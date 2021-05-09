@@ -1,0 +1,15 @@
+@font-face
+{
+  font-family: "defaultReg";
+  src: url("../assets/font/montserrat/Montserrat-Regular.ttf");
+}
+@font-face
+{
+  font-family: "defaultBold";
+  src: url("../assets/font/montserrat/Montserrat-Bold.ttf");
+}
+@font-face
+{
+  font-family: "defaultLight";
+  src: url("../assets/font/montserrat/Montserrat-Light.ttf");
+}

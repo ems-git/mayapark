@@ -1,0 +1,260 @@
+
+.borderDebug {
+  border: 1px red solid;
+}
+
+/*    .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .SCROLLBAR */
+
+::-webkit-scrollbar /*  .   .   .   .   .   .   .   .   .   .   Scroll bar*/
+{
+    width: 12px;
+}
+::-webkit-scrollbar-track /*    .   .   .   .   .   .   .   .   Scroll background*/
+{
+    background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb /*    .   .   .   .   .   .   .   .   Scroll element*/
+{
+    background: #888;
+}
+::-webkit-scrollbar-thumb:hover /*  .   .   .   .   .   .   .   Scroll element hover*/
+{
+    background: #555;
+}
+
+/*    .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .HTML */
+
+* {
+  margin: 0;
+  padding: 0;
+  word-wrap: break-word;
+}
+html {
+	scroll-behavior: smooth;
+}
+body {
+  font-family: 'defaultReg';
+  background-color: var(--c-grey);
+  overflow-y: scroll;
+}
+table {
+  border-collapse: separate !important;
+}
+/*    .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .TEXT */
+
+h1, h2, h3, h4, h5, h6 {
+  text-align: center;
+}
+h1 {
+  font-family: 'defaultBold';
+  font-size: var(--f-size-h1);
+  letter-spacing:var(--f-s-h1);
+  padding: var(--marg01) 0 var(--marg01) 0;
+}
+h2 {
+  font-size: var(--f-size-h2);
+  letter-spacing:var(--f-s-h2);
+}
+h3 {
+  font-family: 'defaultBold';
+  font-size: var(--f-size-h3);
+  letter-spacing:var(--f-s-h3);
+  padding: var(--pad02) 0 var(--pad02) 0;
+}
+h4 {
+  font-size: var(--f-size-h4);
+  letter-spacing:var(--f-s-h4);
+}
+h5 {
+  font-size: var(--f-size-h5);
+  letter-spacing:var(--f-s-h5);
+}
+h6 {
+  font-size: var(--f-size-h6);
+  letter-spacing:var(--f-s-h6);
+}
+p {
+  font-family: 'defaultLight';
+  font-size: var(--f-size-p);
+  letter-spacing:var(--f-s-p);
+}
+a {
+  text-decoration: none;
+}
+::placeholder {
+  font-size: var(--f-size-p);
+  letter-spacing:var(--f-s-p);
+}
+.txtC {
+  text-align : center;
+}
+/*    .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .INPUT/TXTAREA/BTN */
+textarea, input:not(.searchInput):not(.DateInput_input):not(.bookingInput) {
+  padding: var(--pad01);
+}
+input {
+  height: var(--h-input);
+  border: 2px solid var(--c-blue02);
+  border-radius: var(--br-input);
+}
+input:not(.searchInput):not(.DateInput_input):not(.bookingInput):not(.atrTitleInput):not(.atrDescInput) {
+
+  min-width: var(--w-input);
+}
+textarea
+{
+  resize: none;
+  border-radius: var(--br-txtarea);
+  border: 2px solid var(--c-blue02);
+}
+.submitBtn
+{
+  width:var(--btnSub-w);
+  height: var(--h-btn);
+  border-radius: var(--br-btnSub);
+  color: var(--c-white);
+  background-color: var(--c-red);
+  margin: var(--pad01) 0 var(--pad01) 0 ;
+  margin-left: auto;
+  margin-right: auto;
+}
+button {
+  font-family: 'defaultReg';
+  font-size: var(--f-size-btn);
+  letter-spacing:var(--f-s-btn);
+  outline: none;
+  border:none;
+}
+button:hover {
+  animation: .4s btnHover  ease-in-out forwards ;
+}
+button:active {
+  animation: .4s btnActivate  ease-in-out forwards ;
+}
+label {
+  padding: var(--pad01) 0 var(--pad02) 0 ;
+}
+option, select {
+  font-family: 'defaultReg';
+  font-size: var(--f-size-p);
+  letter-spacing: var(--f-s-p);
+}
+/*    .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .IMG */
+.bgImg {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+.bgImgFit {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size:cover;
+}
+/*    .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .COLOR */
+.bgColorWhite {
+  background-color: var(--c-white);
+}
+.bgColorGrey {
+  background-color: var(--c-grey);
+}
+/*    .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .FLEX */
+.FlexCol
+{
+  display: flex;
+  flex-direction: column;
+}
+.FlexRow
+{
+  display: flex;
+  flex-direction: row;
+}
+.fJustifyC {
+  justify-content: center;
+}
+.itemC{
+  align-items: center;
+}
+.dNone {
+  display: none;
+}
+.vertCenter {
+  
+  margin-top: auto;
+  margin-bottom: auto;
+}
+/*    .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .HEADER */
+header {
+  height: var(--h-header);
+  width: var(--w-header);
+  position: relative;
+}
+.homeHeader {
+  background-image: var(--img-header-home);
+}
+.atrHeader {
+  background-image: var(--img-header-atr);
+}
+.profilHeader {
+  background-image: var(--img-header-profil);
+}
+.connexionHeader {
+  background-image: var(--img-header-connection);
+}
+.adminHeader {
+  background-image: var(--img-header-admin);
+}
+.notFoundHeader {
+  background-image: var(--img-header-notfound);
+}
+/*    .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .FOOTER */
+footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  position: relative;
+
+  background-color: var(--c-blue) ;
+  color: var(--c-white);
+
+  width: 100%;
+  height: auto;
+
+  padding: var(--pad01) 0 var(--pad01) 0 ;
+}
+#contactBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+
+  align-items: center;
+  text-align: justify;
+  text-align-last: center;
+
+  width: 100%;
+  height: auto;
+}
+#contactBox p {
+  margin: var(--marg01);
+}
+/*    .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .MAIN */
+#currentBody {
+  position: relative;
+  background-color: var(--c-white);
+
+  width:var(--w-body);
+  margin-left: calc((100% - var(--w-body)) / 2);
+  margin-top: var(--marg-top-body);
+
+  box-shadow: 0px 0px var(--size-shadow) var(--c-shadow02);
+}
+#currentBody:not(.borderBottom) {
+  border-radius: var(--br-body) var(--br-body) 0 0;
+}
+/* #editorWysiwyg
+{
+  border: solid 1px blue;
+  min-height: 200px;
+  min-width: 200px;
+} */

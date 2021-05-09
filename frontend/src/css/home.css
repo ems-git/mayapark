@@ -1,0 +1,222 @@
+#homeBody {
+    margin-top: 0;
+}
+.borderBottom {
+    border-radius: var(--br-body);
+}
+#mayaparkTitle {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+
+    color: var(--c-white);
+    text-align: center;
+
+    font-size: 80px;
+}
+/*    .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .BOOKING */
+#bookingContainer {
+    margin-right: auto;
+    margin-left: auto;
+    padding: var(--marg01) var(--marg02) var(--marg01) var(--marg02);
+}
+.trBooking{
+    width:100%;
+    text-align: center;
+}
+.tdBooking
+{
+    width: 25%;
+}
+#bookingContainer tbody:first-child .trBooking:first-child .tdBooking:first-child
+{
+    width: 50%;
+}
+#bookingContainer #reservBtn
+{
+    width: 120px;
+}
+/*    .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .BOOKING - calendar */
+
+.btnCalContainer {
+    position: relative;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    margin-left: calc(2 * var(--pad-month-cal));
+
+    width: 100%;
+}
+.btnCalbox {
+    position: relative;
+}
+.openBtn, #ticketInput {
+    width: var(--w-inputBooking);
+    height: var(--h-input);
+    background-color: white;
+    
+    outline: none;
+
+    border: 2px solid var(--c-blue02);
+    border-radius: var(--br-input);
+}
+#cleanCalendar {
+    position: absolute;
+
+    width: var(--size-cleanBtn);
+    height: var(--size-cleanBtn);
+
+    top: calc((var(--h-input) / 2) - (var(--size-cleanBtn) /2));
+    left: calc(var(--w-inputBooking) - var(--size-cleanBtn) - (var(--pad-month-cal) + 6px));
+
+    color: red;
+    background-color: transparent;
+
+    font-weight: bolder;
+
+    outline: none;
+    border: none;
+
+    cursor: pointer;
+}
+#calLeftBtn {
+    border-radius:  var(--br-btn) 0 0 var(--br-btn);
+}
+#calRightBtn {
+    border-radius: 0 var(--br-btn) var(--br-btn) 0;
+}
+#ticketInput{
+    border-radius: var(--br-btn);
+}
+.calendarHide {
+    transition: .2s;
+    height: 0;
+    transform: scaleY(0);
+    transform-origin: top;
+}
+.calendarShow {
+    transition: .2s;
+    height: auto;
+    transform:  scaleY(1);
+    transform-origin: top;
+}
+.monthsContainer {
+    position: absolute ;
+
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+
+    border-radius: 0  0 var(---br-month-cal) var(---br-month-cal);
+    background-color: var(--c-bg-cal) !important;
+}
+.monthsContainer button {
+    text-align: center;
+    width: var(--size-cells-cal);
+    height: var(--size-cells-cal);
+    background-color: transparent;
+
+    outline: none;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: var(--br-month-cal);
+}
+
+.monthsContainer button:hover {
+    transition: .2s;
+    transform: scale(1.1);
+}
+
+.monthContainer {
+    height: 100%;
+    padding: var(--pad-month-cal);
+    
+    background-color: transparent !important;
+}
+
+/*HEAD*/
+.calenderHead tr, .weekDayCol /* month col*/
+{
+    background-color: rgba(0, 255, 255, 0.493) !important;
+}
+.calenderHead th /* month row*/
+{
+    text-transform: uppercase;
+    background-color: rgba(216, 216, 216, 0.493) !important;
+}
+
+/*BODY - days grid*/
+.monthContainer td:not(.weekDayCol){
+    text-align: center;
+    min-width: var(--size-cells-cal);
+    height: var(--size-cells-cal);
+    border-radius: 2px;
+}
+
+.pastDays {
+    font-style: italic;
+    background: var(--rayure-bg-cal);
+}
+.otherDays {
+    color: var(--c-otherDays-cal);
+    background-color: var(--c-bg-otherDays-cal) !important;
+}
+.currentDays {
+    color: var(--c-currentDays-cal);
+}
+
+.isntClickable {
+    /* background-color: var(--c-bg-notClickable-cal) !important; */
+}
+
+.isClickable {
+    cursor: pointer;
+    outline: 2px solid transparent !important;
+    background-color: rgb(255, 255, 255) !important;
+}
+.isClickable:hover {
+    font-weight: bold;
+    font-size: var(--f-size-hover-cal);
+    outline: 2px solid var(--c-b-hover-cal) !important;
+}
+
+.isSelected {
+    font-weight: bold;
+    color: var(--c-cal-selectDay);
+    background-color: var(--c-bg-cal-selectDay) !important;
+}
+.inRange {
+    color: var(--c-cal-inRangeDay);
+    background-color: var(--c-bg-cal-inRangeDay) !important;
+}
+.inRangeBlock {
+    /* background-color: var(--c-bg-cal-inRangeBlock) !important; */
+}
+
+/*    .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .DESCRIPTION section */
+#mayaparkContainer {
+    text-align: justify;
+    text-align-last: center;
+    padding: var(--marg01);
+}
+.mayaBox {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.mayaDesc p{
+    padding: var(--marg01);
+}
+
+.mayaDesc p:last-child{
+    padding: var(--pad01);
+    font-family: 'defaultLight';
+    font-size: var(--f-size-p-note);
+}
+.mayaImg {
+    width: var(--w-img-mayaparkDesc);
+    height: auto;
+}

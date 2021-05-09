@@ -1,0 +1,16 @@
+.connectContainer
+{
+    display: flex;
+    flex-direction: var(--fd-connectCont);
+    flex-wrap: nowrap;
+    justify-content: space-around;
+}
+.connectionSection {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+
+    width: var(--w-connectionSect);
+    height: auto;
+}

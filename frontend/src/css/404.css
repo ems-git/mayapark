@@ -1,0 +1,28 @@
+#notfound header {
+    height: 100vh;
+}
+#notfound main {
+    position: absolute;
+
+    background-color:rgba(0, 0, 0, 0.5);
+    border-radius: var(--br-square);
+    
+    width: var(--w-body);
+
+    padding: var(--marg01) 0 var(--marg01) 0 ;
+
+    top: calc(var(--h-nav) + 25%);
+    left: calc((100% - var(--w-body)) / 2);
+
+    text-align: center;
+    color: var(--c-white);
+}
+#notfound h6 {
+    font-size: var(--f-size-h6-notfound);
+}
+#notfound h5 {
+    font-size: var(--f-size-h5-notfound);
+}
+#notfound p {
+    font-size: var(--f-size-p-notfound);
+}

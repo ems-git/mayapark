@@ -1,0 +1,177 @@
+/*    .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   . FORM*/
+.atrForm {
+    padding: var(--marg02) 0 var(--marg01) 0 ;
+    margin: 0 0 var(--marg02) 0 ;
+}
+.editAtrImg {
+
+    min-width: var(--mw-atrImg);
+
+    height: calc(var(--h-atrContainer) - (2 * var(--marg01)));
+
+    border: 2px solid var(--c-shadow);
+
+    object-fit: cover;
+    object-position: center;
+  
+    margin: var(--marg01);
+}
+.editArea {
+    
+    resize: none;
+
+    border: 2px solid var(--c-blue02);  
+    border-radius: var(--br-txtarea);
+  
+    height: calc(100% - (2 * var(--marg01)) - var(--h-input));
+}
+.atrContainer input, .editArea {
+    width: auto;
+}
+/*    .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   . ATTRACTION*/
+.atrContainer {
+
+    position: relative;
+    display: flex;
+    flex-direction: row;
+
+    height: var(--h-atrContainer);
+    width: 100%;
+    min-width: var(--mw-atrImg);
+}
+.atrImg {
+    
+    width: var(--w-atrImg);
+    min-width: var(--mw-atrImg);
+    height: auto;
+
+    object-fit: cover;
+    object-position: center;
+  
+    margin: var(--marg01);
+}
+.descArt {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    height: calc(var(--h-atrContainer) - (2 * var(--marg01)));
+    min-width: var(--mw-atrImg);
+    width: calc(100% - var(--w-atrImg));
+
+    margin: var(--marg01) var(--marg01) var(--marg01) 0 ;
+}
+.flexStart {
+
+    align-items: flex-start;
+}
+.flexEnd {
+    
+    align-items: flex-end;
+}
+.descArtTxtBox {
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+.descArtTxt {
+    display: table-cell;
+    vertical-align: middle;
+}
+.adminBtn {
+    width:var(--size-adminBtn);
+    height:var(--size-adminBtn);
+    background-color: transparent;
+}
+/*Editable class and id*/
+.editInactive, .editActive {
+    position:absolute;
+    top:var(--marg01);
+}
+.editR {
+    right: var(--marg01);
+}
+.editL {
+    left: var(--marg01);
+}
+.inputLeft {
+    float: right;
+}
+.inputRight {
+    margin-left: var(--marg01);
+    float: left;
+}
+.editInactive {
+    background-image: url('../assets/img/icone/editInactive.png');
+}
+.editActive {
+    background-image: url('../assets/img/icone/valideInactive.png');
+}
+.atrTitleInput {
+    min-width:80%;
+    margin-bottom: var(--marg01);
+}
+.atrDescInput {
+    min-width: 80%;
+    height: calc(var(--h-atrContainer) - var(--h-input) - (4 * var(--marg01)));
+}
+/*    .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   . RATING*/
+.ratingContainer
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    flex-wrap: nowrap;
+
+    height: var(--h-rating);
+    width: auto;
+}
+.ratingStar
+{
+    display: block;
+    height: var(--h-rating);
+    width: var(--h-rating);
+
+    object-fit: cover;
+    object-position: center;
+}
+.starActive {
+    background-image: url('../assets/img/icone/starActive.png');
+}
+.starInactive{
+    background-image: url('../assets/img/icone/starInactive.png');
+}
+.starCheck:hover {
+    animation: .2s popUp  ease-in-out forwards ;
+
+    background-image: url('../assets/img/icone/starHover.png');
+    background-size: var(--size-hover-star);    
+    cursor: pointer;
+}
+.starCheck:active{
+    animation: .2s popDown  ease-in-out forwards ;
+}
+.reviewTxt
+{
+    display: table;
+    height: 100%;
+    width: auto;
+    padding: var(--pad01) 0 var(--pad01) 0 ;
+
+}
+.reviewTxt>*
+{
+    display: table-cell;
+    padding-left: var(--pad01);
+}
+.reviewTxt>h5
+{
+    vertical-align: middle;
+}
+.reviewTxt>p
+{
+    font-family: 'defaultLight';
+    font-style: italic;
+    vertical-align:bottom;
+}

@@ -1,0 +1,318 @@
+/*-----------------------------------------------------------------------------------------------*/
+/*   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   */
+/*   .   .   .   .   .   .   .   .   .RESPONSIVE COMPUTER.   .   .   .   .   .   .   .   .   .   */
+/*   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   */
+/*-----------------------------------------------------------------------------------------------*/
+.navbarContainer
+{
+	/* opacity: 0;
+	animation: 1.2s navApparition  1.8s ease forwards; */
+
+	position: fixed;
+		
+	background-color: var(--c-red);
+
+	height: var(--h-nav);
+	width: 100%;
+
+	z-index: 1000;
+}
+/*  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   NAVBAR a */
+.navbarContainer a, .nav-links a
+{
+	display: inline-block;
+
+	color: var(--c-white);
+	font-size: var(--size-a-nav);
+
+	font-weight:normal;
+
+	font-family: 'defaultReg';
+
+	padding-left: var(--size-a-nav);
+	padding-top: calc(var(--size-a-nav) - 2px) ;
+	padding-bottom: calc(var(--size-a-nav) - 2px) ;
+       
+	letter-spacing: var(--s-a-nav);
+	margin-right: var(--marg02);
+}
+.navbarContainer a:hover, .nav-links a:hover
+{
+	background-color: var(--c-redHover);
+}
+
+/*  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   NAVBAR left side*/
+.nav-home
+{
+	float: left;
+    padding-top: var(--size-a-nav) ;
+    padding-bottom: var(--size-a-nav) ;
+}
+/*  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   NAVBAR right side*/
+.nav-links
+{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	list-style: none;
+	float: right;
+}
+/*  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   BURGER*/
+#nav-burg
+{
+	display: none;
+}
+/*  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   SEARCH container*/
+#searchWind
+{
+	display: inline-flex;
+	position: relative;
+	background-color: var(--c-white);
+	width: 200px;
+	height:calc(var(--size-a-nav) * 2);
+	border-radius: var(--br-square);
+	margin-top: calc(var(--size-a-nav) / 2);
+}
+/*  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   SEARCH input*/
+#searchInput
+{
+	background-color: transparent;
+	width : 80%;
+
+	padding: calc(var(--size-a-nav) / 4);
+	border-radius: var(--br-square);
+}
+/*  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   SEARCH btn*/
+.serachBtnBox
+{
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	width: 20%;
+}
+.searchBtn
+{
+	width: 100%;
+	height: 50%;
+	text-align: center;
+	align-items: center;
+}
+#searchNxt, #searchPrev
+{
+	font-size: 8px;
+	border: 1px solid var(--c-grey);
+	outline: none;
+}
+#searchPrev
+{
+	border-radius: 0 var(--br-square) 0 0;
+}
+#searchNxt
+{
+	border-radius: 0 0 var(--br-square) 0;
+}
+#searchNxt:hover, #searchPrev:hover
+{
+	background-color:var(--c-greyHover);
+}
+#searchNxt:focus, #searchPrev:focus
+{
+	border: 1px solid var(--c-greyHover);
+}
+
+/*-----------------------------------------------------------------------------------------------*/
+/*   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   */
+/*   .   .   .   .   .   .   .   .   .RESPONSIVE PHONE   .   .   .   .   .   .   .   .   .   .   */
+/*   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   */
+/*-----------------------------------------------------------------------------------------------*/
+
+@media (max-width: 1100px)
+{
+	.navbarContainer
+	{
+		/* opacity: 0; 
+		animation: 1.2s navApparition  1.8s ease forwards; */
+		
+		position: fixed;
+
+		background-color: var(--c-red);
+
+		height: var(--h-nav);
+		width: 100%;
+
+		z-index: 1000;
+	}
+	/*  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   Burger*/
+	.nav-bouton
+	{
+		display: inline-block;
+
+		position: absolute;
+
+		right: 0px;
+		top: 0px;
+	}
+	.nav-bouton label
+	{
+		display: inline-block;
+
+		width: var(--h-nav);
+		height: calc(var(--h-nav) - (var(--h-nav) / 6 ));
+
+		padding-top: calc(var(--h-nav) / 6 );
+		margin-right: var(--marg01);
+	}
+	#nav-burg
+	{
+		display: none;
+	}
+	/*  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   BURGER symbol*/
+	.nav-bouton > label > span
+	{
+		display: block;
+
+		width: calc(var(--h-nav) / 1.7 );
+		height: calc(var(--h-nav) / 4.5 );
+
+		margin: auto;
+
+		border-top: 2px solid var(--c-white);
+	}
+	/*  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   NAVABAR right side, Hidden dropdown menu*/
+	.nav-links
+	{
+		position: absolute;
+		
+		display: flex;
+		flex-direction: column;
+		flex-wrap: nowrap;
+		list-style: none;
+		
+		width: 0px;
+		height: 0px;
+
+		right: 0px;
+		top: var(--h-nav);
+
+		padding-right: calc(var(--marg01) * 1.3);
+
+		overflow: hidden;
+	}
+	/*  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   NAVABAR right side, Dropdown*/
+	.nav-home
+	{
+		display: inline-block;
+        padding-top: var(--size-a-nav) ;
+        padding-bottom: var(--size-a-nav) ;
+	}
+	.navbarContainer a:not(.nav-home), .nav-links a:not(.nav-home)
+	{
+		display: inline-block;
+
+		width: 100%;
+		
+		color: var(--c-white);
+		font-size: var(--size-a-nav);
+		
+		font-weight:normal;
+		
+		text-decoration: none;
+		font-family: 'defaultReg';
+	
+		padding-top: calc(var(--size-a-nav) - 2px );
+		padding-bottom: calc(var(--size-a-nav) - 2px );
+
+		letter-spacing: var(--s-a-nav);
+
+		margin-right: var(--marg02);
+		
+	}
+	.nav-links a:hover, .nav-bouton label:hover
+	{
+		background-color: var(--c-redHover);
+	}
+	
+	/*  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   BURGER checked*/
+	#nav-burg:checked ~ .nav-links
+	{
+		background-color: var(--c-red);
+		
+		height: auto;
+		width: 30%;
+		
+		text-align:right;
+
+		overflow-y: auto;
+	}
+	/*  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   SEARCH container*/
+	#searchWind
+	{
+		display: inline-flex;
+		background-color: var(--c-white);
+
+		width: 200px;
+		height:calc(var(--size-a-nav) * 2);
+
+		border-radius: var(--br-square);
+
+		margin-top: calc(var(--size-a-nav) / 2);
+		margin-right: calc(var(--size-a-nav) * 3 + (var(--marg01) * 2));
+	}
+	/*  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   SEARCH input*/
+	#searchInput
+	{
+		background-color: transparent;
+		
+		width : 80%;
+		padding: calc(var(--size-a-nav) / 4);
+
+		border-radius: var(--br-square);
+	}
+	/*  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   SEARCH btn*/
+	#searchNxt, #searchPrev
+	{
+		font-size: 8px;
+		border: 1px solid var(--c-grey);
+		outline: none;
+	}
+	#searchPrev
+	{
+		border-radius: 0 var(--br-square) 0 0;
+	}
+	#searchNxt
+	{
+		border-radius: 0 0 var(--br-square) 0;
+	}
+	#searchNxt:hover, #searchPrev:hover
+	{
+		background-color:var(--c-greyHover);
+	}
+	#searchNxt:focus, #searchPrev:focus
+	{
+		border: 1px solid var(--c-greyHover);
+	}
+	.serachBtnBox
+	{
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		width: 20%;
+	}
+	.searchBtn
+	{
+		width: 100%;
+		height: 50%;
+		text-align: center;
+		align-items: center;
+	}
+  }
+ 
+/*  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   Scrollspy*/
+/* .active
+{
+	text-decoration: underline overline var(--c-white) 2px;
+}
+.inactive
+{
+	text-decoration: none;
+} */

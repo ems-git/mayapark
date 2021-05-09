@@ -1,0 +1,35 @@
+Installé coté front :
+	npm init (appuyer sur entrer jusqu'a ce que ça soit finis)
+	npx create-react-app frontend
+	npm install cors --save
+	npm install axios --save
+	npm install react-router-dom --save
+	npm install moment --save
+
+copier coller dans package.json, apres "private":true : "proxy": "http://localhost:4242",
+
+Installé coté back :
+	npm install mysql --save
+	npm install body-parser --save
+	npm install express --save
+	npm install express-validator --save
+	npm install cors --save
+	npm install -g nodemon
+	npm install --save-dev nodemon
+
+
+PAS ENCORE INSTALLE NI FRONT NI BACK
+	npm install fs --save
+
+
+Pour passer de LOCALHOST à une autre url, il faut changer :
+	"proxy": "http://localhost:4242", dans le package.json (coté front)
+	et url dans GlobalVar.js (coté front)
+
+Pour changer de PORT : 
+	changer le port dans GlobalVar.js (coté front)
+	"proxy": "http://localhost:4242", dans le package.json (coté front)
+	changer le port dans app.js (coté back)
+
+Pour la base de donnée:
+	changer la config dans MySqlUtilities.js (cote back)
