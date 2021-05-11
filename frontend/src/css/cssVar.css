@@ -26,6 +26,8 @@
 
   --c-shadow :rgb(205, 204, 206);
   --c-shadow02 :rgb(108, 107, 112);
+
+  --c-errorColor : rgb(211, 16, 32);
   
   /*    .   .   .   .   .   .   .   .   .   .   .   .   GLOBAL fonts*/
 
@@ -39,6 +41,7 @@
   --f-size-btn: 16px;
   --f-size-p-cal: 13px;
   --f-size-p-calHover:18px;
+  --f-size-error : calc(var(--f-size-p) * .65);
 
   --f-s-h1:6px;
   --f-s-h2:5px;

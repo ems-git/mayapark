@@ -20,11 +20,11 @@ export default class Connection extends Component {
         if(this.state.mail!=="" && this.state.password!=="")
         {
             this.props.checkConnectionDB(this.state.mail, this.state.password);
-            this.setState({ mail: "", password: ""});
+            //this.setState({ mail: "", password: ""});
         }
         else
         {
-           console.log("-------FEEDBACK -merci de remplir tout les champ requis pour vous connecter");
+            this.props.msgOnchange(false, "Merci de remplir tout les champs");
         }
     }
     
@@ -50,6 +50,7 @@ export default class Connection extends Component {
                         value={this.state.password}
                         type="text"
                         placeholder='Saisisser votre adresse mail' />
+                    <p className="formMsg">{this.props.connectionMsg}</p>
                         <button
                             className="submitBtn"
                             type="submit"

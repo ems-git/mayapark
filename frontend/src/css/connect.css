@@ -14,3 +14,24 @@
     width: var(--w-connectionSect);
     height: auto;
 }
+.inputErroMsg, .formMsg{
+    font-weight: bold;
+    text-align: center;
+
+    width: var(--w-input);
+    color: var(--c-errorColor);
+}
+.inputErroMsg{
+    font-family: 'defaultReg';
+    font-style: italic;
+    font-size: var(--f-size-error);
+
+    padding:calc( var(--pad02) * 0.8) 0 var(--pad02) 0;
+}
+.formMsg
+{
+    font-family: 'defaultLight';
+    font-size: var(--f-size-p);
+
+    padding:var(--pad01) 0 var(--pad02) 0;
+}

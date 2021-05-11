@@ -99,8 +99,23 @@ app.put(`/user/id/:id_user/isLog/:isLog`,
         }
 });
 
-// ADD NEW USER//
+// CHECK USER EXISTANCE 
+app.get(`/user/mail/:mail`, (req, res) => {
+    let userMail = req.params.mail;
+    MySqlUtilities.checkUser(userMail, (result, error)=>
+    {
+        if(!error)
+        {
+            res.send(result);
+        }
+        else
+        {
+            res.status(500).send.error;
+        }
+    });
+});
 
+// ADD NEW USER//
 app.post(`/createUser`,
    (req, res) => {
        let user = req.body;

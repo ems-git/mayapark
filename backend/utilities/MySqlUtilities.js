@@ -59,6 +59,19 @@ class MySqlUtilities
         connection.end;
     }
 
+    /** MysSqlUtilities.js CHECK IF USER EXISTE IN DATA BASE
+     * @param {String} pMail mail of user */
+    checkUser(pMail,callback)
+    {
+        let connection = mysql.createConnection(config);
+        connection.connect();
+        connection.query('SELECT id_user FROM user WHERE mail=?', [pMail], (error,results)=>
+        {
+            callback(results,error);
+        });
+        connection.end;
+    }
+
     createUser(pUser, callback)
     {
         let connection = mysql.createConnection(config);

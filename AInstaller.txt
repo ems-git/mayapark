@@ -26,10 +26,14 @@ Pour passer de LOCALHOST à une autre url, il faut changer :
 	"proxy": "http://localhost:4242", dans le package.json (coté front)
 	et url dans GlobalVar.js (coté front)
 
-Pour changer de PORT : 
+Pour changer de PORT coté back: 
 	changer le port dans GlobalVar.js (coté front)
 	"proxy": "http://localhost:4242", dans le package.json (coté front)
 	changer le port dans app.js (coté back)
+
+Pour changer le PORT coté front :
+	Modifier d,as lepackage-json, la ligne : "start": "react-scripts start",
+	par: "start": "set PORT=3005 && react-scripts start",
 
 Pour la base de donnée:
 	changer la config dans MySqlUtilities.js (cote back)

@@ -1,7 +1,6 @@
 //REACT import
 import { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
-import moment from 'moment';
 
 import '../../css/cssVar.css';
 import '../../css/font.css';
@@ -30,79 +29,24 @@ class App extends Component {
             },
             markId: 0,
         }
-
-    /*componentDidMount()
+        
+        
+    componentDidMount()
     {
-        console.log('App.js - componentDidMount() "recuperation user"');
-
-        GlobalVar.axios.get(`${GlobalVar.url}userList`)
-            .then(response => {
-
-                let userData = response.data.map(element => {
-                    if (element.birthday != null) {
-                        let elemDate = element.birthday.slice(0, 10);
-                        element.birthday = elemDate;
-                    }
-                    return element;
-                });
-                this.updateUsersFromData(userData);
-            })
-            .catch(error => {
-                console.log('App.js - componentDidMount() GET-user ERROR : ', error);
-            });
+        let currentUserLS = this.localStorageManagement("get", "currentUser");
+        if (currentUserLS) this.setState({ currentUser: { id: currentUserLS.id, type: currentUserLS.type }});
     }
-    updateUsersFromData = (pDataResponse) => {
-        console.log('App.js - updateUsersFromData()');
-
-        this.setState({ users: pDataResponse });
-    }*/
 
     /*-----------------------------------------------------------------------------------------------*/
     /*   .   .   .   .   .   .   .   .   .   .   .DB-USERS.   .   .   .   .   .   .   .   .   .   .  */
     /*-----------------------------------------------------------------------------------------------*/
-
-    /** App.js CHECK IN DATABASE IF USER EXIST
-     * @param {String} pMail mail of user */
-    doesUserExistDB = (pMail) => {
-        console.log('App.js - doesUserExist()');
-    }
-
-    /** App.js CREATE NEW USER IN DATA BASE
-     * @param {Object} pUser  */
-    createUserDB = (pUser) => {
-        console.log('App.js - addUserDB()');
-    }
-
-    /** App.js CHECK IN DATA BASE IF MAIL AND PASSWORD IS OK
-     *  @param {String} pMail email of user
-     * @param {String} pPassword password of user */
-    checkConnectionDB = (pMail, pPassword) => {
-        GlobalVar.axios.get(`${GlobalVar.url}user/mail/${pMail}/password/${pPassword}`)
-            .then(response => {
-
-                let userType = response.data[0].type;
-                let userId = response.data[0].id_user;
-                this.setCurrUser(userType, userId);
-            })
-            .catch(error => {
-                if (error.response && error.response.data && error.response.data.errorsValidator) {
-                    console.log('App.js - checkConnectionDB GET-user ERROR validator : ', error.response.data.errorsValidator);
-                    this.showErrorMsg(error.response.data.errorsValidator);
-                }
-                else {
-                    console.log('App.js - checkConnectionDB GET-user ERROR Callback: ', error);
-                    this.showErrorMsg("Mot de passe ou identifiant incorrect. \nSi vous n'êtes pas encore inscrit, enregistrez vouss :)");
-                }
-            });
-    }
 
     /** App.js CHANGE VALUE OF LOG IN DATA BASE WHEN USER IS LOG OR NOT
      * @param {Number} pId id of current user
      * @param {Boolean} pLogin true if user is log, false if he si not login */
     logUser = (pId, pLogin) => {
         let isLog;
-        //In data base, boolean is 0 or 1
-        isLog=pLogin ? 1 : 0 ;
+        isLog=pLogin ? 1 : 0 ; //In data base, boolean is 0 or 1
 
         GlobalVar.axios.put(`${GlobalVar.url}user/id/${pId}/isLog/${isLog}`)
             .then(response => {
@@ -122,29 +66,31 @@ class App extends Component {
      * @param {String} pType user type : admin, user or null*/
     setCurrUser = (pType, pId) => {
         if (pId) {
-            this.setState({ currentUser: { id: pId, type: pType } }, this.logUser(pId, true));
+            this.setState({ currentUser: { id: pId, type: pType }},
+                ()=>{
+                    this.logUser(pId, true);
+                    this.localStorageManagement("save", 'currentUser');
+                });
+            
         }
         else {
             this.logUser(this.state.currentUser.id, false);
-            this.setState({ currentUser: { id: pId, type: pType } });
+            this.setState({ currentUser: { id: pId, type: pType }},
+                ()=>this.localStorageManagement("clear", 'currentUser'));
         }
 
     }
 
     /*-----------------------------------------------------------------------------------------------*/
-    /*   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   */
+    /*   .   .   .   .   .   .   .   .   .   .LOCAL STORAGE.   .   .   .   .   .   .   .   .   .   . */
     /*-----------------------------------------------------------------------------------------------*/
 
-    showErrorMsg = (pErrors) => {
-        if (Array.isArray(pErrors)) {
-            let msgError = "";
-            pErrors.forEach(element => {
-                msgError += `- ${element}\n`;
-            });
-
-           console.log("-------FEEDBACK -" , msgError);
-        }
-        else console.log("-------FEEDBACK -" , pErrors);
+    localStorageManagement=(pState, pData)=>
+    {
+        if (pState==="save") localStorage.setItem(pData, JSON.stringify(this.state.currentUser));
+        else if(pState==="get") return localStorage.getItem(pData);
+        else if (pState==="clear") localStorage.removeItem(pData);
+        else if(pState==="clearAll") localStorage.clear();
     }
 
     /*-----------------------------------------------------------------------------------------------*/
@@ -176,10 +122,6 @@ class App extends Component {
                                     clearMarkId={this.clearMarkId}
                                     currentUser={this.state.currentUser}
                                     setCurrUser={this.setCurrUser}
-
-                                    doesUserExistDB={this.doesUserExistDB}
-                                    createUserDB={this.createUserDB}
-                                    checkConnectionDB={this.checkConnectionDB}
                                 />
                                 :
                                 <Redirect to="/" />
@@ -241,3 +183,30 @@ class App extends Component {
 }
 
 export default App;
+
+
+/*componentDidMount()
+{
+    console.log('App.js - componentDidMount() "recuperation user"');
+
+    GlobalVar.axios.get(`${GlobalVar.url}userList`)
+        .then(response => {
+
+            let userData = response.data.map(element => {
+                if (element.birthday != null) {
+                    let elemDate = element.birthday.slice(0, 10);
+                    element.birthday = elemDate;
+                }
+                return element;
+            });
+            this.updateUsersFromData(userData);
+        })
+        .catch(error => {
+            console.log('App.js - componentDidMount() GET-user ERROR : ', error);
+        });
+}
+updateUsersFromData = (pDataResponse) => {
+    console.log('App.js - updateUsersFromData()');
+
+    this.setState({ users: pDataResponse });
+}*/

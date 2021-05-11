@@ -3,7 +3,14 @@ import axios from 'axios';
 const GlobalVar = {
     url :"http://localhost:4242/",
     axios : axios,
-    regEmail : /([a-z0-9._-]+@[a-z0-9._-]+\.[a-z]{1,6})\w+/g,
-    regMdp : /([A-Za-z0-9!?§]{3,8})/g,
+    regEmail:/([a-z0-9._-]+@[a-z0-9._-]+\.[a-z]{1,6})\w+/g,
+    regName :/^([a-zA-Z])*$/g,
+    regMdp : /^([A-Za-z0-9!?§]{4,8})*$/g,
+    // regDateDDMMYYYY : /^(0[1-9]|[12]\d|3[01])[\/\-\.](0[1-9]|1[0-2])[\/\-\.](19|20)\d{2}$/gm,
+    regDateYYYYMMDD : /[0-9]{4}[-](([0-2][0-9])|(3[0-1]))[-]((1[0-2])|(0[1-9]))/gm,
+    
+    regDate : /^(19|20)\d{2}[/\-.](0[1-9]|1[0-2])[/\-.](0[1-9]|[12]\d|3[01])$/gm,
+
+    // regDate : /^(19|20)\d{2}[\/\-\.](0[1-9]|1[0-2])[\/\-\.](0[1-9]|[12]\d|3[01])$/gm,
 }
 export default GlobalVar
