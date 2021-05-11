@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import Review from './Review/Review'
+import Review from './Review/Review';
 
-/** App.js => AttractionIndex.js => AttractionList.js => Attraction.js  => AttractionNoEdit.js*/
 class AttractionNoEdit extends Component {
 
     onclick=()=>
@@ -12,6 +11,7 @@ class AttractionNoEdit extends Component {
     /*-----------------------------------------------------------------------------------------------*/
     /*   .   .   .   .   .   .   .   .   .   .   .RENDER.   .   .   .   .   .   .   .   .   .   .    */
     /*-----------------------------------------------------------------------------------------------*/
+    
     render() {
         return (
             this.props.indexAtr % 2 === 0 ?

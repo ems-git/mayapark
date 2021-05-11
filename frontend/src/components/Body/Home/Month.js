@@ -1,5 +1,4 @@
-import React, { Component } from 'react'
-
+import React, { Component } from 'react';
 import moment from 'moment';
 import 'moment/locale/fr';
 
@@ -8,9 +7,8 @@ import WeekDays from './WeekDays';
 
 export default class Month extends Component {
 
-    /* COMPOSITION OF A MONTH WITH PREVIOUS AND NEXT DAYS */
+    /** Month.js - COMPOSITION OF A MONTH WITH PREVIOUS AND NEXT DAYS */
     monthComposition = () => {
-
         let isCurrent = true;
 
         let firstDay = parseInt(moment(this.props.currentMonth).startOf("month").format("d"));
@@ -66,7 +64,11 @@ export default class Month extends Component {
         return this.calendarBoard(daysPrevMonth, daysInMonth, daysNextMonth);
     }
 
-    /** CALENDAR BOARD GENERATOR */
+    /** CALENDAR BOARD GENERATOR
+     * @param {Array} pPrevDays array of previous month days of first week
+     * @param {Array} pCurDay array of current month days
+     * @param {Array} pNextDays array of next month days of last week
+     * @returns {Array} Board of month*/
     calendarBoard = (pPrevDays, pCurDay, pNextDays) => {
         let allCells = [...pPrevDays, ...pCurDay, ...pNextDays];
         let tableRow = [];
@@ -85,6 +87,10 @@ export default class Month extends Component {
         return currentTable;
     }
 
+    /*-----------------------------------------------------------------------------------------------*/
+    /*   .   .   .   .   .   .   .   .   .   .   .RENDER.   .   .   .   .   .   .   .   .   .   .   .*/
+    /*-----------------------------------------------------------------------------------------------*/
+    
     render() {
         return (
             <div className={this.props.showCalendar ? `oneMonth calendarShow` : `oneMonth calendarHide` }>

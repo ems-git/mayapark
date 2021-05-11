@@ -1,31 +1,39 @@
-import React, { Component } from 'react'
-
+import React, { Component } from 'react';
 import moment from 'moment';
+
 export default class Day extends Component {
 
-    /** CHECK IF IT'S BEFOR OR AFTER TOMORROW */
+    /** Day.js - CHECK IF IT'S BEFOR OR AFTER TOMORROW
+     * @param {String} pDay date of the day */
     pastDaysCheck = (pDay) => {
         let currentDay = moment().add(1, 'days').format('MM-DD-YYYY').valueOf();
         return moment(currentDay).isAfter(pDay);
     }
 
-    /** CALL WHEN USER CLICK ON CLICKABLE DAY */
+    /** Day.js - CALL WHEN USER CLICK ON CLICKABLE DAY
+     * @param {String} pDay date of the day */
     dayIsClicked = (pDay) =>
     {
         this.props.dayIsClicked(pDay); 
     }
 
-    /** CHECK IF THIS DAY IS END OR START DAY OF SELECTION */
+    /** Day.js - CHECK IF THIS DAY IS END OR START DAY OF SELECTION
+     * @param {String} pDay date of the day */
     dayIsSelected=(pDay)=>
     {
         return (pDay===this.props.dates[0] || pDay===this.props.dates[1]);
     }
 
-    /** CHECK IF THIS DAY IS ON RANGE OF SELECTION */
+    /** Day.js - CHECK IF THIS DAY IS ON RANGE OF SELECTION 
+     * @param {String} pDay date of the day */
     dayIsInRange=(pDay)=>
     {
         return (moment(pDay).isAfter(this.props.dates[0]) && moment(pDay).isBefore(this.props.dates[1]));
     }
+
+    /*-----------------------------------------------------------------------------------------------*/
+    /*   .   .   .   .   .   .   .   .   .   .   .RENDER.   .   .   .   .   .   .   .   .   .   .    */
+    /*-----------------------------------------------------------------------------------------------*/
 
     render() {
 

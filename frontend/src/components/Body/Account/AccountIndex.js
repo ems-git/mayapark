@@ -1,8 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import Header from '../../Header/Header';
 import Footer from '../../Footer/Footer';
 
-/** App.js => AccountIndex.js */
 export default class AccountIndex extends Component {
     render() {
         let bodyContent = "ACCOUNT PAGE IN COMING";

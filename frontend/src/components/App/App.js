@@ -1,4 +1,3 @@
-//REACT import
 import { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 
@@ -16,12 +15,9 @@ import ProfilIndex from '../Body/Profil/ProfilIndex';
 import AccountIndex from '../Body/Account/AccountIndex';
 import NotFoundIndex from '../Body/NotFound/NotFoundIndex';
 
-
 class App extends Component {
 
-    state =
-        {
-            // users: [],
+    state = {
             resrvations: [],
             currentUser: {
                 id: null,
@@ -30,13 +26,12 @@ class App extends Component {
             markId: 0,
         }
         
-        
     componentDidMount()
     {
         let currentUserLS = this.localStorageManagement("get", "currentUser");
         if (currentUserLS) this.setState({ currentUser: { id: currentUserLS.id, type: currentUserLS.type }});
     }
-
+    
     /*-----------------------------------------------------------------------------------------------*/
     /*   .   .   .   .   .   .   .   .   .   .   .DB-USERS.   .   .   .   .   .   .   .   .   .   .  */
     /*-----------------------------------------------------------------------------------------------*/
@@ -88,7 +83,7 @@ class App extends Component {
     localStorageManagement=(pState, pData)=>
     {
         if (pState==="save") localStorage.setItem(pData, JSON.stringify(this.state.currentUser));
-        else if(pState==="get") return localStorage.getItem(pData);
+        else if(pState==="get") return JSON.parse(localStorage.getItem(pData));
         else if (pState==="clear") localStorage.removeItem(pData);
         else if(pState==="clearAll") localStorage.clear();
     }
@@ -106,9 +101,6 @@ class App extends Component {
 
                         <Route exact path="/attraction">
                             <AttractionIndex
-                                clearMarkSearch={this.clearMarkSearch}
-                                navMark={this.navMark}
-                                clearMarkId={this.clearMarkId}
                                 currentUser={this.state.currentUser}
                                 setCurrUser={this.setCurrUser}
                             />
@@ -117,9 +109,6 @@ class App extends Component {
                         <Route exact path="/connection">
                             {this.state.currentUser.type === null ?
                                 <ConnectionIndex
-                                    clearMarkSearch={this.clearMarkSearch}
-                                    navMark={this.navMark}
-                                    clearMarkId={this.clearMarkId}
                                     currentUser={this.state.currentUser}
                                     setCurrUser={this.setCurrUser}
                                 />
@@ -131,9 +120,6 @@ class App extends Component {
                         <Route exact path="/profil">
                             {this.state.currentUser.type === "user" ?
                                 <ProfilIndex
-                                    clearMarkSearch={this.clearMarkSearch}
-                                    navMark={this.navMark}
-                                    clearMarkId={this.clearMarkId}
                                     currentUser={this.state.currentUser}
                                     setCurrUser={this.setCurrUser}
                                 />
@@ -147,9 +133,6 @@ class App extends Component {
                         <Route exact path="/compteManagement">
                             {this.state.currentUser.type === "admin" ?
                                 <AccountIndex
-                                    clearMarkSearch={this.clearMarkSearch}
-                                    navMark={this.navMark}
-                                    clearMarkId={this.clearMarkId}
                                     currentUser={this.state.currentUser}
                                     setCurrUser={this.setCurrUser}
                                 />
@@ -160,18 +143,12 @@ class App extends Component {
 
                         <Route exact path="/">
                             <HomeIndex
-                                clearMarkSearch={this.clearMarkSearch}
-                                navMark={this.navMark}
-                                clearMarkId={this.clearMarkId}
                                 currentUser={this.state.currentUser}
                                 setCurrUser={this.setCurrUser}
                             />
                         </Route>
 
                         <NotFoundIndex
-                            clearMarkSearch={this.clearMarkSearch}
-                            navMark={this.navMark}
-                            clearMarkId={this.clearMarkId}
                             currentUser={this.state.currentUser}
                             setCurrUser={this.setCurrUser}
                         />

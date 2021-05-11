@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 
-/** App.js => AttractionIndex.js => AttractionFrom.js*/
 class AttractionFrom extends Component {
 
     state =
     {
-        // id: 0,
         name: "",
         description: ``,
         img_url: "",
@@ -23,11 +21,13 @@ class AttractionFrom extends Component {
         if(!this.state.name || !this.state.description )
         {
            console.log("-------FEEDBACK - Vous devez remplir tout les champs");
-            return;
+           return;
         }
         this.setState({id :this.props.attractions[this.props.attractions.length-1].id +1},
-            ()=>{this.props.addAttraction(this.state); this.setState({name:"", description : ""})});
-        
+            ()=>{
+                this.props.addAttraction(this.state);
+                this.setState({name:"", description : ""})
+            });
     }    
     
     /*-----------------------------------------------------------------------------------------------*/

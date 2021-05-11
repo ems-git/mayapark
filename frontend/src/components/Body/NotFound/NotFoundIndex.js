@@ -1,19 +1,15 @@
-import React, { Component } from 'react'
+import React from 'react'
 import '../../../css/404.css';
 import Header from '../../Header/Header';
 
-/** App.js => NotFoundIndex.js */
-export default class NotFoundIndex extends Component {
-    render() {
+ function NotFoundIndex({ currentUser, setCurrUser})
+ {
         return (
             <div id='notfound'>
                 <Header
-                    currentUser={this.props.currentUser}
+                    currentUser={currentUser}
                     indexPath={"notFound"}
-                    clearMarkSearch={this.props.clearMarkSearch}
-                    navMark={this.props.navMark}
-                    clearMarkId={this.props.clearMarkId}
-                    setCurrUser={this.props.setCurrUser} />
+                    setCurrUser={setCurrUser} />
 
                 <main>
                     <h5>Oops...</h5><br />
@@ -22,5 +18,5 @@ export default class NotFoundIndex extends Component {
                 </main>
             </div>
         )
-    }
 }
+export default NotFoundIndex;

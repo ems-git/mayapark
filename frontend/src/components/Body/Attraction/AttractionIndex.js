@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
-import GlobalVar from '../../GlobalVar'
-// import Wysiwyg from '../../Wysiwyg.js';
+import GlobalVar from '../../GlobalVar';
 // import AttractionForm from './AttractionForm';
 import AttractionList from './AttractionList';
 
 import Header from '../../Header/Header';
 import Footer from '../../Footer/Footer';
-
 import '../../../css/attraction.css';
 
-
-/** App.js =>  AttractionIndex.js*/
 class AttractionIndex extends Component {
 
     state={
@@ -28,6 +24,7 @@ class AttractionIndex extends Component {
     /*-----------------------------------------------------------------------------------------------*/
     /*   .   .   .   .   .   .   .   .   .   .   .DATABASE.   .   .   .   .   .   .   .   .   .   .  */
     /*-----------------------------------------------------------------------------------------------*/
+
     componentDidMount() {
 
         GlobalVar.axios.get(`${GlobalVar.url}attractionList`)
@@ -40,6 +37,9 @@ class AttractionIndex extends Component {
             });
     }
 
+
+    /** AttractionIndex.js - UPDATE ATTRACTIONS
+     * @param {Object} pDataResponse */
     updateAtrFromData = (pDataResponse) => {
 
         this.setState({ attractions: [...this.state.attractions, ...pDataResponse] });
@@ -143,9 +143,6 @@ class AttractionIndex extends Component {
                <Header
                    currentUser={this.props.currentUser}
                    indexPath={"attraction"}
-                   clearMarkSearch={this.props.clearMarkSearch}
-                   navMark={this.props.navMark}
-                   clearMarkId={this.props.clearMarkId}
                    setCurrUser={this.props.setCurrUser} />
 
                <main id="currentBody" >
@@ -155,7 +152,6 @@ class AttractionIndex extends Component {
            </div>
        )
     }
-
 }
 
 export default AttractionIndex;

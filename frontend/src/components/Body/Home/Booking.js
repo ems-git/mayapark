@@ -1,9 +1,7 @@
 import React, { Component} from 'react';
-
 import GlobalVar from "../../GlobalVar";
 import DatePicker from './DatePicker';
 import Ticket from './Ticket';
-
 import moment from 'moment';
 
 
@@ -23,12 +21,13 @@ export default class Booking extends Component {
     /*   .   .   .   .   .   .   .   .   .   .   CALENDAR.   .   .   .   .   .   .   .   .   .   .   */
     /*-----------------------------------------------------------------------------------------------*/
 
-    /** SHOW CALENDAR WHEN USER CLICK ON DATE BUTTONS || HIDE WHEN HE CLICK ON OTHER BTN*/
+    /** Booking.js - SHOW CALENDAR WHEN USER CLICK ON DATE BUTTONS || HIDE WHEN HE CLICK ON OTHER BTN
+     * @param {Boolean} pBool */
     setShowCalendar = (pBool) => {
         this.setState({ showCalendar: pBool });
     }
 
-    /** USER CLICKED ON A DATE */
+    /** Booking.js - USER CLICKED ON A DATE */
     dayIsClicked = (pDate) => {
         if (this.state.dates[0] === "Début") {
             let newDates = [pDate, this.state.dates[1]];
@@ -41,7 +40,9 @@ export default class Booking extends Component {
         else this.choseDates(pDate);
     }
 
-    /** UPDATE DATES */
+    /** Booking.js - UPDATE DATES
+     * @param {Array} pDates first and last date of booking
+     * @param {Boolean} pSort true if it's necessary to sort */
     setDates = (pDates, pSort) => {
         pSort ?
             this.setState({ dates: pDates }, () =>{ this.sortDates(); this.calcPrice();})
@@ -49,7 +50,7 @@ export default class Booking extends Component {
             this.setState({ dates: pDates },() => this.calcPrice());
     }
 
-    /** SORT DATES ASCENDING ORDER */
+    /** Booking.js - SORT DATES ASCENDING ORDER */
     sortDates = () => {
         let dateOne = moment(this.state.dates[0], "MM-DD-YYYY").format("MM-DD-YYYY").valueOf();
         let dateTwo = moment(this.state.dates[1], "MM-DD-YYYY").format("MM-DD-YYYY").valueOf();
@@ -66,7 +67,8 @@ export default class Booking extends Component {
         this.setState({ dates: sortDate });
     }
 
-    /** CHOCE OF DATE ACCORDING WITH USER ACTIONS (rbnb model custom) */
+    /** Booking.js - CHOCE OF DATE ACCORDING WITH USER ACTIONS (rbnb model custom) 
+     * @param {String} pDate user date selection*/
     choseDates = (pDate) => {
         let newDates = [];
         if (pDate === this.state.dates[0] && pDate === this.state.dates[1]) newDates = ["Début", "Fin"];
@@ -78,6 +80,7 @@ export default class Booking extends Component {
 
     }
 
+    /** Booking.js - CLEAN DATES ARRAY*/
     cleanDates = () => {
         this.setState({ dates: ["Début", "Fin"]}, ()=>this.calcPrice());
     }
@@ -86,9 +89,9 @@ export default class Booking extends Component {
     /*   .   .   .   .   .   .   .   .   .   .   .TICKETS.   .   .   .   .   .   .   .   .   .   .   */
     /*-----------------------------------------------------------------------------------------------*/
 
-    /** SET TICKET VALUE WHEN USER SELECT A VALUE ON SELECT DROPDOWN  */
-    ticketsOnchange = (pValue) =>
-    {
+    /** Booking.js - SET TICKET VALUE WHEN USER SELECT A VALUE ON SELECT DROPDOWN 
+     * @param {Number} pValue number of ticket/day for a booking */
+    ticketsOnchange = (pValue) => {
         this.setState({ inputTicketValue: pValue.value });
     }
 
@@ -96,6 +99,7 @@ export default class Booking extends Component {
     /*   .   .   .   .   .   .   .   .   .   .   .BOOKING.   .   .   .   .   .   .   .   .   .   .   */
     /*-----------------------------------------------------------------------------------------------*/
 
+    /** Booking.js - USER CLICKE ON RESERVATION BUTTON*/
     resIsClicked = (e) => {
         e.preventDefault();
         this.setShowCalendar(false);
@@ -119,6 +123,7 @@ export default class Booking extends Component {
         }
     }
 
+    /** Booking.js - CALCULATING PRICE OF A BOOKING */
     calcPrice=()=>
     {
         let startDay = moment(this.state.dates[0]);
@@ -136,6 +141,7 @@ export default class Booking extends Component {
     /*   .   .   .   .   .   .   .   .   .   .   .DB-BOOKING.   .   .   .   .   .   .   .   .   .   .*/
     /*-----------------------------------------------------------------------------------------------*/
 
+    /** Booking.js - SAVING A BOOKING*/
     saveBooking=()=>
     {
         let days = [moment(this.state.dates[0], "MM-DD-YYYY").format("YYYY-MM-DD").valueOf()]; /* format sql date */

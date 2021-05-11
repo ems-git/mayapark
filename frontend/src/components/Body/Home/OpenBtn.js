@@ -7,10 +7,10 @@ export default class OpenBtn extends Component {
     /** VALUE OF BUTTON DEPENDING WITH USER SELECTION */
     isDate=()=>
     {
-        if(this.props.btnValue !== "Début" && this.props.btnValue !== "Fin")
-            return moment(this.props.btnValue, "MM-DD-YYYY").format("DD-MMM-YYYY").valueOf();
-        else
-            return this.props.btnValue;
+        return (this.props.btnValue !== "Début" && this.props.btnValue !== "Fin") ?
+            moment(this.props.btnValue, "MM-DD-YYYY").format("DD-MMM-YYYY").valueOf()
+            :
+            this.props.btnValue;
     }
 
     render() {

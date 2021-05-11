@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-
 import moment from 'moment';
-
 import Month from './Month';
 
 export default class Calendar extends Component {
@@ -11,7 +9,8 @@ export default class Calendar extends Component {
         rightMonth : moment().add(1, 'months').format("YYYY-MM"),
     }
 
-    /** SWITCH MONTHS ON CALENDAR WHEN USER CLICK ON NEXY OR PREV BTN */
+    /** Calendar.js - SWITCH MONTHS ON CALENDAR WHEN USER CLICK ON NEXY OR PREV BTN
+     * @param {Boolean} */
     btnPressed=(pIsNext)=>
     {
         let leftNext =  moment(this.state.leftMonth).add(1, 'months').format("YYYY-MM");
@@ -25,6 +24,10 @@ export default class Calendar extends Component {
             :
             this.setState({ leftMonth : leftPrev, rightMonth :rightPrev});
     }
+
+    /*-----------------------------------------------------------------------------------------------*/
+    /*   .   .   .   .   .   .   .   .   .   .   .RENDER.   .   .   .   .   .   .   .   .   .   .    */
+    /*-----------------------------------------------------------------------------------------------*/
 
     render() {
 

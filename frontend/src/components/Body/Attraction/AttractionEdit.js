@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 
-/** App.js => AttractionIndex.js => AttractionList.js => Attraction.js  => AttractionEdit.js*/
 class AttractionEdit extends Component {
     state = {
         titleValue : this.props.attraction.name,
@@ -21,6 +20,7 @@ class AttractionEdit extends Component {
     /*-----------------------------------------------------------------------------------------------*/
     /*   .   .   .   .   .   .   .   .   .   .   .RENDER.   .   .   .   .   .   .   .   .   .   .    */
     /*-----------------------------------------------------------------------------------------------*/
+    
     render() {
         return (
         this.props.indexAtr % 2 === 0 ?

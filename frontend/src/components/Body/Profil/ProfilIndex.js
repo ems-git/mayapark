@@ -1,9 +1,7 @@
-import React, { Component } from 'react'
-
+import React, { Component } from 'react';
 import Header from '../../Header/Header';
 import Footer from '../../Footer/Footer';
 
-/** App.js => ProfilIndex.js */
 export default class ProfilIndex extends Component {
     render() {
         let bodyContent = "PROFIL INDEX";

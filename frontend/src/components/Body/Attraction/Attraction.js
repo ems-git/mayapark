@@ -3,7 +3,6 @@ import GlobalVar from '../../GlobalVar';
 import AttractionNoEdit from './AttractionNoEdit';
 import AttractionEdit from './AttractionEdit';
 
-/** App.js => AttractionIndex.js => AttractionList.js => Attraction.js*/
 class Attraction extends Component {
 
     state = {

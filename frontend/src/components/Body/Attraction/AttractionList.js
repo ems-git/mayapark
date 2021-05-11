@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Attraction from './Attraction';
 
-/** App.js => AttractionIndex.js => AttractionList.js*/
 class AttractionList extends Component {
 
     render() {

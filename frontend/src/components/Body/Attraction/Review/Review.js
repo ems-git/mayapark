@@ -1,7 +1,6 @@
-import React, { Component } from 'react'
-import Star from './Star'
+import React, { Component } from 'react';
+import Star from './Star';
 
-/** App.js => AttractionIndex.js => AttractionList.js => Attraction.js =>Review*/
 class Review extends Component {
 
     state ={
@@ -41,6 +40,7 @@ class Review extends Component {
     /*-----------------------------------------------------------------------------------------------*/
     /*   .   .   .   .   .   .   .   .   .   .   .RENDER.   .   .   .   .   .   .   .   .   .   .    */
     /*-----------------------------------------------------------------------------------------------*/
+    
     render() {
         return (
             <div className="ratingContainer">

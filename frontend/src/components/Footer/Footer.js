@@ -1,6 +1,5 @@
 import React from 'react';
 
-/** App.js => AllIndex.js => Footer.js*/
 function Footer() {
     return (
       <footer >

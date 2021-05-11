@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link  } from "react-router-dom";
 import GlobalVar from '../../GlobalVar';
-
 import Header from '../../Header/Header';
 import Footer from '../../Footer/Footer';
 import Booking from './Booking';
@@ -25,6 +24,7 @@ export default class HomeIndex extends Component {
     /*-----------------------------------------------------------------------------------------------*/
     /*   .   .   .   .   .   .   .   .   .   .   .DATABASE.   .   .   .   .   .   .   .   .   .   .  */
     /*-----------------------------------------------------------------------------------------------*/
+
     componentDidMount() {
 
         GlobalVar.axios.get(`${GlobalVar.url}attractionLight`)
@@ -33,7 +33,7 @@ export default class HomeIndex extends Component {
                 this.updateAtrFromData(attraction);
             })
             .catch(error => {
-                console.log('HomeIndex.js - componentDidMount() GET-attraction ERROR : ', error);
+                console.log('componentDidMount() GET/attractionLight - ERROR : ', error);
             });
     }
 
@@ -47,7 +47,6 @@ export default class HomeIndex extends Component {
     render() {
 
         let bodyContent = (
-            // mettre calendrier 
             <div>
                 <section id="mayaparkContainer">
                     <div className="mayaBox">
@@ -105,9 +104,6 @@ export default class HomeIndex extends Component {
                 <Header
                     currentUser={this.props.currentUser}
                     indexPath={"home"}
-                    clearMarkSearch={this.props.clearMarkSearch}
-                    navMark={this.props.navMark}
-                    clearMarkId={this.props.clearMarkId}
                     setCurrUser={this.props.setCurrUser} />
                     
                     <h1 id="mayaparkTitle">BIENVENUE A MAYAPARK</h1>

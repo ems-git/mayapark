@@ -6,71 +6,61 @@ import Register from './Register';
 import Connection from './Connection';
 import '../../../css/connect.css'
 
-/** App.js => ConnectionIndex.js */
-export default class ConnectionIndex extends Component
-{
-    state={
-        registerMsg :"",
-        connectionMsg :"",
+export default class ConnectionIndex extends Component {
+    state = {
+        registerMsg: "",
+        connectionMsg: "",
     }
 
     /*-----------------------------------------------------------------------------------------------*/
     /*   .   .   .   .   .   .   .   .   .   .   .DB-USERS.   .   .   .   .   .   .   .   .   .   .  */
     /*-----------------------------------------------------------------------------------------------*/
 
-    /** App.js CHECK IN DATABASE IF USER EXIST
+    /** ConnectionIndex.js CHECK IN DATABASE IF USER EXIST
      * @param {String} pMail mail of user */
-     doesUserExistDB = (pUser) => {
+    doesUserExistDB = (pUser) => {
         GlobalVar.axios.get(`${GlobalVar.url}user/mail/${pUser.mail}`)
-        .then(response => {
-            if(response.data[0]) this.setState({registerMsg : "Cet utilisateur existe déjà"});
-            else this.saveNewUser(pUser);
-        })
-        .catch(error => {
-            console.log("error", error);
-        });
+            .then(response => {
+                response.data[0] ?
+                    this.setState({ registerMsg: "Cet utilisateur existe déjà" })
+                    :
+                    this.saveNewUser(pUser);
+            })
+            .catch(error => {
+                console.log("doesUserExistDB() - GET/user/mail/-ERROR", error);
+            });
     }
 
-    /** App.js CREATE NEW USER IN DATA BASE
+    /** ConnectionIndex.js CREATE NEW USER IN DATA BASE
      * @param {Object} pUser  */
-     saveNewUser=(pUser)=>
-     {
-         GlobalVar.axios.post(`${GlobalVar.url}createUser` , pUser)
-             .then((response) =>{
-                
-                let userType = "user";
-                let userId = response.data.insertId;
-                this.props.setCurrUser(userType, userId);
-             })
-             .catch(function (error)
-             {
-                 console.log('Register.js saveNewUser() POST-ERROR : ', error);
-             });
+    saveNewUser = (pUser) => {
+        GlobalVar.axios.post(`${GlobalVar.url}createUser`, pUser)
+            .then((response) => {
+                this.props.setCurrUser("user", response.data.insertId);
+            })
+            .catch(function (error) {
+                console.log('saveNewUser() - POST/createUser-ERROR : ', error);
+            });
         this.msgOnchange(true, "");
-     }
+    }
 
-     test=()=>
-     {
-        console.log("test ici");
-     }
-    /** App.js CHECK IN DATA BASE IF MAIL AND PASSWORD IS OK
-     *  @param {String} pMail email of user
-     * @param {String} pPassword password of user */
+    /** ConnectionIndex.js CHECK IN DATA BASE IF MAIL AND PASSWORD IS OK
+    *  @param {String} pMail email of user
+    * @param {String} pPassword password of user */
     checkConnectionDB = (pMail, pPassword) => {
         GlobalVar.axios.get(`${GlobalVar.url}user/mail/${pMail}/password/${pPassword}`)
             .then(response => {
-
                 let userType = response.data[0].type;
                 let userId = response.data[0].id_user;
                 this.props.setCurrUser(userType, userId);
             })
             .catch(error => {
                 if (error.response && error.response.data && error.response.data.errorsValidator) {
-                    console.log('ConnectionIndex.js - checkConnectionDB GET-user ERROR validator : ', error.response.data.errorsValidator);
+                    console.log('checkConnectionDB - GET/user/mail/password ERROR validator : ', error.response.data.errorsValidator);
                 }
                 else {
-                    console.log('ConnectionIndex.js - checkConnectionDB GET-user ERROR Callback: ', error);
-                    this.msgOnchange(false,"Mot de passe ou identifiant incorrect. \nSi vous n'êtes pas encore inscrit, enregistrez vous");
+                    console.log('checkConnectionDB - GET/user/mail/password ERROR Callback: ', error);
+                    this.msgOnchange(false, "Mot de passe ou identifiant incorrect. \nSi vous n'êtes pas encore inscrit, enregistrez vous");
                 }
             });
     }
@@ -79,10 +69,12 @@ export default class ConnectionIndex extends Component
     /*   .   .   .   .   .   .   .   .   .   .   .STATE.   .   .   .   .   .   .   .   .   .   .   . */
     /*-----------------------------------------------------------------------------------------------*/
 
-    msgOnchange=(pRegister, pMsg)=>
-    {
-        if(pRegister) this.setState({registerMsg :pMsg});
-        else this.setState({connectionMsg :pMsg});
+    /**  ConnectionIndex.js - UPDATE ERROR MESSAGE OR FORMS
+     * @param {Boolean} pRegister if it's true, it's for register else it's for connection
+     * @param {String} pMsg error message */
+    msgOnchange = (pRegister, pMsg) => {
+        if (pRegister) this.setState({ registerMsg: pMsg });
+        else this.setState({ connectionMsg: pMsg });
     }
 
     /*-----------------------------------------------------------------------------------------------*/
@@ -95,9 +87,6 @@ export default class ConnectionIndex extends Component
                 <Header
                     currentUser={this.props.currentUser}
                     indexPath={"connection"}
-                    clearMarkSearch={this.props.clearMarkSearch}
-                    navMark={this.props.navMark}
-                    clearMarkId={this.props.clearMarkId}
                     setCurrUser={this.props.setCurrUser} />
 
                 <main id="currentBody" className="connectContainer">
@@ -105,12 +94,12 @@ export default class ConnectionIndex extends Component
                         doesUserExistDB={this.doesUserExistDB}
                         msgOnchange={this.msgOnchange}
                         registerMsg={this.state.registerMsg}
-                        />
+                    />
                     <Connection
                         checkConnectionDB={this.checkConnectionDB}
                         msgOnchange={this.msgOnchange}
                         connectionMsg={this.state.connectionMsg}
-                        />
+                    />
                 </main>
                 <Footer />
             </div>

@@ -1,8 +1,7 @@
 import React from 'react';
 import Navbar from '../Navbar/Navbar';
 
-/** App.js => AllIndex.js => Header.js*/
-function Header({ indexPath, clearMarkSearch, navMark, clearMarkId, currentUser,setCurrUser }) {
+function Header({ indexPath, currentUser,setCurrUser }) {
 
     let headerBg;
 
@@ -17,9 +16,6 @@ function Header({ indexPath, clearMarkSearch, navMark, clearMarkId, currentUser,
         <header className={`bgImg ${headerBg}`}>
             <Navbar
                 currentUser={currentUser}
-                clearMarkSearch={clearMarkSearch}
-                navMark={navMark}
-                clearMarkId={clearMarkId}
                 setCurrUser={setCurrUser}/>
         </header>
     );

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 
-/** App.js => AttractionIndex.js => AttractionList.js => Attraction.js =>Review.js => Star.js*/
 export default class Star extends Component {
 
     state =
@@ -21,6 +20,7 @@ export default class Star extends Component {
     /*-----------------------------------------------------------------------------------------------*/
     /*   .   .   .   .   .   .   .   .   .   .   .RENDER.   .   .   .   .   .   .   .   .   .   .    */
     /*-----------------------------------------------------------------------------------------------*/
+
     render() {
         return (
             <div>

@@ -10,13 +10,8 @@ export default class InputRegister extends Component
         value:this.props.inputValue,
         errorMsg:this.props.errorMsg,
     }
-    
-    /*-----------------------------------------------------------------------------------------------*/
-    /*   .   .   .   .   .   .   .   .   .   .   .STATE.   .   .   .   .   .   .   .   .   .   .    .*/
-    /*-----------------------------------------------------------------------------------------------*/
-    
-    onChange = (e) => 
-    {
+
+    onChange = (e) => {
         this.setState({value : e.target.value}, ()=>this.props.inputText(this.state.name, this.state.value));
     }
     
@@ -28,7 +23,6 @@ export default class InputRegister extends Component
     * @returns {String}*/
     checkInfo=()=>
     {
-        
         if(this.state.name === "confPassword") return this.props.passwordComparison();
         else if(this.state.regex.test(this.state.value) || this.state.value === "" )
         {

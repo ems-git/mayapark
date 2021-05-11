@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link  } from "react-router-dom";
 
-/** App.js => AllIndex.js => Header.js => Navbar.js */
 class Navbar extends Component {
     
     render()
