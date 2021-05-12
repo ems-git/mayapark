@@ -16,6 +16,7 @@ class AttractionList extends Component {
                             currentUser={this.props.currentUser}
                             updateRating={this.props.updateRating}
                             updateAtr={this.props.updateAtr}
+                            delAttraction={this.props.delAttraction}
                         />
                     ))}
             </section>

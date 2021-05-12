@@ -66,7 +66,7 @@ class Attraction extends Component {
     /**  Attraction.js SET ISEDITABLE WHEN ADMIN CLICKE OR NOT ON BUTTON,AND GO TO UPDATE ATR
      * @param {String} pNewName name of the attraction (depend of the input value) 
      * @param {String} pNewDesc description of the attraction (depend of the input value) */
-    editAtrIsClicked=(pNewName, pNewDesc)=>
+    editAttraction=(pNewName, pNewDesc)=>
     {
         this.setState({isEditable : !this.state.isEditable},
             ()=>{  if(!this.state.isEditable) this.props.updateAtr(this.props.attraction.id_atr, pNewName, pNewDesc); });
@@ -83,14 +83,18 @@ class Attraction extends Component {
                 currentUser={this.props.currentUser}
                 updateUserRating={this.updateUserRating}
                 indexAtr={this.props.indexAtr}
-                editAtrIsClicked={this.editAtrIsClicked}/>
+                editAttraction={this.editAttraction}
+                delAttraction={this.delAttraction}
+                delAttraction={this.props.delAttraction}/>
             :
             <AttractionEdit
                 attraction={this.props.attraction}
                 currentUser={this.props.currentUser}
                 indexAtr={this.props.indexAtr}
-                editAtrIsClicked={this.editAtrIsClicked}
-                updateUserRating={this.updateUserRating}/>
+                editAttraction={this.editAttraction}
+                delAttraction={this.delAttraction}
+                updateUserRating={this.updateUserRating}
+                delAttraction={this.props.delAttraction}/>
         )
     }
 

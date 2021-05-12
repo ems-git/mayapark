@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import EditBtns from './EditBtns';
 
 class AttractionEdit extends Component {
     state = {
@@ -12,9 +13,13 @@ class AttractionEdit extends Component {
         this.setState({[name] : value});
     }
     
-    onclick=()=>
+    editAttraction=()=>
     {
-        this.props.editAtrIsClicked(this.state.titleValue,this.state.descValue);
+        this.props.editAttraction(this.state.titleValue,this.state.descValue);
+    }
+    delAttraction=()=>
+    {
+        this.props.delAttraction(this.props.indexAtr);
     }
 
     /*-----------------------------------------------------------------------------------------------*/
@@ -22,7 +27,78 @@ class AttractionEdit extends Component {
     /*-----------------------------------------------------------------------------------------------*/
     
     render() {
+        let editActive = true;
+        let onRight=true;
         return (
+        this.props.indexAtr % 2 === 0 ?
+                <div className="atrContainer bgColorWhite">
+                    <img className="atrImg"
+                        src={this.props.attraction.img_url}
+                        alt={this.props.attraction.name} />
+                    <div className="artBox artBoxL">
+                        { /* Button edit & del  */
+                            this.props.currentUser.type === "admin" ?
+                                <EditBtns
+                                    editAttraction={this.editAttraction}
+                                    delAttraction={this.delAttraction}
+                                    editActive={editActive}
+                                    onRight={onRight} />
+                                :
+                                ""}
+                        <article className="atrContent">
+                            <div className="artTxt">
+                            <input
+                                    name ="titleValue"
+                                    className="atrTitleInput"
+                                    value={this.state.titleValue}
+                                    onChange={this.inputOnChange}/>
+                                <textarea
+                                    name ="descValue"
+                                    className="atrDescInput"
+                                    value={this.state.descValue}
+                                    onChange={this.inputOnChange}/>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+       :
+            <div className="atrContainer bgColorGrey">
+                <div className="artBox artBoxR">
+                        { /* Button edit & del  */
+                            this.props.currentUser.type === "admin" ?
+                                <EditBtns
+                                    editAttraction={this.editAttraction}
+                                    delAttraction={this.delAttraction}
+                                    editActive={editActive}
+                                    onRight={onRight=false} />
+                                :
+                                "" }
+                        <article className="atrContent">
+                            <div className="artTxt">
+                            <input
+                                name ="titleValue"
+                                className="atrTitleInput"
+                                value={this.state.titleValue}
+                                onChange={this.inputOnChange}/>
+                            <textarea
+                                name ="descValue"
+                                className="atrDescInput"
+                                value={this.state.descValue}
+                                onChange={this.inputOnChange}/>
+                            </div>
+                        </article>
+                        
+                    </div>
+                <img className="atrImg"
+                    src={this.props.attraction.img_url}
+                    alt={this.props.attraction.name}/>
+            </div>
+        )
+    }
+}
+export default AttractionEdit;
+
+/*return (
         this.props.indexAtr % 2 === 0 ?
                 <div className="atrContainer bgColorWhite">
                     <img className="atrImg"
@@ -31,10 +107,13 @@ class AttractionEdit extends Component {
                     <div className="descArt flexStart">
                         <div className="descArtTxtBox">
                             <article className="descArtTxt">
-                                <button
-                                    className="adminBtn editActive bgImgFit editR"
-                                    onClick={this.onclick}>
-                                </button>
+
+                                <EditBtns
+                                        editAttraction={this.editAttraction}
+                                        delAttraction={this.delAttraction}
+                                        editActive={editActive}
+                                        onRight = {onRight}/>
+
                                 <input
                                     name ="titleValue"
                                     className="atrTitleInput inputRight"
@@ -56,10 +135,13 @@ class AttractionEdit extends Component {
                 <div className="descArt flexEnd">
                     <div className="descArtTxtBox">
                         <article className="descArtTxt">
-                            <button
-                                className="adminBtn editActive bgImgFit editL"
-                                onClick={this.onclick}>
-                            </button>
+
+                            <EditBtns
+                                editAttraction={this.editAttraction}
+                                delAttraction={this.delAttraction}
+                                editActive={editActive}
+                                onRight = {false}/>
+
                             <input
                                 name ="titleValue"
                                 className="atrTitleInput inputLeft"
@@ -78,6 +160,4 @@ class AttractionEdit extends Component {
                     alt={this.props.attraction.name}/>
             </div>
         )
-    }
-}
-export default AttractionEdit;
+    }*/

@@ -30,7 +30,6 @@
 }
 /*    .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   . ATTRACTION*/
 .atrContainer {
-
     position: relative;
     display: flex;
     flex-direction: row;
@@ -40,7 +39,6 @@
     min-width: var(--mw-atrImg);
 }
 .atrImg {
-    
     width: var(--w-atrImg);
     min-width: var(--mw-atrImg);
     height: auto;
@@ -50,62 +48,69 @@
   
     margin: var(--marg01);
 }
-.descArt {
+.artBox {
+    position: relative;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    flex-direction: row;
 
     height: calc(var(--h-atrContainer) - (2 * var(--marg01)));
     min-width: var(--mw-atrImg);
     width: calc(100% - var(--w-atrImg));
 
-    margin: var(--marg01) var(--marg01) var(--marg01) 0 ;
 }
-.flexStart {
+.artBoxL {
 
-    align-items: flex-start;
+    margin:  var(--marg01) var(--marg01) var(--marg01) 0;
 }
-.flexEnd {
-    
-    align-items: flex-end;
+.artBoxR {
+    margin:  var(--marg01) 0 var(--marg01) var(--marg01);
 }
-.descArtTxtBox {
-    display: table;
+.atrContent {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
     height: 100%;
     width: 100%;
+    margin: 0 var(--marg01) 0 var(--marg01);
 }
-.descArtTxt {
-    display: table-cell;
-    vertical-align: middle;
+.artTxt {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    height: calc(100% - (var(--h-rating) + 2 * var(--pad01)));
+    width: 100%;
+}
+.editBtns {
+    position:absolute;
+    display: flex;
+    flex-direction: column;
+    top:var(--marg01);
 }
 .adminBtn {
     width:var(--size-adminBtn);
     height:var(--size-adminBtn);
     background-color: transparent;
 }
-/*Editable class and id*/
-.editInactive, .editActive {
-    position:absolute;
-    top:var(--marg01);
+.editBtnsR {
+    top: 0;
+    right: 0;
 }
-.editR {
-    right: var(--marg01);
-}
-.editL {
-    left: var(--marg01);
-}
-.inputLeft {
-    float: right;
-}
-.inputRight {
-    margin-left: var(--marg01);
-    float: left;
+.editBtnsL {
+    top: 0;
+    left: 0;
 }
 .editInactive {
     background-image: url('../assets/img/icone/editInactive.png');
 }
 .editActive {
     background-image: url('../assets/img/icone/valideInactive.png');
+}
+.delAtr {
+    background-image: url('../assets/img/icone/deleteActive.png');
 }
 .atrTitleInput {
     min-width:80%;

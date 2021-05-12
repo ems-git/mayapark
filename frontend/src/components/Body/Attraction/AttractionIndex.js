@@ -46,6 +46,37 @@ class AttractionIndex extends Component {
     }
 
     /*-----------------------------------------------------------------------------------------------*/
+    /*   .   .   .   .   .   .   .   .   .   .   .UPDATE ATR.    .   .   .   .   .   .   .   .   .   */
+    /*-----------------------------------------------------------------------------------------------*/
+
+    /** AttractionIndex.js UPDATE ATTRACTIONS AFTER AN EDITION OF ONE OF THEM
+     * @param {Number} pAtrId id of the attraction
+     * @param {String} pNewName new name of the attraction
+     * @param {String} pNewDesc new description of the attraction */
+     updateAtr =(pAtrId, pNewName, pNewDesc)=>
+     {
+         let newAttractions = this.state.attractions.map((attraction)=>{
+             if(attraction.id_atr === pAtrId)
+             {
+                 attraction.name = pNewName;
+                 attraction.description = pNewDesc;
+             }
+             return attraction;
+         })
+         this.setState({attractions : newAttractions});
+         //mettre a jour coté database
+     }
+ 
+     /** AttractionIndex.js  - DELETE AN ATTRACTION*/
+     delAttraction=(pId)=>
+     {
+        let newAttractions = this.state.attractions.filter((attraction,id)=> id!==pId);
+        this.setState({attractions : newAttractions});
+        // delete on data base db
+        // deleter rating then delete atr
+     }
+     
+    /*-----------------------------------------------------------------------------------------------*/
     /*   .   .   .   .   .   .   .   .   .   .   .  .   .   .   .   .   .   .   .   .   .   .   .   .*/
     /*-----------------------------------------------------------------------------------------------*/
 
@@ -56,6 +87,7 @@ class AttractionIndex extends Component {
         this.setState({attractions:
             [...this.state.attractions, pNewAtr]});
     }
+
     /*-----------------------------------------------------------------------------------------------*/
     /*   .   .   .   .   .   .   .   .   .   .   .RATING.   .   .   .   .   .   .   .   .   .   .   .*/
     /*-----------------------------------------------------------------------------------------------*/
@@ -89,31 +121,10 @@ class AttractionIndex extends Component {
         })
 
         this.setState({attractions : newAttractions});
-        //mettre a jour coté database
+        //mettre a jour coté database db
     }
 
-    /*-----------------------------------------------------------------------------------------------*/
-    /*   .   .   .   .   .   .   .   .   .   .   .UPDATE ATR.    .   .   .   .   .   .   .   .   .   */
-    /*-----------------------------------------------------------------------------------------------*/
 
-    /** AttractionIndex.js UPDATE ATTRACTIONS AFTER AN EDITION OF ONE OF THEM
-     * @param {Number} pAtrId id of the attraction
-     * @param {String} pNewName new name of the attraction
-     * @param {String} pNewDesc new description of the attraction */
-    updateAtr =(pAtrId, pNewName, pNewDesc)=>
-    {
-        let newAttractions = this.state.attractions.map((attraction)=>{
-            if(attraction.id_atr === pAtrId)
-            {
-                attraction.name = pNewName;
-                attraction.description = pNewDesc;
-            }
-            return attraction;
-        })
-        this.setState({attractions : newAttractions});
-        //mettre a jour coté database
-    }
-    
     /*-----------------------------------------------------------------------------------------------*/
     /*   .   .   .   .   .   .   .   .   .   .   .RENDER.   .   .   .   .   .   .   .   .   .   .   .*/
     /*-----------------------------------------------------------------------------------------------*/
@@ -135,6 +146,7 @@ class AttractionIndex extends Component {
                      currentUser={this.props.currentUser}
                      updateRating={this.updateRating}
                      updateAtr={this.updateAtr}
+                     delAttraction={this.delAttraction}
                  />
             </div> )
 

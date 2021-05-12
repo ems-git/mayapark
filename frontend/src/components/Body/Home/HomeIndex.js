@@ -72,27 +72,28 @@ export default class HomeIndex extends Component {
 
                 <section className=" bgColorWhite">
                     <h1>ATTRACTION A LA UNE</h1>
-                    <div className="atrContainer">
-                        <div className="descArt itemC">
-                            <div className="descArtTxtBox">
-                                <article className="descArtTxt">
+
+                    <div className="atrContainer bgColorWhite">
+                        <img className="atrImg"
+                            src={this.state.attraction.img_url}
+                            alt={this.state.attraction.name} />
+                        <div className="artBox artBoxL">
+                            <article className="atrContent">
+                                <div className="artTxt">
                                     <h4>{this.state.attraction.name}</h4>
                                     <p className="txtC">{this.state.attraction.description}</p>
-                                </article>
-                            </div>
-                            <Link
-                                to="/attraction"
-                                className="inactive">
+                                </div>
+                                <Link
+                                    to="/attraction"
+                                    className="inactive">
                                     <button
                                         type="button"
                                         className="submitBtn">
                                         voir plus
                                     </button>
-                            </Link>
+                                </Link>
+                            </article>
                         </div>
-                        <img className="atrImg"
-                            src={this.state.attraction.img_url}
-                            alt={this.state.attraction.name} />
                     </div>
                 </section>
 
