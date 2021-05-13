@@ -28,6 +28,12 @@ class App extends Component {
         
     componentDidMount()
     {
+        this.setCurrentUser();
+    }
+
+    /** App.js - SET CURRENT USER TYPA AND ID */
+    setCurrentUser=()=>
+    {
         let currentUserLS = this.localStorageManagement("get", "currentUser");
         if (currentUserLS) this.setState({ currentUser: { id: currentUserLS.id, type: currentUserLS.type }});
     }
@@ -46,10 +52,10 @@ class App extends Component {
         GlobalVar.axios.put(`${GlobalVar.url}user/id/${pId}/isLog/${isLog}`)
             .then(response => {
 
-                console.log('App.js - logUser(): user is log ', response);
+                console.log('--    REPONSE   -- Put user login/out : ', response.data[0]);
             })
             .catch(error => {
-                console.log('App.js - logUser() ERROR : Callback: ', error);
+                console.log('--!!  E.R.R.O.R  !!-- Put user login/out :\n', error);
             });
     }
 

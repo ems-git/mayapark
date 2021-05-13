@@ -29,11 +29,12 @@ export default class HomeIndex extends Component {
 
         GlobalVar.axios.get(`${GlobalVar.url}attractionLight`)
             .then(response => {
+                console.log('--    REPONSE   --  Get attraction in high-light : ' , response.data[0].name);
                 let attraction = response.data[0];
                 this.updateAtrFromData(attraction);
             })
             .catch(error => {
-                console.log('componentDidMount() GET/attractionLight - ERROR : ', error);
+                console.log('--!!  E.R.R.O.R  !!-- Get attraction in high-light :\n', error);
             });
     }
 

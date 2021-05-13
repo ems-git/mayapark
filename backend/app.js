@@ -20,6 +20,22 @@ app.use(cors());
 /*   .   .   .   .   .   .   .   .   .   .   .USER.   .   .   .   .   .   .   .   .   .   .   .   .*/
 /*-------------------------------------------------------------------------------------------------*/
 
+// ADD NEW USER//
+app.post(`/createUser`,
+   (req, res) => {
+       let user = req.body;
+       MySqlUtilities.createUser(user, (result, error) => {
+           if (!error) //  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .callabck OK
+           {
+               res.send(result);
+           }
+           else // .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .callabck NOT ok !!
+           {
+               res.status(500).send.error;
+           }
+       });
+});
+
 // GET ALL USERS
 app.get(`/userList`, (req, res) => {
     MySqlUtilities.getUserList((result, error)=>
@@ -115,21 +131,6 @@ app.get(`/user/mail/:mail`, (req, res) => {
     });
 });
 
-// ADD NEW USER//
-app.post(`/createUser`,
-   (req, res) => {
-       let user = req.body;
-       MySqlUtilities.createUser(user, (result, error) => {
-           if (!error) //  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .callabck OK
-           {
-               res.send(result);
-           }
-           else // .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .callabck NOT ok !!
-           {
-               res.status(500).send.error;
-           }
-       });
-});
 /*---------------------------------------------------------------------------------------------------*/
 /*   .   .   .   .   .   .   .   .   .   .   .ATTRACTION.   .   .   .   .   .   .   .   .   .   .   .*/
 /*---------------------------------------------------------------------------------------------------*/
@@ -164,10 +165,30 @@ app.get(`/attractionList`, (req, res) => {
     });
 });
 
+/*------------------------------------------------------------------------------------------------*/
+/*   .   .   .   .   .   .   .   .   .   .   .RATING.   .   .   .   .   .   .   .   .   .   .   . */
+/*------------------------------------------------------------------------------------------------*/
+
+// ADD NEW USER RATING//
+app.post(`/setUserRating/user/:id_user/attraction/:id_atr/rating/:userRating`,
+   (req, res) => {
+       let userId = req.params.id_user;
+       let atrId = req.params.id_atr;
+       let userRating = req.params.userRating;
+       MySqlUtilities.setUserRating(userId, atrId, userRating, (result, error) => {
+           if (!error) //  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .callabck OK
+           {
+               res.send(result);
+           }
+           else // .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .callabck NOT ok !!
+           {
+               res.status(500).send.error;
+           }
+       });
+});
+
 // GET THE USER RATING OF AN ATTRACTION //
 app.get(`/userRating/user/:id_user/attraction/:id_atr`,
-    param('id_user', "L'id de l'utilisateur doit être un nombre entier").notEmpty().isInt().withMessage(),
-    param('id_atr', "L'id de l'attraction doit être un nombre entier").notEmpty().isInt().withMessage(),
     (req, res) => {
     let userId = req.params.id_user;
     let atrId = req.params.id_atr;
@@ -184,12 +205,101 @@ app.get(`/userRating/user/:id_user/attraction/:id_atr`,
     });
 });
 
+// UPDATE USER RATING OF AN ATTRACTION //
+app.put(`/setUserRating/user/:id_user/attraction/:id_atr/rating/:userRating`, (req, res) => {
+    let userId = req.params.id_user;
+    let atrId = req.params.id_atr;
+    let userRating = req.params.userRating;
+    MySqlUtilities.updateUserRating(userId, atrId, userRating , (result, error) => {
+        if (!error) //  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .callabck OK
+        {
+            res.send(result);
+        }
+        else // .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .callabck NOT ok !!
+        {
+            res.status(500).send.error;
+        }
+    });
+});
+
+// UPDATE RATING OF AN ATTRACTION //
+app.put(`/updtateRating/attraction/:id_atr/rating/:newRating/nbrRating/:ratingNbr`, (req, res) => {
+    let atrId = req.params.id_atr;
+    let newRating = req.params.newRating;
+    let ratingNbr = req.params.ratingNbr;
+    MySqlUtilities.updateRating(atrId, newRating, ratingNbr , (result, error) => {
+        if (!error) //  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .callabck OK
+        {
+            res.send(result);
+        }
+        else // .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .callabck NOT ok !!
+        {
+            res.status(500).send.error;
+        }
+    });
+});
+
 /*------------------------------------------------------------------------------------------------*/
 /*   .   .   .   .   .   .   .   .   .   .   .DAYS.   .   .   .   .   .   .   .   .   .   .   .   */
-/*-------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------*/
+
 app.get(`/day/date/:date`, (req, res) => {
     let date = req.params.date;
     MySqlUtilities.getTicketAvailableDate(date, (result, error)=>
+    {
+        if(!error) //  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .callabck OK
+        {
+            res.send(result);
+        }
+        else // .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .callabck NOT ok !!
+        {
+            res.status(500).send.error;
+        }
+    });
+});
+
+// SET NEW DAY /
+app.post(`/day/date/:date/tickets/:tickets`, (req, res) => {
+    let date = req.params.date;
+    let tickets = req.params.tickets;
+    MySqlUtilities.setDay(date, tickets, (result, error)=>
+    {
+        if(!error) //  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .callabck OK
+        {
+            res.send(result);
+        }
+        else // .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .callabck NOT ok !!
+        {
+            res.status(500).send.error;
+        }
+    });
+});
+
+// UPDTAE VALID TICKET OF A DAY /
+app.put(`/day/date/:date/tickets/:tickets`, (req, res) => {
+    let date = req.params.date;
+    let tickets = req.params.tickets;
+    MySqlUtilities.updateDay(date, tickets, (result, error)=>
+    {
+        if(!error) //  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .callabck OK
+        {
+            res.send(result);
+        }
+        else // .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .callabck NOT ok !!
+        {
+            res.status(500).send.error;
+        }
+    });
+});
+
+/*------------------------------------------------------------------------------------------------*/
+/*   .   .   .   .   .   .   .   .   .   .RESERVATION.   .   .   .   .   .   .   .   .   .   .   .*/
+/*------------------------------------------------------------------------------------------------*/
+
+// SET NEW RESERVATION /
+app.post(`/createReservation`, (req, res) => {
+    let reservation = req.body;
+    MySqlUtilities.setReservation(reservation, (result, error)=>
     {
         if(!error) //  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .callabck OK
         {

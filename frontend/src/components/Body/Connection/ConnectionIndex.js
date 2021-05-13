@@ -21,13 +21,14 @@ export default class ConnectionIndex extends Component {
     doesUserExistDB = (pUser) => {
         GlobalVar.axios.get(`${GlobalVar.url}user/mail/${pUser.mail}`)
             .then(response => {
+                console.log('--    REPONSE   -- Get user by mail : ', response.data);
                 response.data[0] ?
                     this.setState({ registerMsg: "Cet utilisateur existe déjà" })
                     :
                     this.saveNewUser(pUser);
             })
             .catch(error => {
-                console.log("doesUserExistDB() - GET/user/mail/-ERROR", error);
+                console.log("--!!  E.R.R.O.R  !!-- Get user by mail :\n", error);
             });
     }
 
@@ -36,10 +37,11 @@ export default class ConnectionIndex extends Component {
     saveNewUser = (pUser) => {
         GlobalVar.axios.post(`${GlobalVar.url}createUser`, pUser)
             .then((response) => {
+                console.log('--    REPONSE   -- Post new user :\n', response);
                 this.props.setCurrUser("user", response.data.insertId);
             })
             .catch(function (error) {
-                console.log('saveNewUser() - POST/createUser-ERROR : ', error);
+                console.log('--!!  E.R.R.O.R  !!-- Post new user :\n', error);
             });
         this.msgOnchange(true, "");
     }
@@ -50,16 +52,16 @@ export default class ConnectionIndex extends Component {
     checkConnectionDB = (pMail, pPassword) => {
         GlobalVar.axios.get(`${GlobalVar.url}user/mail/${pMail}/password/${pPassword}`)
             .then(response => {
+                console.log('--    REPONSE   -- Get user by mail/password : ', response.data);
                 let userType = response.data[0].type;
                 let userId = response.data[0].id_user;
                 this.props.setCurrUser(userType, userId);
             })
             .catch(error => {
-                if (error.response && error.response.data && error.response.data.errorsValidator) {
-                    console.log('checkConnectionDB - GET/user/mail/password ERROR validator : ', error.response.data.errorsValidator);
-                }
+                if (error.response && error.response.data && error.response.data.errorsValidator)
+                    console.log('--!!  E.R.R.O.R  !!-- Get user by mail/password :\n', error.response.data.errorsValidator);
                 else {
-                    console.log('checkConnectionDB - GET/user/mail/password ERROR Callback: ', error);
+                    console.log('--!!  E.R.R.O.R  !!-- Get user by mail/password :\n', error);
                     this.msgOnchange(false, "Mot de passe ou identifiant incorrect. \nSi vous n'êtes pas encore inscrit, enregistrez vous");
                 }
             });

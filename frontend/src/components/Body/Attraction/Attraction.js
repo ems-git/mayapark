@@ -15,34 +15,35 @@ class Attraction extends Component {
     /*-----------------------------------------------------------------------------------------------*/
 
     componentDidMount() {
-
-        if(this.props.currentUser.type==="user")
-        {
-            GlobalVar.axios.get(`${GlobalVar.url}userRating/user/${this.props.currentUser.id}/attraction/${this.props.attraction.id_atr}`)
-            .then(response => {
-                if(response.data.length)
-                {
-                    this.updateUserRatingFromData(null);
-                }
-                else
-                {
-                    let userRating = response.data[0].rating;
-                    this.updateUserRatingFromData(userRating);
-                }
-            })
-            .catch(error => {
-                console.log('Attraction.js - componentDidMount() GET-attraction ERROR : ', error);
-            });
-        }
+        if(this.props.currentUser.type==="user") this.getUserRating();
     }
 
+    getUserRating=()=>
+    {
+        GlobalVar.axios.get(`${GlobalVar.url}userRating/user/${this.props.currentUser.id}/attraction/${this.props.attraction.id_atr}`)
+        .then(response => {
+            //console.log('--    REPONSE   -- Get user rating : ', JSON.stringify(response.data));
+            if(response.data.length)
+            {
+                let userRating = response.data[0].rating;
+                this.setUserRating(userRating);
+            }
+            else
+            {
+                this.setUserRating(null);
+            }
+        })
+        .catch(error => {
+            console.log('--!!  E.R.R.O.R  !!-- Get user rating :\n', error);
+        });
+    }
     /*-----------------------------------------------------------------------------------------------*/
     /*   .   .   .   .   .   .   .   .   .   .   .STATE.   .   .   .   .   .   .   .   .   .   .    .*/
     /*-----------------------------------------------------------------------------------------------*/
 
     /** Attraction.js START USER RATING (database Information)
      * @param {Number} pDataResponse value of new user rating */
-    updateUserRatingFromData = (pDataResponse) => {
+    setUserRating = (pDataResponse) => {
         this.setState({ userRating : pDataResponse });
     }
 
@@ -84,7 +85,6 @@ class Attraction extends Component {
                 updateUserRating={this.updateUserRating}
                 indexAtr={this.props.indexAtr}
                 editAttraction={this.editAttraction}
-                delAttraction={this.delAttraction}
                 delAttraction={this.props.delAttraction}/>
             :
             <AttractionEdit
@@ -92,12 +92,10 @@ class Attraction extends Component {
                 currentUser={this.props.currentUser}
                 indexAtr={this.props.indexAtr}
                 editAttraction={this.editAttraction}
-                delAttraction={this.delAttraction}
                 updateUserRating={this.updateUserRating}
                 delAttraction={this.props.delAttraction}/>
         )
     }
-
 }
 
 export default Attraction;

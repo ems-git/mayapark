@@ -1,4 +1,4 @@
-import React, { Component} from 'react';
+import React, { Component } from 'react';
 import GlobalVar from "../../GlobalVar";
 import DatePicker from './DatePicker';
 import Ticket from './Ticket';
@@ -10,15 +10,113 @@ export default class Booking extends Component {
     state = {
         showCalendar: false,
         dates: ["Début", "Fin"],
-        inputTicketValue : 1,
-        duration:0,
-        ticketPrice : 29,
-        ticketMax :200,
-        priceSum:0,
+        inputTicketValue: 1,
+        duration: 0,
+        ticketPrice: 29,
+        ticketMax: 200,
+        priceSum: 0,
     }
 
     /*-----------------------------------------------------------------------------------------------*/
-    /*   .   .   .   .   .   .   .   .   .   .   CALENDAR.   .   .   .   .   .   .   .   .   .   .   */
+    /*   .   .   .   .   .   .   .   .   .   .   .DATA-BASE.   .   .   .   .   .   .   .   .   .   . */
+    /*-----------------------------------------------------------------------------------------------*/
+
+    /** Booking-js -  GET NUMBER OF TICKETS AVAILABLE IN DATA BASE
+    * @param {Array} pDays array of dates (every day in range, "YYYY-MM-DD" format) */
+    getTicketAreAvaiable = (pDays) => {
+        let nbrValidTickets = [];
+
+        pDays.forEach((date, id, array) => {
+            GlobalVar.axios.get(`${GlobalVar.url}day/date/${date}`)
+                .then(response => {
+                    // console.log('--    REPONSE   -- Get number of tickets available by day : ', response.data);
+                    response.data[0] ?
+                        nbrValidTickets.push(response.data[0].ticketsAvailable)
+                        :
+                        nbrValidTickets.push(this.state.ticketMax);
+                    if (id===array.length-1) setTimeout(()=>this.CheckTicketAreAvaiable(nbrValidTickets, pDays), 100); // ! ! ! ! ! Find a way to use async and awit
+                })
+                .catch(error => {
+                    console.log('--!!  E.R.R.O.R  !!-- Get number of tickets available by day :\n', error);
+                });
+        });
+    }
+
+    /** Booking-js -  UPDATE NUMBER OF AVAILABLE TICKETS IN DAYS RANGE
+    * @param {Array} pDates dates of days range (format YYYY-MM-DD)
+    * @param {Array} pNbrValidTickets number of tickets available by days range
+    * @param {} pNbrTickets number of tickets user need by day*/
+    updateDayTicketAvailable = (pNbrValidTickets, pDates, pNbrTickets) => {
+        for(let i =0; i<pDates.length; i++)
+        {
+            let validTicket = pNbrValidTickets[i]-pNbrTickets;
+
+            pNbrValidTickets[i]===200 ? 
+                this.addNewDay(pDates[i],validTicket)
+                :
+                this.updateDay(pDates[i],validTicket);
+            
+        }
+        this.setReservation(pDates);
+    }
+
+    /** Booking.ks - ADD NEW DAY IN DATA-BASE
+     * @param {*} pDay date of the day (format YYYY-MM-DD)
+     * @param {*} pNbrTickets nbr of tickets available */
+    addNewDay=(pDay, pNbrTickets)=>
+    {
+        GlobalVar.axios.post(`${GlobalVar.url}day/date/${pDay}/tickets/${pNbrTickets}`)
+            .then(response => {
+                console.log('--    REPONSE   -- Post new day : ', response.data);
+            })
+            .catch(error => {
+                console.log('--!!  E.R.R.O.R  !!-- Post new day :\n', error);
+            });
+    }
+
+     /** Booking.ks - UDPATE A DAY IN DATA-BASE
+     * @param {*} pDay date of the day (format YYYY-MM-DD)
+     * @param {*} pNbrTickets nbr of tickets available */
+    updateDay=(pDay, pNbrTickets)=>
+    {
+        GlobalVar.axios.put(`${GlobalVar.url}day/date/${pDay}/tickets/${pNbrTickets}`)
+            .then(response => {
+                console.log('--    REPONSE   -- Put update tickets available : ', response.data);
+            })
+            .catch(error => {
+                console.log('--!!  E.R.R.O.R  !!-- Put update tickets available :\n', error);
+            });
+    }
+
+    /** Booking-js - ADD RESERVATION */
+    setReservation = (pDates) => {
+
+        console.log("setReservation()");
+        let newReservation = {
+            id_user: this.props.currentUser.id,
+            startDay: pDates[0],
+            periode: pDates.length,
+            state:"inComing",
+            price: this.state.priceSum };
+
+        GlobalVar.axios.post(`${GlobalVar.url}createReservation`, newReservation)
+            .then(response => {
+                console.log('--    REPONSE   -- Put update tickets available : ', response.data);
+            })
+            .catch(error => {
+                console.log('--!!  E.R.R.O.R  !!-- Put update tickets available :\n', error);
+            });
+
+        setTimeout(()=>this.setReserve(pDates), 1000); // ! ! ! ! ! Find a way to use async and await
+    }
+
+    /** Booking-js - ADD RESERVE ASSOCIATIONS */
+    setReserve = () => {
+        console.log("-------FEEDBACK - Reservation dans votre panier");
+    }
+
+    /*-----------------------------------------------------------------------------------------------*/
+    /*   .   .   .   .   .   .   .   .   .METHODES CALENDAR.   .   .   .   .   .   .   .   .   .   . */
     /*-----------------------------------------------------------------------------------------------*/
 
     /** Booking.js - SHOW CALENDAR WHEN USER CLICK ON DATE BUTTONS || HIDE WHEN HE CLICK ON OTHER BTN
@@ -45,9 +143,9 @@ export default class Booking extends Component {
      * @param {Boolean} pSort true if it's necessary to sort */
     setDates = (pDates, pSort) => {
         pSort ?
-            this.setState({ dates: pDates }, () =>{ this.sortDates(); this.calcPrice();})
+            this.setState({ dates: pDates }, () => { this.sortDates(); this.calcPrice(); })
             :
-            this.setState({ dates: pDates },() => this.calcPrice());
+            this.setState({ dates: pDates }, () => this.calcPrice());
     }
 
     /** Booking.js - SORT DATES ASCENDING ORDER */
@@ -82,11 +180,11 @@ export default class Booking extends Component {
 
     /** Booking.js - CLEAN DATES ARRAY*/
     cleanDates = () => {
-        this.setState({ dates: ["Début", "Fin"]}, ()=>this.calcPrice());
+        this.setState({ dates: ["Début", "Fin"] }, () => this.calcPrice());
     }
 
     /*-----------------------------------------------------------------------------------------------*/
-    /*   .   .   .   .   .   .   .   .   .   .   .TICKETS.   .   .   .   .   .   .   .   .   .   .   */
+    /*   .   .   .   .   .   .   .   .   .METHODES TICKETS.   .   .   .   .   .   .   .   .   .   .  */
     /*-----------------------------------------------------------------------------------------------*/
 
     /** Booking.js - SET TICKET VALUE WHEN USER SELECT A VALUE ON SELECT DROPDOWN 
@@ -96,7 +194,7 @@ export default class Booking extends Component {
     }
 
     /*-----------------------------------------------------------------------------------------------*/
-    /*   .   .   .   .   .   .   .   .   .   .   .BOOKING.   .   .   .   .   .   .   .   .   .   .   */
+    /*   .   .   .   .   .   .   .   .   .METHODES BOOKING.   .   .   .   .   .   .   .   .   .   .  */
     /*-----------------------------------------------------------------------------------------------*/
 
     /** Booking.js - USER CLICKE ON RESERVATION BUTTON*/
@@ -104,46 +202,36 @@ export default class Booking extends Component {
         e.preventDefault();
         this.setShowCalendar(false);
 
-        if(this.props.currentUser.type ===null)
-        {
+        if (this.props.currentUser.type === null) {
             console.log("-------FEEDBACK - GO TINSCRIRE");
         }
-        else if (this.props.currentUser.type ==="user")
-        {
+        else if (this.props.currentUser.type === "user") {
             if (this.state.dates[0] !== "Début" && this.state.dates[1] !== "Fin") this.saveBooking();
-            else
-            {
+            else {
                 console.log("-------FEEDBACK - tu n'as pas précisé les dates");
             }
 
         }
-        else
-        {
+        else {
             console.log("-------FEEDBACK - tu ne peux pas reserver en tan qu'administrateur");
         }
     }
 
     /** Booking.js - CALCULATING PRICE OF A BOOKING */
-    calcPrice=()=>
-    {
+    calcPrice = () => {
         let startDay = moment(this.state.dates[0]);
         let endDay = moment(this.state.dates[1]);
-        let duration = Math.abs(moment.duration(startDay.diff(endDay)).asDays()) +1;
+        let duration = Math.abs(moment.duration(startDay.diff(endDay)).asDays()) + 1;
         let sum = (duration * this.state.ticketPrice * this.state.inputTicketValue);
 
-        (this.state.dates[0]!=="Début" && this.state.dates[1]!=="Fin") ?
-            this.setState({priceSum : sum, duration})
+        (this.state.dates[0] !== "Début" && this.state.dates[1] !== "Fin") ?
+            this.setState({ priceSum: sum, duration })
             :
-            this.setState({priceSum : 0, duration : 0});
+            this.setState({ priceSum: 0, duration: 0 });
     }
 
-    /*-----------------------------------------------------------------------------------------------*/
-    /*   .   .   .   .   .   .   .   .   .   .   .DB-BOOKING.   .   .   .   .   .   .   .   .   .   .*/
-    /*-----------------------------------------------------------------------------------------------*/
-
     /** Booking.js - SAVING A BOOKING*/
-    saveBooking=()=>
-    {
+    saveBooking = () => {
         let days = [moment(this.state.dates[0], "MM-DD-YYYY").format("YYYY-MM-DD").valueOf()]; /* format sql date */
 
         for (let i = 0; i < (this.state.duration - 1); i++) {
@@ -153,48 +241,22 @@ export default class Booking extends Component {
         this.getTicketAreAvaiable(days);
     }
 
-    /** GET NUMBER OF TICKETS AVAILABLE IN DATA BASE
-    * @param {Array} pDays array of dates (every day in range, "YYYY-MM-DD" format) */
-    getTicketAreAvaiable=(pDays)=>
-    {
-        let days = [];
-        pDays.forEach((date,index,array) => {
-
-            GlobalVar.axios.get(`${GlobalVar.url}day/date/${date}`)
-            .then(response => {
-                if(response.data[0]) days.push(response.data[0].ticketsAvailable);
-                else days.push(this.state.ticketMax);
-
-                if (index===array.length-1 ) this.CheckTicketAreAvaiable(days);
-            })
-            .catch(error => {
-                console.log('Booking.js getTicketAreAvaiable() GET-ERROR : ', error);
-            });
-        });
-    }
-
     /** CHECK IF ALL DAYS OF A RESERATION ARE AVAILABLE
-    * @param {Array} pTickets array of number of tickets avalable by day in range */
-    CheckTicketAreAvaiable =(pTickets)=>
-    {
-        const daysAreAvalaible = (ticket) => (ticket-this.state.inputTicketValue) >= 0;
-        if (pTickets.every(daysAreAvalaible))
-        {
-            console.log("-------FEEDBACK -Reservation dans votre panier");
-            // maj db nbr ticketsAvailable in day
-            // maj db reservation add
-            // maj res-day
-            // clean inputs (dates, nbr personne)
-        }
-        else
-        {
+    * @param {Array} pTickets array of number of tickets avalable by day in range
+    * @param {Array} pDates array of days in range*/
+    CheckTicketAreAvaiable = (pTickets, pDates) => {
+        const daysAreAvalaible = (ticket) => (ticket - this.state.inputTicketValue) >= 0;
+
+        (pTickets.every(daysAreAvalaible)) ?
+            this.updateDayTicketAvailable(pTickets, pDates, this.state.inputTicketValue)
+            :
             console.log("-------FEEDBACK -plus de place ");
-        }
     }
 
     /*-----------------------------------------------------------------------------------------------*/
     /*   .   .   .   .   .   .   .   .   .   .   .RENDER.   .   .   .   .   .   .   .   .   .   .   .*/
     /*-----------------------------------------------------------------------------------------------*/
+
     render() {
         return (
             <section id="currentBody" className="borderBottom">
@@ -220,13 +282,13 @@ export default class Booking extends Component {
                                     setShowCalendar={this.setShowCalendar}
                                     cleanDates={this.cleanDates}
                                     dayIsClicked={this.dayIsClicked}
-                                    />
+                                />
                             </td>
                             <td className="tdBooking">
                                 <Ticket
                                     ticketsOnchange={this.ticketsOnchange}
                                     setShowCalendar={this.setShowCalendar}
-                                    calcPrice={this.calcPrice}/>
+                                    calcPrice={this.calcPrice} />
                             </td>
                             <td className="tdBooking">
                                 {this.state.priceSum}
