@@ -24,17 +24,18 @@ export default class Booking extends Component {
     /** Booking-js -  GET NUMBER OF TICKETS AVAILABLE IN DATA BASE
     * @param {Array} pDays array of dates (every day in range, "YYYY-MM-DD" format) */
     getTicketAreAvaiable = (pDays) => {
-        let nbrValidTickets = [];
+        console.log('BOOKING - getTicketAreAvaiable');
 
+        let nbrValidTickets = [];
         pDays.forEach((date, id, array) => {
-            GlobalVar.axios.get(`${GlobalVar.url}day/date/${date}`)
+            GlobalVar.axios.get(`${GlobalVar.url}day/ticket/${date}`)
                 .then(response => {
                     // console.log('--    REPONSE   -- Get number of tickets available by day : ', response.data);
                     response.data[0] ?
                         nbrValidTickets.push(response.data[0].ticketsAvailable)
                         :
                         nbrValidTickets.push(this.state.ticketMax);
-                    if (id===array.length-1) setTimeout(()=>this.CheckTicketAreAvaiable(nbrValidTickets, pDays), 100); // ! ! ! ! ! Find a way to use async and awit
+                    if (id===array.length-1) setTimeout(()=>this.CheckTicketAreAvaiable(nbrValidTickets, pDays), 200); // ! ! ! ! ! ! ! ! ! ! Find a way to use async and awit
                 })
                 .catch(error => {
                     console.log('--!!  E.R.R.O.R  !!-- Get number of tickets available by day :\n', error);
@@ -47,6 +48,9 @@ export default class Booking extends Component {
     * @param {Array} pNbrValidTickets number of tickets available by days range
     * @param {} pNbrTickets number of tickets user need by day*/
     updateDayTicketAvailable = (pNbrValidTickets, pDates, pNbrTickets) => {
+        
+        console.log('BOOKING - updateDayTicketAvailable');
+
         for(let i =0; i<pDates.length; i++)
         {
             let validTicket = pNbrValidTickets[i]-pNbrTickets;
@@ -65,9 +69,11 @@ export default class Booking extends Component {
      * @param {*} pNbrTickets nbr of tickets available */
     addNewDay=(pDay, pNbrTickets)=>
     {
+        console.log('BOOKING - addNewDay');
+
         GlobalVar.axios.post(`${GlobalVar.url}day/date/${pDay}/tickets/${pNbrTickets}`)
             .then(response => {
-                console.log('--    REPONSE   -- Post new day : ', response.data);
+                //console.log('--    REPONSE   -- Post new day : ', response.data);
             })
             .catch(error => {
                 console.log('--!!  E.R.R.O.R  !!-- Post new day :\n', error);
@@ -79,9 +85,11 @@ export default class Booking extends Component {
      * @param {*} pNbrTickets nbr of tickets available */
     updateDay=(pDay, pNbrTickets)=>
     {
+        console.log('BOOKING - updateDay');
+        
         GlobalVar.axios.put(`${GlobalVar.url}day/date/${pDay}/tickets/${pNbrTickets}`)
             .then(response => {
-                console.log('--    REPONSE   -- Put update tickets available : ', response.data);
+                //console.log('--    REPONSE   -- Put update tickets available : ', response.data);
             })
             .catch(error => {
                 console.log('--!!  E.R.R.O.R  !!-- Put update tickets available :\n', error);
@@ -91,8 +99,10 @@ export default class Booking extends Component {
     /** Booking-js - ADD RESERVATION */
     setReservation = (pDates) => {
 
-        console.log("setReservation()");
+        console.log('BOOKING - setReservation');
+
         let newReservation = {
+            id_res:null,
             id_user: this.props.currentUser.id,
             startDay: pDates[0],
             periode: pDates.length,
@@ -101,18 +111,56 @@ export default class Booking extends Component {
 
         GlobalVar.axios.post(`${GlobalVar.url}createReservation`, newReservation)
             .then(response => {
-                console.log('--    REPONSE   -- Put update tickets available : ', response.data);
+                //console.log('--    REPONSE   -- Post new reservation : ', response.data.insertId);
+                newReservation.id_res=response.data.insertId;
             })
             .catch(error => {
-                console.log('--!!  E.R.R.O.R  !!-- Put update tickets available :\n', error);
+                console.log('--!!  E.R.R.O.R  !!-- Post new reservation :\n', error);
             });
 
-        setTimeout(()=>this.setReserve(pDates), 1000); // ! ! ! ! ! Find a way to use async and await
+        setTimeout(()=>{this.getIdDates(pDates, newReservation.id_res)}, 200); // ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! !Find a way to use async and await
     }
 
     /** Booking-js - ADD RESERVE ASSOCIATIONS */
-    setReserve = () => {
+    setReserve = (pIdRes, pIdDates ) => {
+
+        console.log('BOOKING - setReserve');
+
+        let newReserve = {
+            id_res: pIdRes,
+            nbrTickets: this.state.inputTicketValue, }
+
+        pIdDates.forEach(idDay => {
+            GlobalVar.axios.post(`${GlobalVar.url}createReserve/day/${idDay}`, newReserve)
+            .then(response => {
+                //console.log('--    REPONSE   -- Put new reserve : ', response.data);
+            })
+            .catch(error => {
+                console.log('--!!  E.R.R.O.R  !!-- Put new reserve :\n', error);
+            });
+        });
+            
         console.log("-------FEEDBACK - Reservation dans votre panier");
+    }
+
+    getIdDates=(pDates, pIdRes)=>
+    {
+        console.log('BOOKING - getIdDates');
+
+        let dateIds = [];
+
+        pDates.forEach(day => {
+            GlobalVar.axios.get(`${GlobalVar.url}day/date/${day}`)
+                .then(response => {
+                    //console.log('--    REPONSE   -- Get id_day of dates : ', response.data[0].id_day);
+                    dateIds.push(response.data[0].id_day);
+                })
+                .catch(error => {
+                    console.log('--!!  E.R.R.O.R  !!-- Get id_day of dates :\n', error);
+                });
+        });
+
+        setTimeout(()=>{this.setReserve(pIdRes, dateIds)}, 200); // ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! !Find a way to use async and await
     }
 
     /*-----------------------------------------------------------------------------------------------*/

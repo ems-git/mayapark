@@ -243,9 +243,25 @@ app.put(`/updtateRating/attraction/:id_atr/rating/:newRating/nbrRating/:ratingNb
 /*   .   .   .   .   .   .   .   .   .   .   .DAYS.   .   .   .   .   .   .   .   .   .   .   .   */
 /*------------------------------------------------------------------------------------------------*/
 
-app.get(`/day/date/:date`, (req, res) => {
+app.get(`/day/ticket/:date`, (req, res) => {
     let date = req.params.date;
     MySqlUtilities.getTicketAvailableDate(date, (result, error)=>
+    {
+        if(!error) //  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .callabck OK
+        {
+            res.send(result);
+        }
+        else // .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .callabck NOT ok !!
+        {
+            res.status(500).send.error;
+        }
+    });
+});
+
+// GET ID OF DAYS /
+app.get(`/day/date/:date`, (req, res) => {
+    let date = req.params.date;
+    MySqlUtilities.getIdDay(date, (result, error)=>
     {
         if(!error) //  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .callabck OK
         {
@@ -312,6 +328,26 @@ app.post(`/createReservation`, (req, res) => {
     });
 });
 
+/*------------------------------------------------------------------------------------------------*/
+/*   .   .   .   .   .   .   .   .   .   .RESEVRE.   .   .   .   .   .   .   .   .   .   .   .   .*/
+/*------------------------------------------------------------------------------------------------*/
+
+// SET NEW RESEVRE /
+app.post(`/createReserve/day/:id_day`, (req, res) => {
+    let reserve = req.body;
+    let idDay = req.params.id_day;
+    MySqlUtilities.setReserve(reserve,idDay, (result, error)=>
+    {
+        if(!error) //  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .callabck OK
+        {
+            res.send(result);
+        }
+        else // .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .callabck NOT ok !!
+        {
+            res.status(500).send.error;
+        }
+    });
+});
 
 
 

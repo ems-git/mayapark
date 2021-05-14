@@ -189,6 +189,14 @@ class MySqlUtilities
         });
         connection.end;
     }
+    getIdDay(pDate, callback) {
+        let connection = mysql.createConnection(config);
+        connection.connect();
+        connection.query('SELECT id_day FROM day WHERE date=? ', [pDate], (error, results) => {
+            callback(results, error);
+        });
+        connection.end;
+    }
 
     setDay(pDate, pTickets, callback) {
         let connection = mysql.createConnection(config);
@@ -215,6 +223,18 @@ class MySqlUtilities
         let connection = mysql.createConnection(config);
         connection.connect();
         connection.query('INSERT INTO `reservation` (`id_user`, `startDay`,`periode`, `state`, `price` ) VALUES (?,?,?,?,?)', [pReservation.id_user, pReservation.startDay, pReservation.periode, "inComing", pReservation.price], (error, results) => {
+            callback(results, error);
+        });
+        connection.end;
+    }
+    
+    /*------------------------------------------------------------------------------------------------*/
+    /*   .   .   .   .   .   .   .   .   .   .RESERVE.   .   .   .   .   .   .   .   .   .   .   .   .*/
+    /*------------------------------------------------------------------------------------------------*/
+    setReserve(pResere, pIdDay, callback) {
+        let connection = mysql.createConnection(config);
+        connection.connect();
+        connection.query('INSERT INTO `reserve` ( `id_res`, `id_day`,`nbrTickets`) VALUES (?,?,?)', [pResere.id_res, pIdDay, pResere.nbrTickets], (error, results) => {
             callback(results, error);
         });
         connection.end;
