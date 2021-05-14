@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import GlobalVar from '../../GlobalVar';
+import Navbar from '../../Navbar/Navbar';
+import ParkInformation from '../../Navbar/ParkInformation';
 import Header from '../../Header/Header';
 import Footer from '../../Footer/Footer';
 import Register from './Register';
@@ -25,7 +27,7 @@ export default class ConnectionIndex extends Component {
                 response.data[0] ?
                     this.setState({ registerMsg: "Cet utilisateur existe déjà" })
                     :
-                    this.saveNewUser(pUser);
+                    this.setUserDB(pUser);
             })
             .catch(error => {
                 console.log("--!!  E.R.R.O.R  !!-- Get user by mail :\n", error);
@@ -34,7 +36,7 @@ export default class ConnectionIndex extends Component {
 
     /** ConnectionIndex.js CREATE NEW USER IN DATA BASE
      * @param {Object} pUser  */
-    saveNewUser = (pUser) => {
+    setUserDB = (pUser) => {
         GlobalVar.axios.post(`${GlobalVar.url}createUser`, pUser)
             .then((response) => {
                 console.log('--    REPONSE   -- Post new user :\n', response);
@@ -86,6 +88,10 @@ export default class ConnectionIndex extends Component {
     render() {
         return (
             <div>
+                <ParkInformation/>
+                <Navbar
+                    currentUser={this.props.currentUser}
+                    setCurrUser={this.props.setCurrUser}/>
                 <Header
                     currentUser={this.props.currentUser}
                     indexPath={"connection"}

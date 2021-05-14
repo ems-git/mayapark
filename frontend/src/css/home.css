@@ -1,6 +1,10 @@
 #homeBody {
     margin-top: 0;
 }
+#homeBody .bodyContent{
+    width: var(--w-body);
+    margin-left: calc((100% - var(--w-body)) / 2);
+}
 .borderBottom {
     border-radius: var(--br-body);
 }

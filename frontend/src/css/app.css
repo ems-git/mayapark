@@ -189,24 +189,6 @@ header {
   width: var(--w-header);
   position: relative;
 }
-.homeHeader {
-  background-image: var(--img-header-home);
-}
-.atrHeader {
-  background-image: var(--img-header-atr);
-}
-.profilHeader {
-  background-image: var(--img-header-profil);
-}
-.connexionHeader {
-  background-image: var(--img-header-connection);
-}
-.adminHeader {
-  background-image: var(--img-header-admin);
-}
-.notFoundHeader {
-  background-image: var(--img-header-notfound);
-}
 /*    .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .FOOTER */
 footer {
   display: flex;

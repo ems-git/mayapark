@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import GlobalVar from '../../GlobalVar';
+import Navbar from '../../Navbar/Navbar';
+import ParkInformation from '../../Navbar/ParkInformation';
 // import AttractionForm from './AttractionForm';
 import AttractionList from './AttractionList';
 
@@ -26,11 +28,11 @@ class AttractionIndex extends Component {
     /*-----------------------------------------------------------------------------------------------*/
 
     componentDidMount() {
-        this.getListAttractions();
+        this.getAttractionsDB();
     }
 
     /** AttractionIndex.js - GET ATTRACTIONS LIST IN DATABASE*/
-    getListAttractions = () => {
+    getAttractionsDB = () => {
         GlobalVar.axios.get(`${GlobalVar.url}attractionList`)
             .then(response => {
                 // console.log('--    REPONSE   -- Get attraction list : ', response.data);
@@ -53,12 +55,12 @@ class AttractionIndex extends Component {
      * @param {Number} pUserRating user rating
      * @param {Number} pRatingAtr new rating of the attraction
      * @param {Number} pRatingNbrAtr new nbr of rating of the attraction */
-    setUserRating=(pIdAtr,pUserRating,pRatingAtr,pRatingNbrAtr)=>
+    setUserRatingDB=(pIdAtr,pUserRating,pRatingAtr,pRatingNbrAtr)=>
     {
         GlobalVar.axios.post(`${GlobalVar.url}setUserRating/user/${this.props.currentUser.id}/attraction/${pIdAtr}/rating/${pUserRating}`)
             .then((response) => {
                 console.log('--    REPONSE   -- Post new user rating :\n', response.data);
-                this.updateAttractionRating(pIdAtr,pRatingAtr,pRatingNbrAtr);
+                this.updateAttractionRatingDB(pIdAtr,pRatingAtr,pRatingNbrAtr);
             })
             .catch(function (error) {
                 console.log('--!!  E.R.R.O.R  !!-- Post new user rating:\n', error);
@@ -70,12 +72,12 @@ class AttractionIndex extends Component {
      * @param {Number} pUserRating user rating
      * @param {Number} pRatingAtr new rating of the attraction
      * @param {Number} pRatingNbrAtr new nbr of rating of the attraction */
-    updateUserRating=(pIdAtr,pUserRating,pRatingAtr,pRatingNbrAtr)=>
+    updateUserRatingDB=(pIdAtr,pUserRating,pRatingAtr,pRatingNbrAtr)=>
     {
         GlobalVar.axios.put(`${GlobalVar.url}setUserRating/user/${this.props.currentUser.id}/attraction/${pIdAtr}/rating/${pUserRating}`)
             .then((response) => {
                 console.log('--    REPONSE   -- Put update user rating :\n', response.data);
-                this.updateAttractionRating(pIdAtr,pRatingAtr,pRatingNbrAtr);
+                this.updateAttractionRatingDB(pIdAtr,pRatingAtr,pRatingNbrAtr);
             })
             .catch(function (error) {
                 console.log('--!!  E.R.R.O.R  !!-- Put update user rating:\n', error);
@@ -86,7 +88,7 @@ class AttractionIndex extends Component {
      * @param {Number} pIdAtr id of the attraction
      * @param {Number} pRating new rating of the attraction
      * @param {Number} pNbrpRating number of rating of the attraction*/
-     updateAttractionRating=(pIdAtr,pRating, pNbrpRating)=>
+     updateAttractionRatingDB=(pIdAtr,pRating, pNbrpRating)=>
      {
         GlobalVar.axios.put(`${GlobalVar.url}updtateRating/attraction/${pIdAtr}/rating/${pRating}/nbrRating/${pNbrpRating}`)
         .then((response) => {
@@ -96,6 +98,33 @@ class AttractionIndex extends Component {
             console.log('--!!  E.R.R.O.R  !!-- Put new rating:\n', error);
         });
      }
+
+
+    delAttractionDB = (pId) => {
+        return new Promise((resolve, reject) => {
+            GlobalVar.axios.delete(`${GlobalVar.url}attraction/${pId}`)
+                .then((response) => {
+                    //console.log('--    REPONSE   -- Delete attraction :\n', response.data);
+                    resolve();
+                })
+                .catch(function (error) {
+                    console.log('--!!  E.R.R.O.R  !!-- Delete attraction:\n', error);
+                });
+        });
+    }
+
+    delRatingDB = (pId) => {
+        return new Promise((resolve,reject)=>{
+            GlobalVar.axios.delete(`${GlobalVar.url}rating/attraction/${pId}`)
+                .then((response) => {
+                    //console.log('--    REPONSE   -- Delete rating :\n', response.data);
+                    resolve();
+                })
+                .catch(function (error) {
+                    console.log('--!!  E.R.R.O.R  !!-- Delete rating:\n', error);
+                });
+        });
+    }
 
     /*-----------------------------------------------------------------------------------------------*/
     /*   .   .   .   .   .   .   .   .    .METHODES ATTRACTIONS.    .    .   .   .   .   .   .   .   */
@@ -126,12 +155,23 @@ class AttractionIndex extends Component {
         //mettre a jour coté database
     }
 
-    /** AttractionIndex.js  - DELETE AN ATTRACTION*/
-    delAttraction = (pId) => {
+    delAttractionState=(pId)=>
+    {
         let newAttractions = this.state.attractions.filter((attraction, id) => id !== pId);
         this.setState({ attractions: newAttractions });
-        // delete on data base db
-        // deleter rating then delete atr
+    }
+
+    /** AttractionIndex.js  - DELETE AN ATTRACTION*/
+    delAttraction = async (pId) => {
+        try{
+            const idAtr = this.state.attractions[pId].id_atr;
+            const delRating = await this.delRatingDB(idAtr);
+            const delEtr = await this.delAttractionDB(idAtr);
+            const delAtrState = await this.delAttractionState(idAtr);
+        }
+        catch{
+            console.log('--!!  E.R.R.O.R  !!-- Delete rating and atraction failed:\n')
+        }
     }
 
     /*-----------------------------------------------------------------------------------------------*/
@@ -156,7 +196,7 @@ class AttractionIndex extends Component {
                     attraction.rating = newRating;
                     attraction.ratingNbr = newNbrRating;
 
-                    this.setUserRating(pIdAtr,pUserRating,newRating,newNbrRating);
+                    this.setUserRatingDB(pIdAtr,pUserRating,newRating,newNbrRating);
                 }
                 else //the user had already voted
                 {
@@ -164,7 +204,7 @@ class AttractionIndex extends Component {
                     // attraction.rating =  parseFloat((newRating).toFixed(2));
                     attraction.rating = newRating;
 
-                    this.updateUserRating(pIdAtr,pUserRating,newRating,attraction.ratingNbr);
+                    this.updateUserRatingDB(pIdAtr,pUserRating,newRating,attraction.ratingNbr);
                 }
             }
             return attraction;
@@ -200,6 +240,10 @@ class AttractionIndex extends Component {
 
         return (
             <div>
+                <ParkInformation/>
+                <Navbar
+                    currentUser={this.props.currentUser}
+                    setCurrUser={this.props.setCurrUser}/>
                 <Header
                     currentUser={this.props.currentUser}
                     indexPath={"attraction"}

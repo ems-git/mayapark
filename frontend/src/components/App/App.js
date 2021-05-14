@@ -45,7 +45,7 @@ class App extends Component {
     /** App.js CHANGE VALUE OF LOG IN DATA BASE WHEN USER IS LOG OR NOT
      * @param {Number} pId id of current user
      * @param {Boolean} pLogin true if user is log, false if he si not login */
-    logUser = (pId, pLogin) => {
+    logUserDB = (pId, pLogin) => {
         let isLog;
         isLog=pLogin ? 1 : 0 ; //In data base, boolean is 0 or 1
 
@@ -69,13 +69,13 @@ class App extends Component {
         if (pId) {
             this.setState({ currentUser: { id: pId, type: pType }},
                 ()=>{
-                    this.logUser(pId, true);
+                    this.logUserDB(pId, true);
                     this.localStorageManagement("save", 'currentUser');
                 });
             
         }
         else {
-            this.logUser(this.state.currentUser.id, false);
+            this.logUserDB(this.state.currentUser.id, false);
             this.setState({ currentUser: { id: pId, type: pType }},
                 ()=>this.localStorageManagement("clear", 'currentUser'));
         }

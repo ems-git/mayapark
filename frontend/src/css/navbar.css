@@ -8,7 +8,8 @@
 	/* opacity: 0;
 	animation: 1.2s navApparition  1.8s ease forwards; */
 
-	position: fixed;
+	position: sticky;
+	top:0;
 		
 	background-color: var(--c-red);
 
@@ -133,7 +134,8 @@
 		/* opacity: 0; 
 		animation: 1.2s navApparition  1.8s ease forwards; */
 		
-		position: fixed;
+		position: sticky;
+		top:0;
 
 		background-color: var(--c-red);
 

@@ -117,6 +117,15 @@ class MySqlUtilities
         connection.end;
     }
 
+    delAttraction(pAtrId, callback) {
+        let connection = mysql.createConnection(config);
+        connection.connect();
+        connection.query('DELETE FROM `attraction` WHERE id_atr=?', [pAtrId], (error, results) => {
+            callback(results, error);
+        });
+        connection.end;
+    }
+
     /*------------------------------------------------------------------------------------------------*/
     /*   .   .   .   .   .   .   .   .   .   .   .RATING.   .   .   .   .   .   .   .   .   .   .   . */
     /*------------------------------------------------------------------------------------------------*/
@@ -172,6 +181,15 @@ class MySqlUtilities
         let connection = mysql.createConnection(config);
         connection.connect();
         connection.query('UPDATE attraction SET rating=(?), ratingNbr=(?) WHERE id_atr=?', [ pRating, pRatingNbr, pAtrId], (error, results) => {
+            callback(results, error);
+        });
+        connection.end;
+    }
+
+    delRating(pAtrId, callback) {
+        let connection = mysql.createConnection(config);
+        connection.connect();
+        connection.query('DELETE FROM `rating` WHERE id_atr=?', [ pAtrId], (error, results) => {
             callback(results, error);
         });
         connection.end;

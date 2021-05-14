@@ -1,0 +1,26 @@
+.homeHeader {
+    background-image: var(--img-header-home);
+}
+.atrHeader {
+    background-image: var(--img-header-atr);
+}
+.profilHeader {
+    background-image: var(--img-header-profil);
+}
+.connexionHeader {
+    background-image: var(--img-header-connection);
+}
+.adminHeader {
+    background-image: var(--img-header-admin);
+}
+.notFoundHeader {
+    background-image: var(--img-header-notfound);
+}
+#parkInformations {
+    
+    z-index: 1000;
+    background-color: var(--c-white);
+    text-align: center;
+
+    padding: var(--pad01);
+}

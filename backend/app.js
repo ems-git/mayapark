@@ -165,6 +165,22 @@ app.get(`/attractionList`, (req, res) => {
     });
 });
 
+// DELETE AN ATTRACTION  //
+app.delete(`/attraction/:id_atr`, (req, res) => {
+    let idAtr=req.params.id_atr
+    MySqlUtilities.delAttraction(idAtr,(result, error)=>
+    {
+        if(!error) //  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .callabck OK
+        {
+            res.send(result);
+        }
+        else // .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .callabck NOT ok !!
+        {
+            res.status(500).send.error;
+        }
+    });
+});
+
 /*------------------------------------------------------------------------------------------------*/
 /*   .   .   .   .   .   .   .   .   .   .   .RATING.   .   .   .   .   .   .   .   .   .   .   . */
 /*------------------------------------------------------------------------------------------------*/
@@ -229,6 +245,22 @@ app.put(`/updtateRating/attraction/:id_atr/rating/:newRating/nbrRating/:ratingNb
     let ratingNbr = req.params.ratingNbr;
     MySqlUtilities.updateRating(atrId, newRating, ratingNbr , (result, error) => {
         if (!error) //  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .callabck OK
+        {
+            res.send(result);
+        }
+        else // .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .callabck NOT ok !!
+        {
+            res.status(500).send.error;
+        }
+    });
+});
+
+// DELETE RATING WHEN ATTRACTION IS DELETE  //
+app.delete(`/rating/attraction/:id_atr`, (req, res) => {
+    let idAtr=req.params.id_atr
+    MySqlUtilities.delRating(idAtr,(result, error)=>
+    {
+        if(!error) //  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .callabck OK
         {
             res.send(result);
         }

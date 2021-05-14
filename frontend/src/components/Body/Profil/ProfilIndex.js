@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Navbar from '../../Navbar/Navbar';
+import ParkInformation from '../../Navbar/ParkInformation';
 import Header from '../../Header/Header';
 import Footer from '../../Footer/Footer';
 
@@ -7,6 +9,10 @@ export default class ProfilIndex extends Component {
         let bodyContent = "PROFIL INDEX";
         return (
             <div>
+                <ParkInformation />
+                <Navbar
+                    currentUser={this.props.currentUser}
+                    setCurrUser={this.props.setCurrUser} />
                 <Header
                     currentUser={this.props.currentUser}
                     indexPath={"profil"}

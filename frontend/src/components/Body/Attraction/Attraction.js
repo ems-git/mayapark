@@ -15,10 +15,10 @@ class Attraction extends Component {
     /*-----------------------------------------------------------------------------------------------*/
 
     componentDidMount() {
-        if(this.props.currentUser.type==="user") this.getUserRating();
+        if(this.props.currentUser.type==="user") this.getUserRatingDB();
     }
 
-    getUserRating=()=>
+    getUserRatingDB=()=>
     {
         GlobalVar.axios.get(`${GlobalVar.url}userRating/user/${this.props.currentUser.id}/attraction/${this.props.attraction.id_atr}`)
         .then(response => {

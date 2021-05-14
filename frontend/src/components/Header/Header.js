@@ -1,7 +1,7 @@
 import React from 'react';
-import Navbar from '../Navbar/Navbar';
+import '../../css/header.css';
 
-function Header({ indexPath, currentUser,setCurrUser }) {
+function Header({ indexPath}) {
 
     let headerBg;
 
@@ -13,11 +13,7 @@ function Header({ indexPath, currentUser,setCurrUser }) {
     else headerBg = "notFoundHeader";
 
     return (
-        <header className={`bgImg ${headerBg}`}>
-            <Navbar
-                currentUser={currentUser}
-                setCurrUser={setCurrUser}/>
-        </header>
+        <header className={`bgImg ${headerBg}`}></header>
     );
 }
 
