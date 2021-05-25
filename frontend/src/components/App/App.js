@@ -1,25 +1,24 @@
 import { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 
-import '../../css/cssVar.css';
 import '../../css/font.css';
 import '../../css/anim.css';
 import '../../css/app.css';
 import '../../css/navbar.css';
 
 import GlobalVar from "../GlobalVar";
-import AttractionIndex from '../Body/Attraction/AttractionIndex';
-import HomeIndex from '../Body/Home/HomeIndex';
-import ConnectionIndex from '../Body/Connection/ConnectionIndex';
-import ProfilIndex from '../Body/Profil/ProfilIndex';
-import AccountIndex from '../Body/Account/AccountIndex';
-import NotFoundIndex from '../Body/NotFound/NotFoundIndex';
+import AttractionIndex from '../Index/Attraction/AttractionIndex';
+import HomeIndex from '../Index/Home/HomeIndex';
+import ConnectionIndex from '../Index/Connection/ConnectionIndex';
+import ProfilIndex from '../Index/Profil/ProfilIndex';
+import AccountIndex from '../Index/Account/AccountIndex';
+import NotFoundIndex from '../Index/NotFound/NotFoundIndex';
 
 class App extends Component {
 
     state = {
             resrvations: [],
-            currentUser: {
+            currentUser:{
                 id: null,
                 type: null,
             },
@@ -102,7 +101,6 @@ class App extends Component {
         return (
             <div className="App">
                 <Router>
-
                     <Switch>
 
                         <Route exact path="/attraction">
@@ -166,30 +164,3 @@ class App extends Component {
 }
 
 export default App;
-
-
-/*componentDidMount()
-{
-    console.log('App.js - componentDidMount() "recuperation user"');
-
-    GlobalVar.axios.get(`${GlobalVar.url}userList`)
-        .then(response => {
-
-            let userData = response.data.map(element => {
-                if (element.birthday != null) {
-                    let elemDate = element.birthday.slice(0, 10);
-                    element.birthday = elemDate;
-                }
-                return element;
-            });
-            this.updateUsersFromData(userData);
-        })
-        .catch(error => {
-            console.log('App.js - componentDidMount() GET-user ERROR : ', error);
-        });
-}
-updateUsersFromData = (pDataResponse) => {
-    console.log('App.js - updateUsersFromData()');
-
-    this.setState({ users: pDataResponse });
-}*/

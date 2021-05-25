@@ -1,0 +1,68 @@
+:root
+{
+  /*    .   .   .   .   .   .   .   .   .   .   .   .   GLOBAL colors*/
+
+  --c-white : #ffffff;
+  --c-grey : #f3f3f3;
+  --c-greyHover : #c0c0c0;
+  --c-grey01 : rgb(216, 216, 216);
+  --c-grey02 : rgb(189, 189, 189);
+  --c-grey03 : rgb(134, 134, 134);
+  --c-grey04 : rgb(61, 61, 61);
+  --c-grey05 : rgb(29, 29, 29);
+
+  --c-black :  rgb(24, 24, 24);
+
+  --c-red : #B54235;
+  --c-redHover : #9e3226;
+
+  --c-blue : #1EC3CE;
+  --c-blueHover : #0ecfdd;
+  
+  --c-blue02 : #9ADBDF;
+  --c-blue02Hover : #8febf0;
+
+  --c-blue03 : #00909b;
+
+  --c-shadow :rgb(205, 204, 206);
+  --c-shadow02 :rgb(108, 107, 112);
+
+  --c-errorColor : rgb(211, 16, 32);
+  
+  /*    .   .   .   .   .   .   .   .   .   .   .   .   NAVBAR*/
+
+  --size-a-nav : 14px;
+  --s-a-nav : calc(var(--size-a-nav) / 2);
+  --h-nav : calc(var(--size-a-nav) * 3);
+
+  /*    .   .   .   .   .   .   .   .   .   .   .   .  HEADER*/
+
+  --img-header-home: url('../assets/img/attractionPage/atr00.jpg');
+  --img-header-atr: url('../assets/img/attractionPage/atr08.jpg');
+  --img-header-profil: url('../assets/img/header/mayan01.jpg');
+  --img-header-connection:url('../assets/img/attractionPage/atr01.jpg');
+  --img-header-admin: url('../assets/img/header/maya08.jpg');
+  --img-header-notfound: url('../assets/img/header/decors04.jpg');
+
+  /*    .   .   .   .   .   .   .   .   .   .   .   .   HOME page*/
+
+  /*calendar*/
+
+  --c-currentDays-cal : rgb(0, 0, 0);
+  --c-otherDays-cal : rgba(0, 0, 0, 0.5);
+  --c-cal-selectDay : rgb(0, 0, 0);
+  --c-cal-inRangeDay : rgb(121, 121, 121);
+
+  --c-bg-cal : white;
+  --c-bg-weekDays-cal : rgb(0, 135, 153);
+  --c-bg-notClickable-cal : rgb(255, 0, 0,1);
+  --c-bg-past-cal : rgb(206, 206, 206);
+  --c-bg-otherDays-cal : rgba(0, 0, 0, 0.08);
+  --c-bg-cal-selectDay : rgba(0, 247, 255, 0.5);
+  --c-bg-cal-inRangeDay : rgba(0, 247, 255, 0.2);
+  --c-bg-cal-inRangeBlock : rgba(0, 145, 212, 0.2);
+
+  --rayure-bg-cal : linear-gradient(45deg,rgba(255, 255, 255, 0) 25%, rgba(0, 0, 0, 0.05) 10%,rgba(0, 0, 0, 0.05) 50%,rgba(255, 255, 255, 0) 50%,rgba(255, 255, 255, 0) 75%,rgba(0, 0, 0, 0.05) 75%);
+
+  --c-b-hover-cal : rgba(0, 247, 255, 0.5);
+}

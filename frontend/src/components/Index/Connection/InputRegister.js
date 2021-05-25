@@ -42,7 +42,7 @@ export default class InputRegister extends Component
     render() {
         return (
             <div className="FlexCol itemC">
-                    <label htmlFor="mail">{this.props.label}</label>
+                    <label htmlFor={this.state.name}>{this.props.label}</label>
                     <input
                         name={this.state.name}
                         onChange={this.onChange}

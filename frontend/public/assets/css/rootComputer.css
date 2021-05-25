@@ -1,0 +1,135 @@
+:root
+{
+  /*    .   .   .   .   .   .   .   .   .   .   .   .   GLOBAL fonts*/
+
+  --f-size-h1:46px;
+  --f-size-h1-header:80px;
+  --f-size-h2:35px;
+  --f-size-h3:26px;
+  --f-size-h4:24px;
+  --f-size-h5:20px;
+  --f-size-h6:18px;
+  --f-size-p: 16px;
+  --f-size-btn: 16px;
+  --f-size-p-cal: 13px;
+  --f-size-p-calHover:18px;
+  --f-size-error : calc(var(--f-size-p) * .65);
+
+  --f-s-h1:6px;
+  --f-s-h2:5px;
+  --f-s-h3:5px;
+  --f-s-h4:0;
+  --f-s-h5:0;
+  --f-s-h6:0;
+  --f-s-p: 0.8px;
+  --f-s-btn: 0.8px;
+
+  /*    .   .   .   .   .   .   .   .   .   .   .   .   GLOBAL margin/padding*/
+
+  --marg01:40px;
+  --marg02:calc(var(--marg01) / 2);
+
+  --pad01:10px;
+  --pad02:calc(var(--pad01) / 2);
+
+  /*    .   .   .   .   .   .   .   .   .   .   .   .   GLOBAL border*/
+
+  --br-body:10px;
+  --br-square:6px;
+
+  /*    .   .   .   .   .   .   .   .   .   .   .   .  GLOBAL inputs / textarea / button*/
+
+  --h-input:30px;
+  --w-input:320px;
+  --br-input:12px;
+  
+  --br-txtarea:10px;
+
+  --h-btn:36px;
+  --w-btn:100px;
+  --btnSub-w:200px;
+  
+  --br-btn:10px;
+  --br-btnSub:30px;
+
+  /*    .   .   .   .   .   .   .   .   .   .   .   .  HEADER*/
+  
+  --h-header:90vh;
+  --w-header:100%;
+
+  /*    .   .   .   .   .   .   .   .   .   .   .   .  BODY*/
+
+  --w-body:70%;
+  --marg-top-body:-200px;
+
+  --size-shadow : 20px;
+
+  /*    .   .   .   .   .   .   .   .   .   .   .   .   HOME page*/
+
+
+  /*calendar*/
+  
+  --pad-month-cal : 4px;
+  --br-month-cal : 8px;
+
+  --f-size-hover-cal : 130%;
+
+  --size-cells-cal : 30px;
+  --size-cleanBtn : 20px;
+
+  --w-inputBooking : 200px;
+
+  --w-resBtn:120px;
+
+  /*Mayapark description*/
+
+  --f-size-p-note: 12px;
+  --w-img-mayaparkDesc:40%;
+
+  --fd-mayaDesc:row;
+
+  /*    .   .   .   .   .   .   .   .   .   .   .   .  CONNECTION*/
+
+  --w-connectionSect:50%;
+  --fd-connectCont:row;
+
+  /*    .   .   .   .   .   .   .   .   .   .   .   .   ATTRACTION page*/
+
+  --h-atrContainer : 400px;
+  --fd-atrContainer:row;
+
+  --w-artBox:calc(100% - var(--w-atrImg));
+
+  --marg-artBoxL: var(--marg01) var(--marg01) var(--marg01) 0;
+  --marg-artBoxR: var(--marg01) 0 var(--marg01) var(--marg01);
+
+  --w-atrImg : 45%;
+  --h-atrImg :auto;
+
+  --mw-atrImg : calc(var(--h-atrContainer));
+  --marg-atrImg: var(--marg01);
+
+  --h-rating : 40px;
+
+  --size-adminBtn : 36px;
+
+  /*star*/
+  --size-hover-star : 160%;
+
+  /*    .   .   .   .   .   .   .   .   .   .   .   .  NOTFOUND*/
+
+  --f-size-h5-notfound: 14vw;
+  --f-size-h6-notfound: 8vw;
+  --f-size-p-notfound: 20px;
+
+  /*    .   .   .   .   .   .   .   .   .   .   .   .  JUST IN COMPUTER CSS, TO ADD !!!!!!!!!!!!!!!!!!!!*/
+
+  --pad-profilContainer :90px 0 0 0 ;
+
+  --w-profilLSide : 30%;
+  --w-profilRSide : calc(100% - var(--w-profilLSide));
+  --mh-profilRSide : 300px;
+
+  --w-profilBtn: var(--w-resBtn);
+  --size-f-th-p : 12px;
+}

@@ -33,7 +33,7 @@ class AttractionIndex extends Component {
 
     /** AttractionIndex.js - GET ATTRACTIONS LIST IN DATABASE*/
     getAttractionsDB = () => {
-        GlobalVar.axios.get(`${GlobalVar.url}attractionList`)
+        GlobalVar.axios.get(`${GlobalVar.url}attractions`)
             .then(response => {
                 // console.log('--    REPONSE   -- Get attraction list : ', response.data);
                 let attractions = response.data;
@@ -165,9 +165,9 @@ class AttractionIndex extends Component {
     delAttraction = async (pId) => {
         try{
             const idAtr = this.state.attractions[pId].id_atr;
-            const delRating = await this.delRatingDB(idAtr);
-            const delEtr = await this.delAttractionDB(idAtr);
-            const delAtrState = await this.delAttractionState(idAtr);
+            await this.delRatingDB(idAtr);
+            await this.delAttractionDB(idAtr);
+            await this.delAttractionState(idAtr);
         }
         catch{
             console.log('--!!  E.R.R.O.R  !!-- Delete rating and atraction failed:\n')

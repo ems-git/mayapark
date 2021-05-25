@@ -32,7 +32,7 @@
 .atrContainer {
     position: relative;
     display: flex;
-    flex-direction: row;
+    flex-direction: var(--fd-atrContainer);
 
     height: var(--h-atrContainer);
     width: 100%;
@@ -41,12 +41,12 @@
 .atrImg {
     width: var(--w-atrImg);
     min-width: var(--mw-atrImg);
-    height: auto;
+    height: var(--h-atrImg);
 
     object-fit: cover;
     object-position: center;
   
-    margin: var(--marg01);
+    margin: var(--marg-atrImg);
 }
 .artBox {
     position: relative;
@@ -55,15 +55,14 @@
 
     height: calc(var(--h-atrContainer) - (2 * var(--marg01)));
     min-width: var(--mw-atrImg);
-    width: calc(100% - var(--w-atrImg));
+    width: var(--w-artBox);
 
 }
 .artBoxL {
-
-    margin:  var(--marg01) var(--marg01) var(--marg01) 0;
+    margin:  var(--marg-artBoxLR);
 }
 .artBoxR {
-    margin:  var(--marg01) 0 var(--marg01) var(--marg01);
+    margin:  var(--marg-artBoxR);
 }
 .atrContent {
     position: relative;

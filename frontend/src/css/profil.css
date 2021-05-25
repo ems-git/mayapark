@@ -1,0 +1,63 @@
+.proflContainer {
+    padding: var(--pad-profilContainer);
+}
+
+.profilBox {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: top;
+    
+    overflow: hidden;
+}
+.profilLside h4 {
+    padding: var(--pad01) 0 var(--pad01) 0 ;
+}
+.profilRside {
+    position: relative;
+
+    background-color: var(--c-grey02);
+
+    width: var(--w-profilRSide);
+    min-height : var(--mh-profilRSide);
+}
+.profilLside {
+    background-color: var(--c-grey03);
+
+    width: var(--w-profilLSide);
+    height: fit-content;
+}
+.profilTable{
+    border-collapse:  collapse !important;
+
+    position: relative;
+    text-align: center;
+
+    min-width: calc(100% - var(--marg01));
+    height: auto;
+
+    margin:  var(--marg01)  var(--marg02)  var(--marg01) var(--marg02);
+}
+.profilActivrTab {
+    
+    background-color: var(--c-grey02);
+}
+.profilTable th, .profilTable td {
+    position: relative;
+    background-color: var(--c-grey01);
+    border: 1px var(--c-grey02) solid;
+
+    min-width: 20%;
+
+    padding: var(--pad02) 0 var(--pad02) 0 ;
+}
+.profilTable tfoot td{
+    background-color: transparent;
+}
+.profilTable th p {
+    font-size: var(--size-f-th-p);
+}
+
+.profilBtn {
+    width: var(--w-profilBtn);
+}

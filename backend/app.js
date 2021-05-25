@@ -37,8 +37,8 @@ app.post(`/createUser`,
 });
 
 // GET ALL USERS
-app.get(`/userList`, (req, res) => {
-    MySqlUtilities.getUserList((result, error)=>
+app.get(`/users`, (req, res) => {
+    MySqlUtilities.getUsers((result, error)=>
     {
         if(!error)
         {
@@ -131,6 +131,7 @@ app.get(`/user/mail/:mail`, (req, res) => {
     });
 });
 
+
 /*---------------------------------------------------------------------------------------------------*/
 /*   .   .   .   .   .   .   .   .   .   .   .ATTRACTION.   .   .   .   .   .   .   .   .   .   .   .*/
 /*---------------------------------------------------------------------------------------------------*/
@@ -151,8 +152,8 @@ app.get(`/attractionLight`, (req, res) => {
 });
 
 // GET ATTRACTION LIST //
-app.get(`/attractionList`, (req, res) => {
-    MySqlUtilities.getAtrList((result, error)=>
+app.get(`/attractions`, (req, res) => {
+    MySqlUtilities.getAttractions((result, error)=>
     {
         if(!error) //  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .callabck OK
         {
@@ -275,9 +276,12 @@ app.delete(`/rating/attraction/:id_atr`, (req, res) => {
 /*   .   .   .   .   .   .   .   .   .   .   .DAYS.   .   .   .   .   .   .   .   .   .   .   .   */
 /*------------------------------------------------------------------------------------------------*/
 
-app.get(`/day/ticket/:date`, (req, res) => {
-    let date = req.params.date;
-    MySqlUtilities.getTicketAvailableDate(date, (result, error)=>
+/** GET DATES OF EXISTING DAYS ON DATA BASE */
+app.get(`/day/startDay/:start/endDays/:end`, (req, res) => {
+    let start = req.params.start;
+    let end = req.params.end;
+    
+    MySqlUtilities.getExistingDates(start,end, (result, error)=>
     {
         if(!error) //  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .callabck OK
         {
@@ -290,10 +294,13 @@ app.get(`/day/ticket/:date`, (req, res) => {
     });
 });
 
-// GET ID OF DAYS /
-app.get(`/day/date/:date`, (req, res) => {
-    let date = req.params.date;
-    MySqlUtilities.getIdDay(date, (result, error)=>
+/** CHECK VALID TICKETS FOR A RESERVATION */
+app.get(`/day/startDate/:start/endDate/:end/ticket/:tickets`, (req, res) => {
+    let start = req.params.start;
+    let end = req.params.end;
+    let tickets = req.params.tickets; 
+    
+    MySqlUtilities.getValidTickets(start, end,tickets, (result, error)=>
     {
         if(!error) //  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .callabck OK
         {
@@ -306,11 +313,10 @@ app.get(`/day/date/:date`, (req, res) => {
     });
 });
 
-// SET NEW DAY /
-app.post(`/day/date/:date/tickets/:tickets`, (req, res) => {
-    let date = req.params.date;
-    let tickets = req.params.tickets;
-    MySqlUtilities.setDay(date, tickets, (result, error)=>
+/** REGISTER RESERVATION, RESEVE AND DAYS */
+app.post(`/booking`, (req, res) => {
+    let informations = req.body;
+    MySqlUtilities.saveBooking(informations, (result, error)=>
     {
         if(!error) //  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .callabck OK
         {
@@ -323,31 +329,34 @@ app.post(`/day/date/:date/tickets/:tickets`, (req, res) => {
     });
 });
 
-// UPDTAE VALID TICKET OF A DAY /
-app.put(`/day/date/:date/tickets/:tickets`, (req, res) => {
-    let date = req.params.date;
-    let tickets = req.params.tickets;
-    MySqlUtilities.updateDay(date, tickets, (result, error)=>
-    {
-        if(!error) //  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .callabck OK
-        {
-            res.send(result);
-        }
-        else // .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .callabck NOT ok !!
-        {
-            res.status(500).send.error;
-        }
-    });
-});
 
 /*------------------------------------------------------------------------------------------------*/
 /*   .   .   .   .   .   .   .   .   .   .RESERVATION.   .   .   .   .   .   .   .   .   .   .   .*/
 /*------------------------------------------------------------------------------------------------*/
 
-// SET NEW RESERVATION /
-app.post(`/createReservation`, (req, res) => {
-    let reservation = req.body;
-    MySqlUtilities.setReservation(reservation, (result, error)=>
+// GET USER RESERVATIONS LIST //
+app.get(`/reservations/user/:id_user`, (req, res) => {
+    let id_user = req.params.id_user;
+    MySqlUtilities.getReservations(id_user,(result, error)=>
+    {
+        if(!error) //  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .callabck OK
+        {
+            res.send(result);
+        }
+        else // .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .callabck NOT ok !!
+        {
+            res.status(500).send.error;
+        }
+    });
+});
+
+// UPDATE RESERVATION //
+app.post(`/reservations/user/:id_user`, (req, res) => {
+    let id_user = req.params.id_user;
+    let ids_res = req.body.ids_res;
+
+    console.log(id_user,ids_res)
+    MySqlUtilities.updateReservation(id_user,ids_res,(result, error)=>
     {
         if(!error) //  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .callabck OK
         {
@@ -363,23 +372,6 @@ app.post(`/createReservation`, (req, res) => {
 /*------------------------------------------------------------------------------------------------*/
 /*   .   .   .   .   .   .   .   .   .   .RESEVRE.   .   .   .   .   .   .   .   .   .   .   .   .*/
 /*------------------------------------------------------------------------------------------------*/
-
-// SET NEW RESEVRE /
-app.post(`/createReserve/day/:id_day`, (req, res) => {
-    let reserve = req.body;
-    let idDay = req.params.id_day;
-    MySqlUtilities.setReserve(reserve,idDay, (result, error)=>
-    {
-        if(!error) //  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .callabck OK
-        {
-            res.send(result);
-        }
-        else // .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .callabck NOT ok !!
-        {
-            res.status(500).send.error;
-        }
-    });
-});
 
 
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Calendar from './Calendar';
-import OpenBtn from './OpenBtn';
+import OpenBtn from '../OpenBtn';
 import 'moment/locale/fr';
 
 export default class DatePicker extends Component {

@@ -16,7 +16,7 @@
     color: var(--c-white);
     text-align: center;
 
-    font-size: 80px;
+    font-size: var(--f-size-h1-header);
 }
 /*    .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .BOOKING */
 #bookingContainer {
@@ -38,7 +38,7 @@
 }
 #bookingContainer #reservBtn
 {
-    width: 120px;
+    width: var(--w-resBtn);
 }
 /*    .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .BOOKING - calendar */
 
@@ -206,7 +206,7 @@
 }
 .mayaBox {
     display: flex;
-    flex-direction: row;
+    flex-direction: var(--fd-mayaDesc);
     flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;

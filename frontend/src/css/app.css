@@ -92,12 +92,12 @@ a {
 textarea, input:not(.searchInput):not(.DateInput_input):not(.bookingInput) {
   padding: var(--pad01);
 }
-input {
+input:not(.reservationCheckbox) {
   height: var(--h-input);
   border: 2px solid var(--c-blue02);
   border-radius: var(--br-input);
 }
-input:not(.searchInput):not(.DateInput_input):not(.bookingInput):not(.atrTitleInput):not(.atrDescInput) {
+input:not(.searchInput):not(.DateInput_input):not(.bookingInput):not(.atrTitleInput):not(.atrDescInput):not(.reservationCheckbox) {
 
   min-width: var(--w-input);
 }
@@ -226,6 +226,7 @@ footer {
   background-color: var(--c-white);
 
   width:var(--w-body);
+  height: fit-content;
   margin-left: calc((100% - var(--w-body)) / 2);
   margin-top: var(--marg-top-body);
 

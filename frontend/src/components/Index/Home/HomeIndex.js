@@ -89,7 +89,6 @@ export default class HomeIndex extends Component {
 
                 <main>
                     <Booking
-                        saveBooking={this.props.saveBooking}
                         currentUser={this.props.currentUser}
                         addToProfil={this.addToProfil} />
 

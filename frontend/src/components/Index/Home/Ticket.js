@@ -10,8 +10,9 @@ export default class Ticket extends Component {
                     name="ticket"
                     id="ticketInput"
                     ref={this.ticketValue}
+                    value={this.props.inputTicketValue}
                     onChange={()=>this.props.ticketsOnchange(this.ticketValue.current)}
-                    onClick={()=>{this.props.setShowCalendar(false); this.props.calcPrice();}}
+                    onClick={()=>this.props.setShowCalendar(false)}
                 >
                     <option value="1">1 personne</option>
                     <option value="2">2 personnes</option>
