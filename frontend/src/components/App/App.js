@@ -50,8 +50,7 @@ class App extends Component {
 
         GlobalVar.axios.put(`${GlobalVar.url}user/id/${pId}/isLog/${isLog}`)
             .then(response => {
-
-                console.log('--    REPONSE   -- Put user login/out : ', response.data[0]);
+                console.log('--    REPONSE   -- Put user login/out : ', response);
             })
             .catch(error => {
                 console.log('--!!  E.R.R.O.R  !!-- Put user login/out :\n', error);

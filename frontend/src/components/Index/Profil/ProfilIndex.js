@@ -54,11 +54,12 @@ export default class ProfilIndex extends Component {
             GlobalVar.axios.post(`${GlobalVar.url}reservations/user/${this.props.currentUser.id}`, informations)
             .then(response => {
                 console.log('--    REPONSE   -- Post reservations suppression : ', response.data);
-                //let reservations = response.data;
-                //this.setState({ reservations: [...this.state.reservations, ...reservations] });
+                this.updateReservations(pIds_res);
+                console.log("-------FEEDBACK - réservation annulé, pour refaire une reservatio, rendez vous sur la page d'accueil");
             })
             .catch(error => {
                 console.log('--!!  E.R.R.O.R  !!-- Post reservations suppression :\n', error);
+                console.log("-------FEEDBACK - Erreur survenu lors de la suppression, réessayer dans 5'");
             });
         }
     }
@@ -75,7 +76,6 @@ export default class ProfilIndex extends Component {
      * @param {Array} pIds_res
      * @param {Array} pTickets  */
     deleteReservation = (pIds_res,pTickets) => {
-        //this.updateReservations(pIds_res);
         this.deleteUserReservationDB(pIds_res, pTickets);
     }
 
