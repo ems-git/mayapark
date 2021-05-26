@@ -353,10 +353,9 @@ app.get(`/reservations/user/:id_user`, (req, res) => {
 // UPDATE RESERVATION //
 app.post(`/reservations/user/:id_user`, (req, res) => {
     let id_user = req.params.id_user;
-    let ids_res = req.body.ids_res;
+    let informations = req.body;
 
-    console.log(id_user,ids_res)
-    MySqlUtilities.updateReservation(id_user,ids_res,(result, error)=>
+    MySqlUtilities.deleteUserReservation(id_user,informations,(result, error)=>
     {
         if(!error) //  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .callabck OK
         {

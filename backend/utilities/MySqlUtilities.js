@@ -5,7 +5,7 @@ const config =
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'test',
+    database: 'mayapark',
     multipleStatements: true,
 };
 
@@ -273,38 +273,96 @@ class MySqlUtilities {
         connection.end;
     }
 
-    updateReservation(pIdUser, pIds_res, callback) {
-        console.log(pIdUser, pIds_res);
+    deleteUserReservation(pIdUser, pInformations, callback) {
+        let reqSelectIdsDay = "";
+        let reqDeleteReserve = "";
+        let reqDeleteReservation = "";
+        let reqUpdateTicketAvailable = "";
+        let resIdDay = [];
+        let id_days = [];
 
-        let requestSelectReservation = "";
-        let requestDeleteReservation = "";
-
-        /*
-        pIds_res.forEach(id => {
-            requestSelectReservation += `SELECT tickets FROM reservation WHERE id_res=${id};`;
+        //GET ID_DAY OF RESERVE REQUEST
+        pInformations.ids_res.forEach(id_res => {
+            reqSelectIdsDay += `SELECT id_day FROM reserve WHERE id_res=${id_res};`;
         });
+        //console.log("REQUEST 01 \n", reqSelectIdsDay);
+
+        //DELETE RESERVE REQUESTS
+        pInformations.ids_res.forEach(id_res => {
+            reqDeleteReserve += `DELETE FROM reserve WHERE id_res=${id_res};`;
+        });
+        //console.log("REQUEST 02 \n", reqDeleteReserve);
+
+        
+        //DELETE RESERVATION REQUESTS
+        pInformations.ids_res.forEach(id_res => {
+            reqDeleteReservation += `DELETE FROM reservation WHERE id_res=${id_res} AND id_user=${pIdUser};`;
+        });
+        //console.log("REQUEST 03 \n", reqDeleteReservation);
 
         let connection = mysql.createConnection(config);
         connection.beginTransaction(function (err) {
             if (err) { throw err; }
 
-            connection.query(requestSelectReservation, (error, results, fields) => {
-                if (error) return connection.rollback(() => { throw error; }); // GET id_res AND tickets
-
-                results.forEach(result => {
-                    requestDeleteReservation += `DELETE FROM reservation WHERE id_res=${result.id_res} AND id_user=${pIdUser}`;
-                });
-
-                connection.query(requestDeleteReservation, (error, results, fields) => {
-                    if (error) return connection.rollback(() => { throw error; }); //UPDATE DAYS
-                    connection.commit((error, results, fields) => {
-                        if (error) return connection.rollback(() => { throw err });
-                        callback(results, error);
-                        console.log('SUCCESS!');
+            connection.query(reqSelectIdsDay, (error, results, fields) => {
+                if (error) return connection.rollback(() => { throw error; }); // GET ID_DAY OF EVERY RESERVE
+                resIdDay = [];
+                if (Array.isArray(results[0]))
+                {
+                    results.forEach(result => {
+                        id_days=[];
+                        result.forEach((element, index, array) => {
+                            id_days.push(element.id_day);
+                            if(index===array.length-1) resIdDay.push(id_days);
+                        });
                     });
-                });
+                }
+                else
+                {
+                    results.forEach((element) => {
+                        resIdDay.push(element.id_day);
+                    });
+                }
+
+                //console.log("ICI TEST resIdDay\n", resIdDay);
+
+                //UPDATE DAYS TICKETS AVAILABLE REQUESTS (a inclure dans un rollback)
+                if (Array.isArray(resIdDay[0]))
+                {
+                    resIdDay.forEach((reservation, index, array) => {
+                        reservation.forEach(id_day => {
+                            reqUpdateTicketAvailable += `UPDATE day SET ticketsAvailable=(ticketsAvailable+${pInformations.tickets[index]}) WHERE id_day='${id_day}';`;
+                        });
+                    });
+                }
+                else
+                {
+                    resIdDay.forEach((id_day,index) => {
+                        reqUpdateTicketAvailable += `UPDATE day SET ticketsAvailable=(ticketsAvailable+${pInformations.tickets}) WHERE id_day='${id_day}';`;
+                    });
+                }
+
+                //console.log("ICI TEST \n",reqUpdateTicketAvailable );
+                
+                connection.query(reqUpdateTicketAvailable, (error, results, fields) => {
+                    if (error) return connection.rollback(() => { throw error; }); // UPDATE DAYS TICKETAVAILABLE
+
+                    connection.query(reqDeleteReserve, (error, results, fields) => {
+                        if (error) return connection.rollback(() => { throw error; }); // DELETE RESERVE
+
+                        connection.query(reqDeleteReservation, (error, results, fields) => {
+                            if (error) return connection.rollback(() => { throw error; }); // DELETE RESERVATION
+
+                            connection.commit((error, results, fields) => {
+                                if (error) return connection.rollback(() => { throw err });
+                                callback(results, error);
+                                console.log('SUCCESS!');
+                            });
+                        });
+                    });
+               });
             });
-        });*/
+        });
     }
 
     /*------------------------------------------------------------------------------------------------*/

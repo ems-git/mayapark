@@ -42,16 +42,20 @@ export default class ProfilIndex extends Component {
 
     /** UPDATE RESERVATIONS IN DATA BASE AFTER A USER SUPPRESSION
      * @param {Array} pIds_res  */
-    updateReservationDB = (pIds_res,pTickets) => {
-        console.log("updateReservationDB()");
+    deleteUserReservationDB = (pIds_res,pTickets) => {
+        console.log("deleteUserReservationDB()", pIds_res,pTickets);
 
         if(pIds_res.length)
         {
-            GlobalVar.axios.post(`${GlobalVar.url}reservations/user/${this.props.currentUser.id}`, {ids_res : pIds_res })
+            let informations = {
+                ids_res : pIds_res,
+                tickets : pTickets,
+            }
+            GlobalVar.axios.post(`${GlobalVar.url}reservations/user/${this.props.currentUser.id}`, informations)
             .then(response => {
                 console.log('--    REPONSE   -- Post reservations suppression : ', response.data);
-                let reservations = response.data;
-                this.setState({ reservations: [...this.state.reservations, ...reservations] });
+                //let reservations = response.data;
+                //this.setState({ reservations: [...this.state.reservations, ...reservations] });
             })
             .catch(error => {
                 console.log('--!!  E.R.R.O.R  !!-- Post reservations suppression :\n', error);
@@ -71,8 +75,8 @@ export default class ProfilIndex extends Component {
      * @param {Array} pIds_res
      * @param {Array} pTickets  */
     deleteReservation = (pIds_res,pTickets) => {
-        this.updateReservations(pIds_res);
-        this.updateReservationDB(pIds_res, pTickets);
+        //this.updateReservations(pIds_res);
+        this.deleteUserReservationDB(pIds_res, pTickets);
     }
 
     /** UPDATE RESERVATIONS STATES /LIST AFTER USER DELETE RESERVATION

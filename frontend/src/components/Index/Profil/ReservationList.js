@@ -9,7 +9,6 @@ export default class ReservationList extends Component {
     }
 
     addToSelection = (pId_res,pTickets) => {
-        console.log(pId_res,pTickets)
         this.setState({
                 ids_res: [...this.state.ids_res, pId_res],
                 tickets: [...this.state.tickets, pTickets] });

@@ -9,13 +9,18 @@ Installé coté front :
 copier coller dans package.json, apres "private":true : "proxy": "http://localhost:4242",
 
 Installé coté back :
+	npm init 
+	npm install -g nodemon
+	npm install --save-dev nodemon
 	npm install mysql --save
 	npm install body-parser --save
 	npm install express --save
 	npm install express-validator --save
 	npm install cors --save
-	npm install -g nodemon
-	npm install --save-dev nodemon
+
+Si la commande "nodemon app.js" ne fonctionne pas,
+ajouter "start" : "nodemon app.js"
+après "test": "echo \"Error: no test specified\" && exit 1", dans package.json et lancer avec "npm start"
 
 
 PAS ENCORE INSTALLE NI FRONT NI BACK
