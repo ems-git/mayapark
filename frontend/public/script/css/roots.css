@@ -7,7 +7,7 @@
   --c-greyHover : #c0c0c0;
   --c-grey01 : rgb(216, 216, 216);
   --c-grey02 : rgb(189, 189, 189);
-  --c-grey03 : rgb(134, 134, 134);
+  --c-grey03 : rgb(150, 150, 150);
   --c-grey04 : rgb(61, 61, 61);
   --c-grey05 : rgb(29, 29, 29);
 
@@ -28,12 +28,6 @@
   --c-shadow02 :rgb(108, 107, 112);
 
   --c-errorColor : rgb(211, 16, 32);
-  
-  /*    .   .   .   .   .   .   .   .   .   .   .   .   NAVBAR*/
-
-  --size-a-nav : 14px;
-  --s-a-nav : calc(var(--size-a-nav) / 2);
-  --h-nav : calc(var(--size-a-nav) * 3);
 
   /*    .   .   .   .   .   .   .   .   .   .   .   .  HEADER*/
 

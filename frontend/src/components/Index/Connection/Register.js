@@ -95,6 +95,8 @@ export default class Register extends Component {
                 <form className="FlexCol itemC">
                     {this.renderForm()}
                     <p className="formMsg">{this.props.registerMsg}</p>
+
+                    <a href="#middle" onClick={this.props.changeTab}>Déja inscrit ? Se connecter</a>
                     <button
                         className="submitBtn"
                         type="submit"

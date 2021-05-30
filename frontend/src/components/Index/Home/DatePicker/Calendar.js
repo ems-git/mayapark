@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import Month from './Month';
 
+import GlobalVar from '../../../GlobalVar';
+
 export default class Calendar extends Component {
 
     state={
@@ -32,24 +34,35 @@ export default class Calendar extends Component {
     render() {
 
         let isLeft = true;
+
         return (
-            <div className="monthsContainer">
-                
-                <Month
-                    showCalendar={this.props.showCalendar}
-                    currentMonth={this.state.leftMonth}
-                    isLeft={isLeft}
-                    btnPressed={this.btnPressed}
-                    dayIsClicked={this.props.dayIsClicked}
-                    dates={this.props.dates}/>
-                <Month
-                    showCalendar={this.props.showCalendar}
-                    currentMonth={this.state.rightMonth}
-                    isLeft={!isLeft}
-                    btnPressed={this.btnPressed}
-                    dayIsClicked={this.props.dayIsClicked}
-                    dates={this.props.dates}/>
-            </div>
+            GlobalVar.widthDevice > GlobalVar.phoneWidth ?
+                <div className="monthsContainer">
+                    <Month
+                        showCalendar={this.props.showCalendar}
+                        currentMonth={this.state.leftMonth}
+                        isLeft={isLeft}
+                        btnPressed={this.btnPressed}
+                        dayIsClicked={this.props.dayIsClicked}
+                        dates={this.props.dates} />
+                    <Month
+                        showCalendar={this.props.showCalendar}
+                        currentMonth={this.state.rightMonth}
+                        isLeft={!isLeft}
+                        btnPressed={this.btnPressed}
+                        dayIsClicked={this.props.dayIsClicked}
+                        dates={this.props.dates} />
+                </div>
+                :
+                <div className="monthsContainer">
+                    <Month
+                        showCalendar={this.props.showCalendar}
+                        currentMonth={this.state.leftMonth}
+                        isLeft={!isLeft}
+                        btnPressed={this.btnPressed}
+                        dayIsClicked={this.props.dayIsClicked}
+                        dates={this.props.dates} />
+                </div>
         )
     }
 }

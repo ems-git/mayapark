@@ -220,14 +220,13 @@
 		
 		text-decoration: none;
 		font-family: 'defaultReg';
-	
+		
 		padding-top: calc(var(--size-a-nav) - 2px );
 		padding-bottom: calc(var(--size-a-nav) - 2px );
 
 		letter-spacing: var(--s-a-nav);
 
 		margin-right: var(--marg02);
-		
 	}
 	.nav-links a:hover, .nav-bouton label:hover
 	{
@@ -308,7 +307,19 @@
 		align-items: center;
 	}
   }
- 
+
+@media (max-width: 480px)
+{
+	/*  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   BURGER checked*/
+	#nav-burg:checked ~ .nav-links
+	{
+		width: 60%;
+	}
+	.navbarContainer a:not(.nav-home), .nav-links a:not(.nav-home)
+	{
+		padding-left: 0;
+	}
+}
 /*  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   Scrollspy*/
 /* .active
 {

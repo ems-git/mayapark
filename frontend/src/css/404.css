@@ -13,6 +13,8 @@
 
     text-align: center;
     color: var(--c-white);
+    
+    margin-top: var(--marg-top-errorPage);
 }
 #notfoundTxt h6 {
     font-size: var(--f-size-h6-notfound);

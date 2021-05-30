@@ -6,11 +6,11 @@ export default class EditBtns extends Component {
         return (
             <div className={this.props.onRight ? "editBtns editBtnsR" : "editBtns editBtnsL"}>
                 <button
-                    className={this.props.editActive ? "adminBtn editActive bgImgFit" : "adminBtn editInactive bgImgFit"}
+                    className={this.props.editActive ? "editBtn editActive bgImgFit" : "editBtn editInactive bgImgFit"}
                     onClick={this.props.editAttraction}
                 ></button>
                 <button
-                    className="adminBtn delAtr bgImgFit"
+                    className="editBtn delAtr bgImgFit"
                     onClick={this.props.delAttraction}
                 ></button>
             </div>

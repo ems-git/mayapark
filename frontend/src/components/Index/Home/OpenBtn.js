@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import 'moment/locale/fr';
 
+const widthDevice = window.screen.width;
+
 export default class OpenBtn extends Component {
 
     /** VALUE OF BUTTON DEPENDING WITH USER SELECTION */
@@ -22,7 +24,16 @@ export default class OpenBtn extends Component {
                     id={this.props.btnClass}
                     className="openBtn"
                     value={this.isDate()}
-                    onClick={() => this.props.setShowCalendar(true)}>
+                    onClick={
+                        widthDevice>480 ?
+                        () => this.props.setShowCalendar(true)
+                        :
+                        this.props.btnClass==="calRightBtn" ? 
+                            () => this.props.setShowCalendar(false)
+                            :
+                            () => this.props.setShowCalendar(true)
+                        }
+                    >
                     {this.isDate()}
                 </button>
 

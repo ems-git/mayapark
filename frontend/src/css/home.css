@@ -1,3 +1,6 @@
+#mainHome {
+    margin-top: var(--marg-top-homePage);
+}
 #homeBody {
     margin-top: 0;
 }
@@ -19,6 +22,11 @@
     font-size: var(--f-size-h1-header);
 }
 /*    .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .BOOKING */
+.bookingPhone {
+    width: 90% !important;
+    margin-left: 5% !important;
+}
+
 #bookingContainer {
     margin-right: auto;
     margin-left: auto;
@@ -27,6 +35,7 @@
 .trBooking{
     width:100%;
     text-align: center;
+    height: var(--h-tr);
 }
 .tdBooking
 {
@@ -108,10 +117,10 @@
 }
 .monthsContainer {
     position: absolute ;
-
     display: flex;
+
     flex-direction: row;
-    width: fit-content;
+    width: var(--w-datePicker);
 
     border-radius: 0  0 var(---br-month-cal) var(---br-month-cal);
     background-color: var(--c-bg-cal) !important;
@@ -131,9 +140,14 @@
     transition: .2s;
     transform: scale(1.1);
 }
-
+.oneMonth {
+    position: relative;
+    width: 100%;
+}
 .monthContainer {
     height: 100%;
+    margin: 0 auto 0 auto;
+
     padding: var(--pad-month-cal);
     
     background-color: transparent !important;

@@ -3,6 +3,7 @@ import Navbar from '../../Navbar/Navbar';
 import ParkInformation from '../../Navbar/ParkInformation';
 import Header from '../../Header/Header';
 import Footer from '../../Footer/Footer';
+import '../../../css/account.css';
 
 export default class AccountIndex extends Component {
     render() {
@@ -21,7 +22,7 @@ export default class AccountIndex extends Component {
                     clearMarkId={this.props.clearMarkId}
                     setCurrUser={this.props.setCurrUser} />
 
-                <main id="currentBody">
+                <main id="mainAccount" className="currentBody">
                     {bodyContent}
                 </main>
 

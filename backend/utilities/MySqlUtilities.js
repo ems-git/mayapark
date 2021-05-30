@@ -97,7 +97,7 @@ class MySqlUtilities {
     getAttractions(callback) {
         let connection = mysql.createConnection(config);
         connection.connect();
-        connection.query('SELECT * FROM attraction', (error, results) => {
+        connection.query('SELECT * FROM attraction ORDER BY rating DESC;', (error, results) => {
             callback(results, error);
         });
         connection.end;
@@ -267,7 +267,7 @@ class MySqlUtilities {
     getReservations(pIdUser, callback) {
         let connection = mysql.createConnection(config);
         connection.connect();
-        connection.query('SELECT id_user,id_res,DATE_FORMAT(startDay,"%Y-%m-%d") AS startDay, periode, tickets, price FROM reservation WHERE id_user=?', [pIdUser], (error, results) => {
+        connection.query('SELECT id_user,id_res,DATE_FORMAT(startDay,"%Y-%m-%d") AS startDay, periode, tickets, price FROM reservation WHERE id_user=? ORDER BY startDay ASC;', [pIdUser], (error, results) => {
             callback(results, error);
         });
         connection.end;

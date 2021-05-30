@@ -183,12 +183,6 @@ option, select {
   margin-top: auto;
   margin-bottom: auto;
 }
-/*    .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .HEADER */
-header {
-  height: var(--h-header);
-  width: var(--w-header);
-  position: relative;
-}
 /*    .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .FOOTER */
 footer {
   display: flex;
@@ -221,23 +215,16 @@ footer {
   margin: var(--marg01);
 }
 /*    .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .MAIN */
-#currentBody {
+.currentBody {
   position: relative;
   background-color: var(--c-white);
 
   width:var(--w-body);
   height: fit-content;
   margin-left: calc((100% - var(--w-body)) / 2);
-  margin-top: var(--marg-top-body);
 
   box-shadow: 0px 0px var(--size-shadow) var(--c-shadow02);
 }
-#currentBody:not(.borderBottom) {
+.currentBody:not(.borderBottom) {
   border-radius: var(--br-body) var(--br-body) 0 0;
 }
-/* #editorWysiwyg
-{
-  border: solid 1px blue;
-  min-height: 200px;
-  min-width: 200px;
-} */

@@ -12,6 +12,7 @@ export default class ConnectionIndex extends Component {
     state = {
         registerMsg: "",
         connectionMsg: "",
+        isRegister : true,
     }
 
     /*-----------------------------------------------------------------------------------------------*/
@@ -61,7 +62,10 @@ export default class ConnectionIndex extends Component {
             })
             .catch(error => {
                 if (error.response && error.response.data && error.response.data.errorsValidator)
+                {
                     console.log('--!!  E.R.R.O.R  !!-- Get user by mail/password :\n', error.response.data.errorsValidator);
+                    this.msgOnchange(false, "Mot de passe ou identifiant incorrect. \nSi vous n'êtes pas encore inscrit, enregistrez vous");
+                }
                 else {
                     console.log('--!!  E.R.R.O.R  !!-- Get user by mail/password :\n', error);
                     this.msgOnchange(false, "Mot de passe ou identifiant incorrect. \nSi vous n'êtes pas encore inscrit, enregistrez vous");
@@ -81,6 +85,11 @@ export default class ConnectionIndex extends Component {
         else this.setState({ connectionMsg: pMsg });
     }
 
+    changeTab=()=>
+    {
+        this.setState({isRegister : !this.state.isRegister});
+    }
+
     /*-----------------------------------------------------------------------------------------------*/
     /*   .   .   .   .   .   .   .   .   .   .   .RENDER.   .   .   .   .   .   .   .   .   .   .   .*/
     /*-----------------------------------------------------------------------------------------------*/
@@ -97,17 +106,24 @@ export default class ConnectionIndex extends Component {
                     indexPath={"connection"}
                     setCurrUser={this.props.setCurrUser} />
 
-                <main id="currentBody" className="connectContainer">
-                    <Register
-                        doesUserExistDB={this.doesUserExistDB}
-                        msgOnchange={this.msgOnchange}
-                        registerMsg={this.state.registerMsg}
-                    />
+                <main id="connectPage" className="currentBody">
+                    {this.state.isRegister ? 
+                    
                     <Connection
                         checkConnectionDB={this.checkConnectionDB}
                         msgOnchange={this.msgOnchange}
                         connectionMsg={this.state.connectionMsg}
+                        changeTab={this.changeTab}
                     />
+                    :
+                    <Register
+                        doesUserExistDB={this.doesUserExistDB}
+                        msgOnchange={this.msgOnchange}
+                        registerMsg={this.state.registerMsg}
+                        changeTab={this.changeTab}
+                        />
+                    }
+                    
                 </main>
                 <Footer />
             </div>

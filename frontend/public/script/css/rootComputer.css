@@ -52,23 +52,42 @@
   --br-btn:10px;
   --br-btnSub:30px;
 
+  /*    .   .   .   .   .   .   .   .   .   .   .   .   NAVBAR*/
+
+  --size-a-nav : 14px;
+  --s-a-nav : calc(var(--size-a-nav) / 2);
+  --h-nav : calc(var(--size-a-nav) * 3);
+
   /*    .   .   .   .   .   .   .   .   .   .   .   .  HEADER*/
   
   --h-header:90vh;
+  --h-headerAtr:90vh;
+  --h-headerConnect: 90vh;
+  --h-headerAccount:90vh;
+  --h-headerProfil:90vh;
+  --h-headerError:calc(var(--h-header)  - var(--h-nav));
+
   --w-header:100%;
 
   /*    .   .   .   .   .   .   .   .   .   .   .   .  BODY*/
 
   --w-body:70%;
-  --marg-top-body:-200px;
+
+  --marg-top-homePage:-200px;
+  --marg-top-atrPage:-200px;
+  --marg-top-connectPage:-80vh;
+  --marg-top-profilPage:-200px;
+  --marg-top-accountPage:-200px;
+  --marg-top-errorPage:none;
 
   --size-shadow : 20px;
 
   /*    .   .   .   .   .   .   .   .   .   .   .   .   HOME page*/
 
-
   /*calendar*/
   
+  --w-datePicker : fit-content;
+
   --pad-month-cal : 4px;
   --br-month-cal : 8px;
 
@@ -77,9 +96,12 @@
   --size-cells-cal : 30px;
   --size-cleanBtn : 20px;
 
+  --margL-cal : 0;
+
   --w-inputBooking : 200px;
 
   --w-resBtn:120px;
+  --h-tr:35px;
 
   /*Mayapark description*/
 
@@ -91,6 +113,8 @@
   /*    .   .   .   .   .   .   .   .   .   .   .   .  CONNECTION*/
 
   --w-connectionSect:50%;
+  --mh-connectionSection:600px;
+
   --fd-connectCont:row;
 
   /*    .   .   .   .   .   .   .   .   .   .   .   .   ATTRACTION page*/
@@ -102,6 +126,10 @@
 
   --marg-artBoxL: var(--marg01) var(--marg01) var(--marg01) 0;
   --marg-artBoxR: var(--marg01) 0 var(--marg01) var(--marg01);
+  --h-ArtBox : 100%;
+
+  --h-atrContent :calc(var(--h-atrContainer) - (2 * var(--marg01))) ;
+  --pad-atrContent: none;
 
   --w-atrImg : 45%;
   --h-atrImg :auto;
@@ -111,7 +139,9 @@
 
   --h-rating : 40px;
 
-  --size-adminBtn : 36px;
+  --size-editBtn : 36px;
+
+  --fd-editBtn : row;
 
   /*star*/
   --size-hover-star : 160%;
@@ -122,11 +152,25 @@
   --f-size-h6-notfound: 8vw;
   --f-size-p-notfound: 20px;
 
-  /*    .   .   .   .   .   .   .   .   .   .   .   .  JUST IN COMPUTER CSS, TO ADD !!!!!!!!!!!!!!!!!!!!*/
+  /*    .   .   .   .   .   .   .   .   .   .   .   .  PROFIL*/
+
+  --fd-ProfilBox :row;
+  --ai-ProfilBox:top;
+  --jc-ProfilBox:center;
+  --mh-profilBox:300px; 
 
   --pad-profilContainer :90px 0 0 0 ;
 
   --w-profilLSide : 30%;
+  --w-h4-profilLside : none;
+  --fd-ProfilLside :column;
+
+  --br-profilLside : var(--br-body) 0 0 0;
+  --br-profilRside : 0 var(--br-body) 0 0;
+  
+  --bShadow-profilLside01: 0 0 0 0 var(--c-grey03) inset, -10px -60px 10px 0 var(--c-grey03) inset;
+  --bShadow-profilLside02: 0 0 0 0 var(--c-grey03) inset, -10px 60px 10px 0 var(--c-grey03) inset;
+
   --w-profilRSide : calc(100% - var(--w-profilLSide));
   --mh-profilRSide : 300px;
 

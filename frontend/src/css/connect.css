@@ -1,9 +1,11 @@
-.connectContainer
+#connectPage
 {
     display: flex;
     flex-direction: var(--fd-connectCont);
     flex-wrap: nowrap;
     justify-content: space-around;
+
+    margin-top: var(--marg-top-connectPage);
 }
 .connectionSection {
     display: flex;
@@ -13,6 +15,7 @@
 
     width: var(--w-connectionSect);
     height: auto;
+    min-height: var(--mh-connectionSection);
 }
 .inputErroMsg, .formMsg{
     font-weight: bold;

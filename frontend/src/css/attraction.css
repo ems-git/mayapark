@@ -1,3 +1,6 @@
+#mainAttraction {
+    margin-top: var(--marg-top-atrPage);
+}
 /*    .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   . FORM*/
 .atrForm {
     padding: var(--marg02) 0 var(--marg01) 0 ;
@@ -38,31 +41,35 @@
     width: 100%;
     min-width: var(--mw-atrImg);
 }
-.atrImg {
+.atrImgContainer{
     width: var(--w-atrImg);
-    min-width: var(--mw-atrImg);
     height: var(--h-atrImg);
+
+    margin: var(--marg-atrImg);
+}
+.atrImg {
+    width: 100%;
+    height: 100%;
 
     object-fit: cover;
     object-position: center;
-  
-    margin: var(--marg-atrImg);
 }
 .artBox {
     position: relative;
     display: flex;
     flex-direction: row;
+    align-items: center;
 
-    height: calc(var(--h-atrContainer) - (2 * var(--marg01)));
-    min-width: var(--mw-atrImg);
+    height: var(--h-ArtBox);
+    /* min-width: var(--mw-atrImg); */
     width: var(--w-artBox);
 
 }
 .artBoxL {
-    margin:  var(--marg-artBoxLR);
+    margin:  var(--marg-artBoxL) auto   var(--marg-artBoxL) auto ;
 }
 .artBoxR {
-    margin:  var(--marg-artBoxR);
+    margin:  var(--marg-artBoxR)  auto var(--marg-artBoxR)  auto  ;
 }
 .atrContent {
     position: relative;
@@ -71,9 +78,11 @@
     flex-direction: column;
     align-items: center;
 
-    height: 100%;
     width: 100%;
+    height: var(--h-atrContent );
+
     margin: 0 var(--marg01) 0 var(--marg01);
+    padding: var(--pad-atrContent);
 }
 .artTxt {
     display: flex;
@@ -83,15 +92,28 @@
     height: calc(100% - (var(--h-rating) + 2 * var(--pad01)));
     width: 100%;
 }
+.atrTitle {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.575);
+
+    width: 100%;
+    top: calc(var(--h-atrImg) - (var(--pad01) + var(--f-size-h4)));
+
+    padding: var(--pad01) 0 var(--pad01) 0 ;
+
+    text-align: center;
+    font-weight: normal;
+    color: var(--c-white);
+}
 .editBtns {
     position:absolute;
     display: flex;
-    flex-direction: column;
+    flex-direction: var(--fd-editBtn);
     top:var(--marg01);
 }
-.adminBtn {
-    width:var(--size-adminBtn);
-    height:var(--size-adminBtn);
+.editBtn {
+    width:var(--size-editBtn);
+    height:var(--size-editBtn);
     background-color: transparent;
 }
 .editBtnsR {

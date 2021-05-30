@@ -9,5 +9,9 @@ const GlobalVar = {
     regDate:/^(19|20)\d{2}[/\-.](0[1-9]|1[0-2])[/\-.](0[1-9]|[12]\d|3[01])$/gm,
     // regDate:/^(19|20)\d{2}[\/\-\.](0[1-9]|1[0-2])[\/\-\.](0[1-9]|[12]\d|3[01])$/gm,
     // regDateDDMMYYYY : /^(0[1-9]|[12]\d|3[01])[\/\-\.](0[1-9]|1[0-2])[\/\-\.](19|20)\d{2}$/gm,
+    widthDevice : window.screen.width,
+    computerWidth:1024,
+    tabletWidth:768,
+    phoneWidth : 480,
 }
 export default GlobalVar

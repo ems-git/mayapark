@@ -249,7 +249,7 @@ class AttractionIndex extends Component {
                     indexPath={"attraction"}
                     setCurrUser={this.props.setCurrUser} />
 
-                <main id="currentBody" >
+                <main id="mainAttraction" className="currentBody">
                     {bodyContent}
                 </main>
                 <Footer />

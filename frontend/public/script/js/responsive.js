@@ -23,14 +23,14 @@ function isComputer()
     cssPhone.disabled = true;
 }
 
-if (widthDevice > 768) {
+if (widthDevice > 1024) {
     
     console.log("Computer", widthDevice);
     isComputer();
 
     window.addEventListener('resize', function () {
         screenWidth = Math.round(window.innerWidth);
-        if (screenWidth > 768) isComputer();
+        if (screenWidth > 1024) isComputer();
         else if (screenWidth > 480) isTablet()
         else isPhone()
     });

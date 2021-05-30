@@ -1,31 +1,64 @@
-.proflContainer {
-    padding: var(--pad-profilContainer);
-}
-
-.profilBox {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: top;
-    
-    overflow: hidden;
+#profilPage {
+    margin-top: var(--marg-top-profilPage);
 }
 .profilLside h4 {
-    padding: var(--pad01) 0 var(--pad01) 0 ;
+    padding: var(--pad01);
+    width: var(--w-h4-profilLside);
+
+    border-radius: var(--br-profilLside);
+}
+.profilActiveTab {
+    background-color: var(--c-grey02);
+    /* box-shadow: none; */
+}
+
+.proflContainer {
+    padding: var(--pad-profilContainer);
+    width: 100%;
+}
+.profilBox {
+    display: flex;
+    flex-direction: var(--fd-ProfilBox);
+    justify-content: var(--jc-ProfilBox); 
+    align-items: var(--ai-ProfilBox);
+    
+    overflow: hidden;
+
+    width: 100%;
+    min-height: var(--mh-profilBox);
+}
+.profilRside, .profilLside {
+    background-color: var(--c-grey02);
 }
 .profilRside {
     position: relative;
 
-    background-color: var(--c-grey02);
-
     width: var(--w-profilRSide);
     min-height : var(--mh-profilRSide);
+
+    margin-left: 0;
+
+    border-radius: var(--br-profilRside);
 }
 .profilLside {
-    background-color: var(--c-grey03);
+    display: flex;
+    flex-direction: var(--fd-ProfilLside);
+    justify-content: center;
+    align-items: top;
+
+    border-radius: var(--br-profilLside);
 
     width: var(--w-profilLSide);
-    height: fit-content;
+    height: fit-content;  
+}
+.profilTabShadowT {
+    box-shadow: var(--bShadow-profilLside01); 
+}
+.profilTabShadowB {
+    box-shadow: var(--bShadow-profilLside02);  
+}
+.profilTabBtn {
+    background: none;
 }
 .profilTable{
     border-collapse:  collapse !important;
@@ -37,10 +70,6 @@
     height: auto;
 
     margin:  var(--marg01)  var(--marg02)  var(--marg01) var(--marg02);
-}
-.profilActivrTab {
-    
-    background-color: var(--c-grey02);
 }
 .profilTable th, .profilTable td {
     position: relative;

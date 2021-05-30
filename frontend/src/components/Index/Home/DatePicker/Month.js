@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import 'moment/locale/fr';
 
+import GlobalVar from '../../../GlobalVar';
 import Day from './Day';
 import WeekDays from './WeekDays';
 
@@ -97,15 +98,22 @@ export default class Month extends Component {
                 <table id={this.props.currentMonth} className="monthContainer">
                     <thead className="calenderHead">
 
-                        {this.props.isLeft ?
-                            <tr>
-                                <th colSpan="2"><button onClick={()=>this.props.btnPressed(false)}>{"<"}</button></th>
-                                <th colSpan="5">{moment(this.props.currentMonth).format('MMMM YYYY')}</th>
-                            </tr>
+                        {GlobalVar.widthDevice > GlobalVar.phoneWidth ?
+                            this.props.isLeft ?
+                                <tr>
+                                    <th colSpan="2"><button onClick={()=>this.props.btnPressed(false)}>{"<"}</button></th>
+                                    <th colSpan="5">{moment(this.props.currentMonth).format('MMMM YYYY')}</th>
+                                </tr>
+                                :
+                                <tr>
+                                    <th colSpan="5">{moment(this.props.currentMonth).format('MMMM YYYY')}</th>
+                                    <th colSpan="2"><button onClick={()=>this.props.btnPressed(true)}>{">"}</button></th>
+                                </tr>
                             :
                             <tr>
-                                <th colSpan="5">{moment(this.props.currentMonth).format('MMMM YYYY')}</th>
-                                <th colSpan="2"><button onClick={()=>this.props.btnPressed(true)}>{">"}</button></th>
+                                <th colSpan="2"><button onClick={() => this.props.btnPressed(false)}>{"<"}</button></th>
+                                <th colSpan="3">{moment(this.props.currentMonth).format('MMMM YYYY')}</th>
+                                <th colSpan="2"><button onClick={() => this.props.btnPressed(true)}>{">"}</button></th>
                             </tr>
                         }
                         <tr className="weekDayRow">

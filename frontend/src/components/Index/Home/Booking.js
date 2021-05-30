@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import GlobalVar from "../../GlobalVar";
+import moment from 'moment';
+
 import DatePicker from './DatePicker/DatePicker';
 import Ticket from './Ticket';
-import moment from 'moment';
 
 export default class Booking extends Component {
 
@@ -62,7 +63,7 @@ export default class Booking extends Component {
     saveBooking = (pInsertDates, pExistingDays) => {
         console.log('saveBooking()');
 
-        if (!pExistingDays.length && !pInsertDates.length) pInsertDates=this.state.fullDates;
+        if (!pExistingDays.length && !pInsertDates.length) pInsertDates = this.state.fullDates;
 
         let startDay = moment(this.state.dates[0], "MM-DD-YYYY").format("YYYY-MM-DD");
         let endDay = moment(this.state.dates[1], "MM-DD-YYYY").format("YYYY-MM-DD");
@@ -81,7 +82,7 @@ export default class Booking extends Component {
 
         GlobalVar.axios.post(`${GlobalVar.url}booking`, informations)
             .then(response => {
-                console.log('--    REPONSE   -- Post days,reservation,reserve : ', response,"\n-------FEEDBACK - Reservation pris en compte, check tes résa dans ton profil" );
+                console.log('--    REPONSE   -- Post days,reservation,reserve : ', response, "\n-------FEEDBACK - Reservation pris en compte, check tes résa dans ton profil");
                 this.cleanBooking();
             })
             .catch(error => {
@@ -168,7 +169,8 @@ export default class Booking extends Component {
             fullDates: [],
             inputTicketValue: 1,
             duration: 0,
-            priceSum: 0, });
+            priceSum: 0,
+        });
     }
 
     /*-----------------------------------------------------------------------------------------------*/
@@ -178,7 +180,7 @@ export default class Booking extends Component {
     /** SET TICKET VALUE WHEN USER SELECT A VALUE ON SELECT DROPDOWN 
      * @param {Number} pValue number of ticket/day for a booking */
     ticketsOnchange = (pValue) => {
-        this.setState({ inputTicketValue: pValue.value }, ()=> this.calcPrice());
+        this.setState({ inputTicketValue: pValue.value }, () => this.calcPrice());
     }
 
     /*-----------------------------------------------------------------------------------------------*/
@@ -239,70 +241,133 @@ export default class Booking extends Component {
 
     /**Booking-js -  SAVE DAYS, UPDATE TICKETS AVAILABLE, RESERVATION AND RESERVE IN DATA BASE
     * @param {Array} pExistingDates array of date in database (format YYYY-MM-DD) */
-     createRequestArray=(pExistingDates)=> {
+    createRequestArray = (pExistingDates) => {
         console.log('createRequestArray()');
-         let updateDates = [];
-         let insertDates = [];
- 
-         pExistingDates.forEach((element,index,array) => {
-             updateDates.push(element.date);
-             if(index===array.length-1)insertDates = this.state.fullDates.filter( dates => !updateDates.includes( dates ));
-         });
- 
-         this.saveBooking(insertDates, updateDates);
-     }
-     
+        let updateDates = [];
+        let insertDates = [];
+
+        pExistingDates.forEach((element, index, array) => {
+            updateDates.push(element.date);
+            if (index === array.length - 1) insertDates = this.state.fullDates.filter(dates => !updateDates.includes(dates));
+        });
+
+        this.saveBooking(insertDates, updateDates);
+    }
+
     /*-----------------------------------------------------------------------------------------------*/
     /*   .   .   .   .   .   .   .   .   .   .   .RENDER.   .   .   .   .   .   .   .   .   .   .   .*/
     /*-----------------------------------------------------------------------------------------------*/
 
     render() {
         return (
-            <section id="currentBody" className="borderBottom">
-                <h2>Réservez votre séjour</h2>
-                <table id="bookingContainer">
-                    <tbody>
-                        <tr className="trBooking">
-                            <td className="tdBooking">
-                                <h4>Saisissez dates</h4>
-                            </td>
-                            <td className="tdBooking">
-                                <h4>Nombre de personne</h4>
-                            </td>
-                            <td className="tdBooking">
-                                <h4>Prix</h4>
-                            </td>
-                        </tr>
-                        <tr className="trBooking">
-                            <td className="tdBooking">
-                                <DatePicker
-                                    dates={this.state.dates}
-                                    showCalendar={this.state.showCalendar}
-                                    setShowCalendar={this.setShowCalendar}
-                                    cleanDates={this.cleanDates}
-                                    dayIsClicked={this.dayIsClicked}
-                                />
-                            </td>
-                            <td className="tdBooking">
-                                <Ticket
-                                    inputTicketValue={this.state.inputTicketValue}
-                                    ticketsOnchange={this.ticketsOnchange}
-                                    setShowCalendar={this.setShowCalendar} />
-                            </td>
-                            <td className="tdBooking">
-                                {this.state.priceSum}
-                            </td>
-                            <td className="tdBooking">
-                                <button
-                                    id="reservBtn"
-                                    className="submitBtn"
-                                    type="submit"
-                                    onClick={this.reserveIsClicked}
-                                >Réserver</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+            <section id="mainHome" className="currentBody homePage borderBottom bookingPhone">
+                <h2>RÉSERVEZ VOTRE SÉJOUR</h2>
+                {GlobalVar.widthDevice > GlobalVar.phoneWidth ?
+
+                    <table id="bookingContainer">
+                        <tbody>
+                            <tr className="trBooking">
+                                <td className="tdBooking">
+                                    <h4>Saisissez dates</h4>
+                                </td>
+                                <td className="tdBooking">
+                                    <h4>Nombre de personne</h4>
+                                </td>
+                                <td className="tdBooking">
+                                    <h4>Tarif</h4>
+                                </td>
+                            </tr>
+                            <tr className="trBooking">
+                                <td className="tdBooking">
+                                    <DatePicker
+                                        dates={this.state.dates}
+                                        showCalendar={this.state.showCalendar}
+                                        setShowCalendar={this.setShowCalendar}
+                                        cleanDates={this.cleanDates}
+                                        dayIsClicked={this.dayIsClicked}
+                                    />
+                                </td>
+                                <td className="tdBooking">
+                                    <Ticket
+                                        inputTicketValue={this.state.inputTicketValue}
+                                        ticketsOnchange={this.ticketsOnchange}
+                                        setShowCalendar={this.setShowCalendar} />
+                                </td>
+                                <td className="tdBooking">
+                                    {`${this.state.priceSum} patates`}
+                                </td>
+                                <td className="tdBooking">
+                                    <button
+                                        id="reservBtn"
+                                        className="submitBtn"
+                                        type="submit"
+                                        onClick={this.reserveIsClicked}
+                                    >Réserver</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    :
+                    // PHONE DEVICE
+                    <table id="bookingContainer">
+                        <tbody>
+                            <tr className="trBooking">
+                                <td className="tdBooking">
+                                    <h4>Saisissez dates</h4>
+                                </td>
+                            </tr>
+                            <tr className="trBooking">
+                                <td className="tdBooking">
+                                    <DatePicker
+                                        dates={this.state.dates}
+                                        showCalendar={this.state.showCalendar}
+                                        setShowCalendar={this.setShowCalendar}
+                                        cleanDates={this.cleanDates}
+                                        dayIsClicked={this.dayIsClicked}
+                                    />
+                                </td>
+                            </tr>
+
+                            <tr className="trBooking">
+                                <td className="tdBooking">
+                                    <h4>Nombre de personne</h4>
+                                </td>
+                            </tr>
+                            <tr className="trBooking">
+                                <td className="tdBooking">
+                                    <Ticket
+                                        inputTicketValue={this.state.inputTicketValue}
+                                        ticketsOnchange={this.ticketsOnchange}
+                                        setShowCalendar={this.setShowCalendar} />
+                                </td>
+                            </tr>
+
+                            <tr className="trBooking">
+                                <td className="tdBooking">
+                                    <h4>Tarif</h4>
+                                </td>
+                            </tr>
+                            <tr className="trBooking">
+                                <td className="tdBooking">
+                                    {`${this.state.priceSum} patates`}
+                                </td>
+                            </tr>
+
+                            <tr className="trBooking">
+                                <td className="tdBooking">
+                                    <button
+                                        id="reservBtn"
+                                        className="submitBtn"
+                                        type="submit"
+                                        onClick={this.reserveIsClicked}
+                                    >Réserver</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                }
             </section>
         )
     }
