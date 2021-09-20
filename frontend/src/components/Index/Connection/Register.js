@@ -32,7 +32,7 @@ export default class Register extends Component {
 
     /** Register.js - CHECK IF PASSWORD AND CONFIRM PASSWOR ARE SAME */
     passwordComparison = () => {
-        return (this.state.password === this.state.confPassword) ? "" : "Différent du mot de passe";
+        return (this.state.password === this.state.confPassword) ? "" : "Mot de passe différent";
     }
 
     /** Register.js - CREATE USER */
@@ -55,7 +55,7 @@ export default class Register extends Component {
      * @returns  {Array} array of div with input and label in*/
     renderForm = () => {
         let informations = ["name", "firstName", "birthday", "mail", "password", "confPassword"];
-        let labels = ["Prenom", "Nom", "Date de naissance", "Adress e-mail", "Mot de pass", "Confirmation mot de passe"];
+        let labels = ["Prenom", "Nom", "Date de naissance", "Adresse e-mail", "Mot de passe", "Confirmation mot de passe"];
         let placeholders = ["prénom", "nom de famille", "date de naissance", "e-mail", "mot de passe", "mot de passe de nouveau"];
         let errorMsgs = ["Le prénom doit être composé uniquement de lettre", "Le nom de famille doit être composé uniquement de lettre", "Date non conforme", "Format de l'email non conforme", "Doit contenir entre 4 & 8 caractères \n (lettres, chiffres)", ""];
         let regexs = [GlobalVar.regName, GlobalVar.regName, GlobalVar.regDate, GlobalVar.regEmail, GlobalVar.regMdp, GlobalVar.regMdp];
@@ -65,7 +65,7 @@ export default class Register extends Component {
         for (let i = 0; i < informations.length; i++) {
             let inputType;
 
-            informations[i] === "birthday" ? inputType = "date" : inputType = "text";
+            informations[i] === "birthday" ? inputType = "date" : ((informations[i] === "password" || informations[i] === "confPassword") ? inputType = "password" : inputType = "text") ;
             formInputs.push(
                 <InputRegister
                     key={i}

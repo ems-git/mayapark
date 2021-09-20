@@ -25,7 +25,7 @@ export default class Reservation extends Component {
         return (
             <tbody>
                 <tr>
-                    <td>{moment(this.props.reservation.startDay, "YYYY-MM-DD").format("DD MMMM YYYY")}</td>
+                    <td>{moment(this.props.reservation.startDay, "YYYY-MM-DD").format("DD/MM/YY")}</td>
                     <td>{this.props.reservation.periode}</td>
                     <td>{this.props.reservation.tickets}</td>
                     <td>{this.props.reservation.price}</td>

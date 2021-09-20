@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import GlobalVar from '../../GlobalVar';
 import Navbar from '../../Navbar/Navbar';
 import ParkInformation from '../../Navbar/ParkInformation';
-// import AttractionForm from './AttractionForm';
+import AttractionForm from './AttractionForm';
 import AttractionList from './AttractionList';
 
 import Header from '../../Header/Header';
@@ -13,11 +13,11 @@ class AttractionIndex extends Component {
 
     state = {
         attractions: [{
-            description: 'desc',
+            description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`,
             id_atr: 0,
             img_url: "/assets/img/attractionPage/atr11.jpg",
             light: 0,
-            name: 'nom',
+            name: 'Lorem ipsum',
             rating: 0,
             ratingNbr: 0,
         },],
@@ -99,7 +99,9 @@ class AttractionIndex extends Component {
         });
      }
 
-
+     /** AttractionIndex.js - DELETE AN ATTRACTION IN DATA BASE
+      * @param {*} pId id of the attraction
+      * @returns  */
     delAttractionDB = (pId) => {
         return new Promise((resolve, reject) => {
             GlobalVar.axios.delete(`${GlobalVar.url}attraction/${pId}`)
@@ -113,6 +115,9 @@ class AttractionIndex extends Component {
         });
     }
 
+     /** AttractionIndex.js DEELETE RATING IN DATA BASE
+     * @param {*} pId id of the attraction
+     * @returns  */
     delRatingDB = (pId) => {
         return new Promise((resolve,reject)=>{
             GlobalVar.axios.delete(`${GlobalVar.url}rating/attraction/${pId}`)
@@ -126,6 +131,28 @@ class AttractionIndex extends Component {
         });
     }
 
+    /** AttractionIndex.js CREATE AN ATTRACTION IN DATA BASE
+     * @param {*} pNewAtr attraction information */
+    createAttractioDB=(pNewAtr)=>
+    {
+       GlobalVar.axios.post(`${GlobalVar.url}attraction` , pNewAtr )
+       .then((response) => {
+           console.log('--    REPONSE   -- Post a new attraction:\n', response.data);
+           this.setState({ attractions: [...this.state.attractions, {
+               description : pNewAtr.description,
+               id_atr : response.data.insertId,
+               img_url: pNewAtr.img_url,
+               name: pNewAtr.name,
+               rating: 0,
+               ratingNbr: 0,
+            }
+            ]});
+       })
+       .catch(function (error) {
+           console.log('--!!  E.R.R.O.R  !!--  Post a new attraction:\n', error);
+       });
+    }
+
     /*-----------------------------------------------------------------------------------------------*/
     /*   .   .   .   .   .   .   .   .    .METHODES ATTRACTIONS.    .    .   .   .   .   .   .   .   */
     /*-----------------------------------------------------------------------------------------------*/
@@ -133,9 +160,29 @@ class AttractionIndex extends Component {
     /** AttractionIndex.js - ADD ATTRACTION FROM FORM
      * @param {Object} pNewAtr new atraction Object */
     addAttraction = (pNewAtr) => {
-        this.setState({
-            attractions:
-                [...this.state.attractions, pNewAtr]
+        let newAtr = {
+            description: pNewAtr.description,
+            img_url: pNewAtr.img_url,
+            name: pNewAtr.name,
+        };
+        console.log(newAtr);
+        this.createAttractioDB(newAtr);
+    }
+
+    /** Attraction.js UPDATE ATTRACTION IN SATABASE AFTER AN EDITION
+     * @param {Number} pAtrId id of the attraction
+     * @param {String} pNewName new name of the attraction
+     * @param {String} pNewDesc new description of the attraction */
+    updateAttractionDB = (pAtrId, pNewName, pNewDesc) => {
+        return new Promise((resolve, reject) => {
+            GlobalVar.axios.put(`${GlobalVar.url}attraction/${pAtrId}`, { name: pNewName, description: pNewDesc })
+                .then((response) => {
+                    console.log('--    REPONSE   -- Updtate attraction :\n', response.data);
+                    resolve();
+                })
+                .catch(function (error) {
+                    console.log('--!!  E.R.R.O.R  !!-- Updtate attraction:\n', error);
+                });
         });
     }
 
@@ -143,7 +190,7 @@ class AttractionIndex extends Component {
      * @param {Number} pAtrId id of the attraction
      * @param {String} pNewName new name of the attraction
      * @param {String} pNewDesc new description of the attraction */
-    updateAtr = (pAtrId, pNewName, pNewDesc) => {
+     updateAttractionState = (pAtrId, pNewName, pNewDesc) => {
         let newAttractions = this.state.attractions.map((attraction) => {
             if (attraction.id_atr === pAtrId) {
                 attraction.name = pNewName;
@@ -152,13 +199,26 @@ class AttractionIndex extends Component {
             return attraction;
         })
         this.setState({ attractions: newAttractions });
-        //mettre a jour coté database
+    }
+
+    /** AttractionIndex.js  - UPDATE AN ATTRACTION
+     * @param {Numbre} pId id of the attraction
+     * @param {String} pNewName new title of the attraction
+     * @param {String} pNewDesc new desc of the attraction*/
+     updateAttraction = async (pId , pNewName, pNewDesc) => {
+        try{
+            await this.updateAttractionDB(pId, pNewName, pNewDesc);
+            await this.updateAttractionState(pId, pNewName, pNewDesc); 
+        }
+        catch{
+            console.log('--!!  E.R.R.O.R  !!-- Update atraction failed:\n')
+        }
     }
 
     delAttractionState=(pId)=>
     {
-        let newAttractions = this.state.attractions.filter((attraction, id) => id !== pId);
-        this.setState({ attractions: newAttractions });
+        let newAttractions = this.state.attractions.filter((attraction, id) => attraction.id_atr !== pId);
+        this.setState({ attractions : newAttractions });
     }
 
     /** AttractionIndex.js  - DELETE AN ATTRACTION*/
@@ -219,8 +279,7 @@ class AttractionIndex extends Component {
     render() {
         let bodyContent = (
             <div>
-                <h1>ATTRACTIONS</h1>
-                {/* {
+                {
                     this.props.currentUser.type==="admin" ? 
                     <AttractionForm
                      attractions={this.state.attractions}
@@ -228,12 +287,12 @@ class AttractionIndex extends Component {
                      />
                     :
                     ""
-                } */}
+                }
                 <AttractionList
                     attractions={this.state.attractions}
                     currentUser={this.props.currentUser}
                     updateRating={this.updateRating}
-                    updateAtr={this.updateAtr}
+                    updateAttraction={this.updateAttraction}
                     delAttraction={this.delAttraction}
                 />
             </div>)
@@ -250,6 +309,10 @@ class AttractionIndex extends Component {
                     setCurrUser={this.props.setCurrUser} />
 
                 <main id="mainAttraction" className="currentBody">
+                <h1>ATTRACTIONS</h1>
+                <div className="pageDesc">
+                    <p>Des attractions faites pour tous ! <br></br> Attractions frissonnantes, rapide, aquatique ...Il y en a pour tout le monde! Faite votre choix et laissez vous envouter par cet univers et culture dévordante de magie!</p>
+                </div>
                     {bodyContent}
                 </main>
                 <Footer />

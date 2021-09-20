@@ -31,10 +31,10 @@
 
   /*    .   .   .   .   .   .   .   .   .   .   .   .  HEADER*/
 
-  --img-header-home: url('../assets/img/attractionPage/atr00.jpg');
-  --img-header-atr: url('../assets/img/attractionPage/atr08.jpg');
+  --img-header-home: url('../assets/img/attractionPage/atr16.jpg');
+  --img-header-atr: url('../assets/img/attractionPage/atr8.jpg');
   --img-header-profil: url('../assets/img/header/mayan01.jpg');
-  --img-header-connection:url('../assets/img/attractionPage/atr01.jpg');
+  --img-header-connection:url('../assets/img/attractionPage/atr1.jpg');
   --img-header-admin: url('../assets/img/header/maya08.jpg');
   --img-header-notfound: url('../assets/img/header/decors04.jpg');
 
@@ -58,5 +58,5 @@
 
   --rayure-bg-cal : linear-gradient(45deg,rgba(255, 255, 255, 0) 25%, rgba(0, 0, 0, 0.05) 10%,rgba(0, 0, 0, 0.05) 50%,rgba(255, 255, 255, 0) 50%,rgba(255, 255, 255, 0) 75%,rgba(0, 0, 0, 0.05) 75%);
 
-  --c-b-hover-cal : rgba(0, 247, 255, 0.5);
+  --c-b-hover-cal : rgba(0, 247, 255, 0.3);
 }

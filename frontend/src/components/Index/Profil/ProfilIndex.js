@@ -22,7 +22,6 @@ export default class ProfilIndex extends Component {
         this.getReservationsDB();
     }
 
-
     /*-----------------------------------------------------------------------------------------------*/
     /*   .   .   .   .   .   .   .   .   .   .   .DATA-BASE.   .   .   .   .   .   .   .   .   .   . */
     /*-----------------------------------------------------------------------------------------------*/
@@ -41,9 +40,9 @@ export default class ProfilIndex extends Component {
     }
 
     /** UPDATE RESERVATIONS IN DATA BASE AFTER A USER SUPPRESSION
-     * @param {Array} pIds_res  */
+     * @param {Int} pIds_res ids of the reservations
+     * @param {*} pTickets nbr of tickets of reservation*/
     deleteUserReservationDB = (pIds_res, pTickets) => {
-        console.log("deleteUserReservationDB()", pIds_res, pTickets);
 
         if (pIds_res.length) {
             let informations = {
@@ -54,7 +53,7 @@ export default class ProfilIndex extends Component {
                 .then(response => {
                     console.log('--    REPONSE   -- Post reservations suppression : ', response.data);
                     this.updateReservations(pIds_res);
-                    console.log("-------FEEDBACK - réservation annulé, pour refaire une reservatio, rendez vous sur la page d'accueil");
+                    console.log("-------FEEDBACK - réservation annulé, pour refaire une reservation, rendez vous sur la page d'accueil");
                 })
                 .catch(error => {
                     console.log('--!!  E.R.R.O.R  !!-- Post reservations suppression :\n', error);
@@ -87,16 +86,14 @@ export default class ProfilIndex extends Component {
      * @param {Array} pIds_res  */
     updateReservations = (pIds_res) => {
         let currentReservations = this.state.reservations.filter(({ id_res }) => !pIds_res.includes(id_res));
-
         this.setState({ reservations: currentReservations });
-
     }
 
     /*-----------------------------------------------------------------------------------------------*/
     /*   .   .   .   .   .   .   .   .   .   .   .RENDER.   .   .   .   .   .   .   .   .   .   .   .*/
     /*-----------------------------------------------------------------------------------------------*/
-
     render() {
+        
         return (
             <div>
                 <ParkInformation />
@@ -112,6 +109,7 @@ export default class ProfilIndex extends Component {
                     setCurrUser={this.props.setCurrUser} />
 
                 <main id="profilPage" className="currentBody">
+                    <h1>PROFIL</h1>
                     {this.state.paramTab ?
 
                         <section className="profilBox">

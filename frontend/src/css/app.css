@@ -73,7 +73,7 @@ h6 {
   font-size: var(--f-size-h6);
   letter-spacing:var(--f-s-h6);
 }
-p {
+p, td, th {
   font-family: 'defaultLight';
   font-size: var(--f-size-p);
   letter-spacing:var(--f-s-p);
@@ -97,7 +97,7 @@ input:not(.reservationCheckbox) {
   border: 2px solid var(--c-blue02);
   border-radius: var(--br-input);
 }
-input:not(.searchInput):not(.DateInput_input):not(.bookingInput):not(.atrTitleInput):not(.atrDescInput):not(.reservationCheckbox) {
+input:not(.searchInput):not(.DateInput_input):not(.bookingInput):not(.atrTitleInput):not(.atrDescInput):not(.reservationCheckbox):not(.inputProfil) {
 
   min-width: var(--w-input);
 }
@@ -205,7 +205,7 @@ footer {
   justify-content: space-evenly;
 
   align-items: center;
-  text-align: justify;
+  text-align: var(--t-a-footer);
   text-align-last: center;
 
   width: 100%;
@@ -220,11 +220,19 @@ footer {
   background-color: var(--c-white);
 
   width:var(--w-body);
+  max-width: var(--mw-body);
   height: fit-content;
-  margin-left: calc((100% - var(--w-body)) / 2);
+  /* margin-left: calc((100% - var(--w-body)) / 2); */
+  margin-left: auto;
+  margin-right: auto;
 
   box-shadow: 0px 0px var(--size-shadow) var(--c-shadow02);
 }
 .currentBody:not(.borderBottom) {
   border-radius: var(--br-body) var(--br-body) 0 0;
+}
+
+.pageDesc {
+  text-align: center;
+  padding: var(--marg01);
 }

@@ -61,16 +61,15 @@ class Attraction extends Component {
             let lastRating = this.state.userRating;
             this.setState({userRating : newUserRating },this.props.updateRating(this.props.attraction.id_atr,newUserRating,true,lastRating));
         }
-        //mettre a jour coté database
     }
-
+    
     /**  Attraction.js SET ISEDITABLE WHEN ADMIN CLICKE OR NOT ON BUTTON,AND GO TO UPDATE ATR
      * @param {String} pNewName name of the attraction (depend of the input value) 
      * @param {String} pNewDesc description of the attraction (depend of the input value) */
     editAttraction=(pNewName, pNewDesc)=>
     {
         this.setState({isEditable : !this.state.isEditable},
-            ()=>{  if(!this.state.isEditable) this.props.updateAtr(this.props.attraction.id_atr, pNewName, pNewDesc); });
+            ()=>{  if(!this.state.isEditable) this.props.updateAttraction(this.props.attraction.id_atr, pNewName, pNewDesc); });
     }
 
     /*-----------------------------------------------------------------------------------------------*/

@@ -1,0 +1,188 @@
+:root
+{
+  /*    .   .   .   .   .   .   .   .   .   .   .   .   GLOBAL fonts*/
+  --f-size-h1:38px;
+  --f-size-h1-header:60px;
+  --f-size-h2:30px;
+  --f-size-h3:24px;
+  --f-size-h4:22px;
+  --f-size-h5:20px;
+  --f-size-h6:18px;
+  --f-size-p: 16px;
+  --f-size-btn: 16px;
+  --f-size-p-cal: 13px;
+  --f-size-p-calHover:18px;
+  --f-size-error : calc(var(--f-size-p) * .65);
+
+  --f-s-h1:5px;
+  --f-s-h2:4px;
+  --f-s-h3:4px;
+  --f-s-h4:0;
+  --f-s-h5:0;
+  --f-s-h6:0;
+  --f-s-p: 0.6px;
+  --f-s-btn: 0.6px;
+
+  /*    .   .   .   .   .   .   .   .   .   .   .   .   GLOBAL margin/padding*/
+
+  --marg01:26px;
+  --marg02:calc(var(--marg01) / 2);
+
+  --pad01:8px;
+  --pad02:calc(var(--pad01) / 2);
+
+  /*    .   .   .   .   .   .   .   .   .   .   .   .   GLOBAL border*/
+
+  --br-body:8px;
+  --br-square:5px;
+
+  /*    .   .   .   .   .   .   .   .   .   .   .   .  GLOBAL inputs / textarea / button*/
+
+  --h-input:26px;
+  --w-input:300px;
+  --br-input:10px;
+  
+  --br-txtarea:8px;
+
+  --h-btn:30px;
+  --w-btn:90px;
+  --btnSub-w:180px;
+  
+  --br-btn:8px;
+  --br-btnSub:26px;
+
+  /*    .   .   .   .   .   .   .   .   .   .   .   .   NAVBAR*/
+
+  --size-a-nav : 14px;
+  --s-a-nav : calc(var(--size-a-nav) / 2);
+  --h-nav : calc(var(--size-a-nav) * 3);
+
+  /*    .   .   .   .   .   .   .   .   .   .   .   .  HEADER*/
+  
+  --h-header:90vh;
+  --h-headerAtr:90vh;
+  --h-headerConnect: 90vh;
+  --h-headerAccount:90vh;
+  --h-headerProfil:90vh;
+  --h-headerError:calc(var(--h-header)  - var(--h-nav));
+
+  --w-header:100%;
+
+  /*    .   .   .   .   .   .   .   .   .   .   .   .  BODY*/
+
+  --w-body:90%;
+  --mw-body : 1000px;
+
+  --marg-top-homePage:-200px;
+  --marg-top-atrPage:-200px;
+  --marg-top-connectPage:-50vh;
+  --marg-top-profilPage:-200px;
+  --marg-top-accountPage:-200px;
+  --marg-top-errorPage:none;
+
+  --size-shadow : 20px;
+
+  /*    .   .   .   .   .   .   .   .   .   .   .   .   HOME page*/
+
+  --pad-b-homeBody : 50px;
+
+  /*calendar*/
+  
+  --w-datePicker : fit-content;
+
+  --pad-month-cal : 4px;
+  --br-month-cal : 8px;
+  --shadow-cal : 0 8px 10px var(--c-shadow02);
+
+  --f-size-hover-cal : 130%;
+
+  --size-cells-cal : 30px;
+  --size-cleanBtn : 20px;
+
+  --margL-cal : 0;
+
+  --w-inputBooking : 200px;
+
+  --w-resBtn:120px;
+  --h-tr:35px;
+
+  /*Mayapark description*/
+
+  --f-size-p-note: 12px;
+  --w-img-mayaparkDesc:40%;
+
+  --fd-mayaDesc:row;
+
+  /*    .   .   .   .   .   .   .   .   .   .   .   .  CONNECTION*/
+
+  --w-connectionSect:50%;
+  --mh-connectionSection:600px;
+
+  --fd-connectCont:row;
+
+  /*    .   .   .   .   .   .   .   .   .   .   .   .   ATTRACTION page*/
+  
+  --size-nxtBtn : 30px;
+
+  --h-atrContainer : 400px;
+  --fd-atrContainer:row;
+
+  --w-artBox:calc(100% - var(--w-atrImg));
+
+  --marg-artBoxL: var(--marg01) var(--marg01) var(--marg01) 0;
+  --marg-artBoxR: var(--marg01) 0 var(--marg01) var(--marg01);
+  --h-ArtBox : 100%;
+
+  --h-atrContent :calc(var(--h-atrContainer) - (2 * var(--marg01))) ;
+  --pad-atrContent: none;
+
+  --w-atrImg : 45%;
+  --h-atrImg :auto;
+
+  --mw-atrImg : calc(var(--h-atrContainer));
+  --marg-atrImg: var(--marg01);
+
+  --h-rating : 40px;
+
+  --size-editBtn : 36px;
+
+  --fd-editBtn : row;
+
+  /*star*/
+  --size-hover-star : 160%;
+
+  /*    .   .   .   .   .   .   .   .   .   .   .   .  NOTFOUND*/
+
+  --f-size-h5-notfound: 14vw;
+  --f-size-h6-notfound: 8vw;
+  --f-size-p-notfound: 20px;
+
+  /*    .   .   .   .   .   .   .   .   .   .   .   .  PROFIL*/
+
+  --fd-ProfilBox :row;
+  --ai-ProfilBox:top;
+  --jc-ProfilBox:center;
+  --mh-profilBox:300px; 
+
+  --pad-profilContainer :90px 0 0 0 ;
+
+  --w-profilLSide : 30%;
+  --w-h4-profilLside : none;
+  --fd-ProfilLside :column;
+
+  --br-profilLside : var(--br-body) 0 0 0;
+  --br-profilRside : 0 var(--br-body) 0 0;
+  
+  --bShadow-profilLside01: 0 0 0 0 var(--c-grey03) inset, -10px -60px 10px 0 var(--c-grey03) inset;
+  --bShadow-profilLside02: 0 0 0 0 var(--c-grey03) inset, -10px 60px 10px 0 var(--c-grey03) inset;
+
+  --w-profilRSide : calc(100% - var(--w-profilLSide));
+  --mh-profilRSide : 300px;
+
+  --w-profilBtn: var(--w-resBtn);
+  --size-f-th-p : 12px;
+
+  /*    .   .   .   .   .   .   .   .   .   .   .   .  FOOTER*/
+
+  --t-a-footer : justify ;
+}

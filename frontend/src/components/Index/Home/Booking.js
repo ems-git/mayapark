@@ -83,6 +83,7 @@ export default class Booking extends Component {
         GlobalVar.axios.post(`${GlobalVar.url}booking`, informations)
             .then(response => {
                 console.log('--    REPONSE   -- Post days,reservation,reserve : ', response, "\n-------FEEDBACK - Reservation pris en compte, check tes résa dans ton profil");
+                window.alert("Votre réserbvation a bien été prise en compte.\n Pour consulter ou annuler une pré-réservation,; rendez vous dns votre espace profil");
                 this.cleanBooking();
             })
             .catch(error => {
@@ -263,7 +264,6 @@ export default class Booking extends Component {
             <section id="mainHome" className="currentBody homePage borderBottom bookingPhone">
                 <h2>RÉSERVEZ VOTRE SÉJOUR</h2>
                 {GlobalVar.widthDevice > GlobalVar.phoneWidth ?
-
                     <table id="bookingContainer">
                         <tbody>
                             <tr className="trBooking">
@@ -294,7 +294,7 @@ export default class Booking extends Component {
                                         setShowCalendar={this.setShowCalendar} />
                                 </td>
                                 <td className="tdBooking">
-                                    {`${this.state.priceSum} patates`}
+                                    {`${this.state.priceSum} €`}
                                 </td>
                                 <td className="tdBooking">
                                     <button
@@ -350,7 +350,7 @@ export default class Booking extends Component {
                             </tr>
                             <tr className="trBooking">
                                 <td className="tdBooking">
-                                    {`${this.state.priceSum} patates`}
+                                    {`${this.state.priceSum} €`}
                                 </td>
                             </tr>
 

@@ -1,7 +1,6 @@
 :root
 {
   /*    .   .   .   .   .   .   .   .   .   .   .   .   GLOBAL fonts*/
-
   --f-size-h1:46px;
   --f-size-h1-header:80px;
   --f-size-h2:35px;
@@ -72,6 +71,7 @@
   /*    .   .   .   .   .   .   .   .   .   .   .   .  BODY*/
 
   --w-body:70%;
+  --mw-body : 1000px;
 
   --marg-top-homePage:-200px;
   --marg-top-atrPage:-200px;
@@ -84,12 +84,15 @@
 
   /*    .   .   .   .   .   .   .   .   .   .   .   .   HOME page*/
 
+  --pad-b-homeBody : 50px;
+
   /*calendar*/
   
   --w-datePicker : fit-content;
 
   --pad-month-cal : 4px;
   --br-month-cal : 8px;
+  --shadow-cal : 0 8px 10px var(--c-shadow02);
 
   --f-size-hover-cal : 130%;
 
@@ -118,6 +121,8 @@
   --fd-connectCont:row;
 
   /*    .   .   .   .   .   .   .   .   .   .   .   .   ATTRACTION page*/
+  
+  --size-nxtBtn : 35px;
 
   --h-atrContainer : 400px;
   --fd-atrContainer:row;
@@ -176,4 +181,8 @@
 
   --w-profilBtn: var(--w-resBtn);
   --size-f-th-p : 12px;
+
+  /*    .   .   .   .   .   .   .   .   .   .   .   .  FOOTER*/
+
+  --t-a-footer : justify ;
 }

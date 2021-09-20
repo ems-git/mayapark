@@ -131,7 +131,40 @@ app.get(`/user/mail/:mail`, (req, res) => {
     });
 });
 
+// GET INFORMATIONS OF A USER
+app.get(`/informations/user/:id_user`, (req, res) => {
+    let id_user = req.params.id_user;
+    MySqlUtilities.getInformationsUser(id_user, (result, error)=>
+    {
+        if(!error)
+        {
+            res.send(result);
+        }
+        else
+        {
+            res.status(500).send.error;
+        }
+    });
+});
 
+// UPDATE USER INFORMATION //
+app.put(`/user/:id_user`, (req, res) => {
+    let userId = req.params.id_user;
+    let name = req.body.name;
+    let firstName = req.body.firstName;
+    let password = req.body.password;
+    let mail = req.body.mail;
+    MySqlUtilities.updateUserInfo( userId, name , firstName, password, mail, (result, error) => {
+        if (!error) //  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .callabck OK
+        {
+            res.send(result);
+        }
+        else // .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .callabck NOT ok !!
+        {
+            res.status(500).send.error;
+        }
+    });
+});
 /*---------------------------------------------------------------------------------------------------*/
 /*   .   .   .   .   .   .   .   .   .   .   .ATTRACTION.   .   .   .   .   .   .   .   .   .   .   .*/
 /*---------------------------------------------------------------------------------------------------*/
@@ -172,6 +205,41 @@ app.delete(`/attraction/:id_atr`, (req, res) => {
     MySqlUtilities.delAttraction(idAtr,(result, error)=>
     {
         if(!error) //  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .callabck OK
+        {
+            res.send(result);
+        }
+        else // .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .callabck NOT ok !!
+        {
+            res.status(500).send.error;
+        }
+    });
+});
+
+// UPDATE AN ATTRACTION  //
+app.put(`/attraction/:id_atr`, (req, res) => {
+    let idAtr = req.params.id_atr;
+    let title = req.body.name;
+    let desc = req.body.description;
+    MySqlUtilities.updateAttraction(idAtr, title, desc , (result, error) => {
+        if (!error) //  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .callabck OK
+        {
+            res.send(result);
+        }
+        else // .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .callabck NOT ok !!
+        {
+            res.status(500).send.error;
+        }
+    });
+});
+
+// CREATE AN ATTRACTION  //
+app.post(`/attraction`, (req, res) => {
+    let description = req.body.description;
+    let img_url = req.body.img_url;
+    let name = req.body.name;
+
+    MySqlUtilities.createAttraction(description, img_url, name, (result, error) => {
+        if (!error) //  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .callabck OK
         {
             res.send(result);
         }

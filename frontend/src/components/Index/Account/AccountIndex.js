@@ -6,8 +6,8 @@ import Footer from '../../Footer/Footer';
 import '../../../css/account.css';
 
 export default class AccountIndex extends Component {
-    render() {
-        let bodyContent = "ACCOUNT PAGE IN COMING";
+    render() { 
+        let bodyContent = <h1>PAGE EN COURS DE CONSTRUCTION</h1>;
         return (
             <div>
                 <ParkInformation />

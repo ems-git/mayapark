@@ -24,11 +24,11 @@ class Navbar extends Component {
                     <li>
                         <Link
                             to="/compteManagement"
-                            className="inactive">COMPTES
+                            className="inactive">GESTION
                         </Link>
                     </li>
                 :
-                ""}
+                null}
                 
                 <li>
                     <Link
@@ -45,12 +45,12 @@ class Navbar extends Component {
                     </Link>
                     </li>
                 :
-                ""}
+                null}
                 {this.props.currentUser.type === null ? 
                     <li>
                         <Link
                             to="/connection"
-                            className="inactive">CONNECTION
+                            className="inactive">CONNEXION
                         </Link>
                     </li>
                     :
@@ -58,7 +58,7 @@ class Navbar extends Component {
                         <Link
                             to="/"
                             onClick={()=>this.props.setCurrUser(null,null)}
-                            className="inactive">DECONNECTION
+                            className="inactive">DECONNEXION
                         </Link>
                     </li>
                 }

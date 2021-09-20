@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Reservation from './Reservation';
+import GlobalVar from '../../GlobalVar';
 
 export default class ReservationList extends Component {
 
@@ -36,11 +37,11 @@ export default class ReservationList extends Component {
                 <table className="profilTable">
                     <thead>
                         <tr>
-                            <th><h6>ARRIVEE</h6><p> . </p></th>
-                            <th><h6>DUREE </h6><p><i>en jour</i></p></th>
-                            <th><h6>TICKET </h6><p><i>par jour</i></p></th>
-                            <th><h6>TOTAL</h6><p><i>en euros</i></p></th>
-                            <th><h6>SELECTIONNER</h6><p> . </p></th>
+                            <th><h6>Arrivée</h6><p> . </p></th>
+                            <th><h6>Durée</h6><p><i>en jour</i></p></th>
+                            <th><h6>Tickets</h6><p><i>par jour</i></p></th>
+                            <th><h6>Totale</h6><p><i>en euros</i></p></th>
+                            <th><h6>Cocher</h6><p> . </p></th>
                         </tr>
                     </thead>
                     {this.props.reservations.map((reservation, index) => (
@@ -57,8 +58,8 @@ export default class ReservationList extends Component {
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td></td>
-                            <td>
+                            {GlobalVar.widthDevice>480 ? <td></td> : null}
+                            <td colSpan={GlobalVar.widthDevice>480 ? "0" :"2"}>
                                 <button
                                     className="submitBtn profilBtn"
                                     onClick={() =>this.props.deleteReservation(this.state.ids_res, this.state.tickets)}

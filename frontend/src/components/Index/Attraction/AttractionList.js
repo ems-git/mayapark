@@ -15,7 +15,7 @@ class AttractionList extends Component {
                             attraction={attraction}
                             currentUser={this.props.currentUser}
                             updateRating={this.props.updateRating}
-                            updateAtr={this.props.updateAtr}
+                            updateAttraction={this.props.updateAttraction}
                             delAttraction={this.props.delAttraction}
                         />
                     ))}

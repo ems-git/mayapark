@@ -1,7 +1,6 @@
 :root
 {
   /*    .   .   .   .   .   .   .   .   .   .   .   .   GLOBAL fonts*/
-
   --f-size-h1:28px;
   --f-size-h1-header:40px;
   --f-size-h2:24px;
@@ -60,20 +59,22 @@
 
   /*    .   .   .   .   .   .   .   .   .   .   .   .  HEADER*/
   
-  --h-header:40vh;
-  --h-headerAtr:100vh;
+  --h-header:60vh;
+  --h-headerAtr:60vh;
   --h-headerConnect:100vh;
-  --h-headerAccount:40vh;
-  --h-headerProfil:40vh;
-  --h-headerError:calc(var(--h-header)  - var(--h-nav));
+  --h-headerAccount:calc(90vh  - var(--h-nav));
+  --h-headerProfil:60vh;
+  --h-headerError:calc(90vh - var(--h-nav));
 
   --w-header:100%;
 
   /*    .   .   .   .   .   .   .   .   .   .   .   .  BODY*/
 
   --w-body:94%;
+  --mw-body : none;
+
   --marg-top-homePage:-100px;
-  --marg-top-atrPage:-50vh;
+  --marg-top-atrPage:-100px;
   --marg-top-connectPage:-80vh;
   --marg-top-profilPage:-100px;
   --marg-top-accountPage:-100px;
@@ -83,12 +84,15 @@
 
   /*    .   .   .   .   .   .   .   .   .   .   .   .   HOME page*/
 
+  --pad-b-homeBody : 20px;
+
   /*calendar*/
   
   --w-datePicker : calc(100% - (4 * var(--pad01)));
   
   --pad-month-cal : 2px;
   --br-month-cal : 4px;
+  --shadow-cal : 0 4px 8px var(--c-shadow02);
 
   --f-size-hover-cal : 110%;
 
@@ -117,6 +121,8 @@
   --fd-connectCont:column;
 
   /*    .   .   .   .   .   .   .   .   .   .   .   .   ATTRACTION page*/
+
+  --size-nxtBtn : 24px;
 
   --h-atrContainer : 500px;
   --fd-atrContainer:column;
@@ -175,4 +181,8 @@
   
   --w-profilBtn: var(--w-resBtn);
   --size-f-th-p : 12px;
+
+  /*    .   .   .   .   .   .   .   .   .   .   .   .  FOOTER*/
+
+  --t-a-footer : center ;
 }

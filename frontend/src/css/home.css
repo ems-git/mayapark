@@ -7,6 +7,7 @@
 #homeBody .bodyContent{
     width: var(--w-body);
     margin-left: calc((100% - var(--w-body)) / 2);
+    padding-bottom: var(--pad-b-homeBody);
 }
 .borderBottom {
     border-radius: var(--br-body);
@@ -24,7 +25,8 @@
 /*    .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .BOOKING */
 .bookingPhone {
     width: 90% !important;
-    margin-left: 5% !important;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #bookingContainer {
@@ -122,23 +124,27 @@
     flex-direction: row;
     width: var(--w-datePicker);
 
-    border-radius: 0  0 var(---br-month-cal) var(---br-month-cal);
+    
+    border-radius: 0  0 var(--br-month-cal) var(--br-month-cal);
     background-color: var(--c-bg-cal) !important;
+    box-shadow: var(--shadow-cal);
 }
 .monthsContainer button {
     text-align: center;
     width: var(--size-cells-cal);
     height: var(--size-cells-cal);
-    background-color: transparent;
+    background-color: var(--c-bg-cal-selectDay);
+    font-weight: bolder;
 
     outline: none;
-    border: 1px solid rgba(0, 0, 0, 0.3);
+    border: none;
     border-radius: var(--br-month-cal);
 }
 
 .monthsContainer button:hover {
     transition: .2s;
     transform: scale(1.1);
+    background-color:  var(--c-b-hover-cal);
 }
 .oneMonth {
     position: relative;
@@ -154,14 +160,14 @@
 }
 
 /*HEAD*/
-.calenderHead tr, .weekDayCol /* month col*/
+.weekDayCol /* month col*/
 {
-    background-color: rgba(0, 255, 255, 0.493) !important;
+    color: var(--c-bg-weekDays-cal ) !important;
 }
 .calenderHead th /* month row*/
 {
     text-transform: uppercase;
-    background-color: rgba(216, 216, 216, 0.493) !important;
+    color: var(--c-black);
 }
 
 /*BODY - days grid*/
@@ -183,11 +189,9 @@
 .currentDays {
     color: var(--c-currentDays-cal);
 }
-
 .isntClickable {
     /* background-color: var(--c-bg-notClickable-cal) !important; */
 }
-
 .isClickable {
     cursor: pointer;
     outline: 2px solid transparent !important;
@@ -211,7 +215,6 @@
 .inRangeBlock {
     /* background-color: var(--c-bg-cal-inRangeBlock) !important; */
 }
-
 /*    .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .DESCRIPTION section */
 #mayaparkContainer {
     text-align: justify;

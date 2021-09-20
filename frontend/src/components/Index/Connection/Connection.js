@@ -16,7 +16,6 @@ export default class Connection extends Component {
         e.preventDefault();
         if (this.state.mail !== "" && this.state.password !== "") {
             this.props.checkConnectionDB(this.state.mail, this.state.password);
-            //this.setState({ mail: "", password: ""});
         }
         else  this.props.msgOnchange(false, "Merci de remplir tout les champs");
     }
@@ -28,7 +27,7 @@ export default class Connection extends Component {
     render() {
         return (
             <section className="connectionSection">
-                <h1>CONNECTION</h1>
+                <h1>CONNEXION</h1>
                 <form className="FlexCol itemC vertCenter">
                     
                     <p className="formMsg">{this.props.connectionMsg}</p>
@@ -44,15 +43,15 @@ export default class Connection extends Component {
                         name="password"
                         onChange={this.inputText}
                         value={this.state.password}
-                        type="text"
-                        placeholder='Saisisser votre adresse mail' />
+                        type="password"
+                        placeholder='Saisisser votre mot de passe' />
 
                     <a href="#middle" onClick={this.props.changeTab}>Vous n'êtes pas encore inscrit ? S'inscrire</a>
 
                     <button
                         className="submitBtn"
                         type="submit"
-                        onClick={this.connection}>CONNECTION</button>
+                        onClick={this.connection}>CONNEXION</button>
                 </form>
             </section>
         )

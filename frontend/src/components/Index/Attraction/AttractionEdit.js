@@ -14,9 +14,9 @@ class AttractionEdit extends Component {
     }
 
     editAttraction = () => {
-        console.log("test");
         this.props.editAttraction(this.state.titleValue, this.state.descValue);
     }
+
     delAttraction = () => {
         this.props.delAttraction(this.props.indexAtr);
     }

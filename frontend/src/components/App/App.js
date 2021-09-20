@@ -17,26 +17,23 @@ import NotFoundIndex from '../Index/NotFound/NotFoundIndex';
 class App extends Component {
 
     state = {
-            resrvations: [],
-            currentUser:{
-                id: null,
-                type: null,
-            },
-            markId: 0,
-        }
-        
-    componentDidMount()
-    {
+        resrvations: [],
+        currentUser: {
+            id: null,
+            type: null,
+        },
+    }
+
+    componentDidMount() {
         this.setCurrentUser();
     }
 
     /** App.js - SET CURRENT USER TYPA AND ID */
-    setCurrentUser=()=>
-    {
+    setCurrentUser = () => {
         let currentUserLS = this.localStorageManagement("get", "currentUser");
-        if (currentUserLS) this.setState({ currentUser: { id: currentUserLS.id, type: currentUserLS.type }});
+        if (currentUserLS) this.setState({ currentUser: { id: currentUserLS.id, type: currentUserLS.type } });
     }
-    
+
     /*-----------------------------------------------------------------------------------------------*/
     /*   .   .   .   .   .   .   .   .   .   .   .DB-USERS.   .   .   .   .   .   .   .   .   .   .  */
     /*-----------------------------------------------------------------------------------------------*/
@@ -46,7 +43,7 @@ class App extends Component {
      * @param {Boolean} pLogin true if user is log, false if he si not login */
     logUserDB = (pId, pLogin) => {
         let isLog;
-        isLog=pLogin ? 1 : 0 ; //In data base, boolean is 0 or 1
+        isLog = pLogin ? 1 : 0; //In data base, boolean is 0 or 1
 
         GlobalVar.axios.put(`${GlobalVar.url}user/id/${pId}/isLog/${isLog}`)
             .then(response => {
@@ -65,31 +62,32 @@ class App extends Component {
      * @param {String} pType user type : admin, user or null*/
     setCurrUser = (pType, pId) => {
         if (pId) {
-            this.setState({ currentUser: { id: pId, type: pType }},
-                ()=>{
+            this.setState({ currentUser: { id: pId, type: pType } },
+                () => {
                     this.logUserDB(pId, true);
                     this.localStorageManagement("save", 'currentUser');
                 });
-            
         }
         else {
             this.logUserDB(this.state.currentUser.id, false);
-            this.setState({ currentUser: { id: pId, type: pType }},
-                ()=>this.localStorageManagement("clear", 'currentUser'));
+            this.setState({ currentUser: { id: pId, type: pType } },
+                () => this.localStorageManagement("clear", 'currentUser'));
         }
-
     }
 
     /*-----------------------------------------------------------------------------------------------*/
     /*   .   .   .   .   .   .   .   .   .   .LOCAL STORAGE.   .   .   .   .   .   .   .   .   .   . */
     /*-----------------------------------------------------------------------------------------------*/
 
-    localStorageManagement=(pState, pData)=>
-    {
-        if (pState==="save") localStorage.setItem(pData, JSON.stringify(this.state.currentUser));
-        else if(pState==="get") return JSON.parse(localStorage.getItem(pData));
-        else if (pState==="clear") localStorage.removeItem(pData);
-        else if(pState==="clearAll") localStorage.clear();
+    /** App.js UPDATE LOCAL STORAGE
+     * @param {String} pState type of update
+     * @param {String} pData type of data ex: current user
+     * @returns  */
+    localStorageManagement = (pState, pData) => {
+        if (pState === "save") localStorage.setItem(pData, JSON.stringify(this.state.currentUser));
+        else if (pState === "get") return JSON.parse(localStorage.getItem(pData));
+        else if (pState === "clear") localStorage.removeItem(pData);
+        else if (pState === "clearAll") localStorage.clear();
     }
 
     /*-----------------------------------------------------------------------------------------------*/
@@ -120,29 +118,27 @@ class App extends Component {
                             }
                         </Route>
 
-                        <Route exact path="/profil">
-                            {this.state.currentUser.type === "user" ?
+                        {this.state.currentUser.type === "user" ?
+                            <Route exact path="/profil">
                                 <ProfilIndex
                                     currentUser={this.state.currentUser}
                                     setCurrUser={this.setCurrUser}
                                 />
-                                :
-                                <Redirect to="/" />
-                            }
+                            </Route>
+                            :
+                            null
+                        }
 
-                        </Route>
-
-
-                        <Route exact path="/compteManagement">
-                            {this.state.currentUser.type === "admin" ?
+                        {this.state.currentUser.type === "admin" ?
+                            <Route exact path="/compteManagement">
                                 <AccountIndex
                                     currentUser={this.state.currentUser}
                                     setCurrUser={this.setCurrUser}
                                 />
-                                :
-                                <Redirect to="/" />
-                            }
-                        </Route>
+                            </Route>
+                            :
+                            null
+                        }
 
                         <Route exact path="/">
                             <HomeIndex

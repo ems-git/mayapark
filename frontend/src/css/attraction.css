@@ -31,6 +31,21 @@
 .atrContainer input, .editArea {
     width: auto;
 }
+
+.carousselBtnContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: var(--pad01) 0 ;
+}
+
+.carousselBtn{
+    width:var(--size-nxtBtn);
+    height: var(--size-nxtBtn);
+    border-radius: 2px;
+    color: var(--c-white);
+    background-color: var(--c-red);
+}
 /*    .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   . ATTRACTION*/
 .atrContainer {
     position: relative;

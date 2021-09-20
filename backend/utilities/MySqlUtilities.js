@@ -75,6 +75,30 @@ class MySqlUtilities {
         connection.end;
     }
 
+    getInformationsUser(pId_user, callback) {
+        let connection = mysql.createConnection(config);
+        connection.connect();
+        connection.query('SELECT name,firstName,DATE_FORMAT(birthday,"%Y-%m-%d") AS birthday ,mail,password FROM user WHERE id_user=?', [pId_user], (error, results) => {
+            callback(results, error);
+        });
+        connection.end;
+    }
+
+    /** MysSqlUtilities.js UPDATE USER INFORMATION
+     * @param {Number} pUserId id of the user
+     * @param {String} pName new name of the user
+     * @param {String} pFirstName new firstname of the user
+     * @param {String} pPassword new password of the user
+     * @param {string} pMail mail of the user
+     * @param {*} callback  */
+    updateUserInfo( pUserId, pName , pFirstName, pPassword , pMail, callback) {
+        let connection = mysql.createConnection(config);
+        connection.connect();
+        connection.query('UPDATE user SET name=(?), firstName =(?), password =(?), mail =(?) WHERE id_user=?', [pName , pFirstName, pPassword, pMail , pUserId ], (error, results) => {
+            callback(results, error);
+        });
+        connection.end;
+    }
     /*--------------------------------------------------------------------------------------------------*/
     /*   .   .   .   .   .   .   .   .   .   .   .ATRACTION.   .   .   .   .   .   .   .   .   .   .   .*/
     /*--------------------------------------------------------------------------------------------------*/
@@ -97,16 +121,48 @@ class MySqlUtilities {
     getAttractions(callback) {
         let connection = mysql.createConnection(config);
         connection.connect();
-        connection.query('SELECT * FROM attraction ORDER BY rating DESC;', (error, results) => {
+        connection.query('SELECT * FROM attraction ORDER BY rating DESC, ratingNbr DESC, name ASC;', (error, results) => {
             callback(results, error);
         });
         connection.end;
     }
 
+    /** MysSqlUtilities.js DELETE AN ATTRACTION IN DATA BASE
+     * @param {Number} pAtrId id of an attraction
+     * @param {Callback} callback response of result in data base*/
     delAttraction(pAtrId, callback) {
         let connection = mysql.createConnection(config);
         connection.connect();
         connection.query('DELETE FROM `attraction` WHERE id_atr=?', [pAtrId], (error, results) => {
+            callback(results, error);
+        });
+        connection.end;
+    }
+
+   /** MysSqlUtilities.js UPDATE AN ATTRACTION IN DATA BASE
+    * @param {Numbre} pAtrId id of the attraction
+    * @param {String} pTitle new title of the attraction
+    * @param {String} pDesc new desc of the attraction 
+    * @param {Callback} callback  */
+    updateAttraction(pAtrId, pTitle, pDesc, callback) {
+        let connection = mysql.createConnection(config);
+        connection.connect();
+        connection.query('UPDATE attraction SET name=(?), description =(?) WHERE id_atr=?', [pTitle, pDesc, pAtrId], (error, results) => {
+            callback(results, error);
+        });
+        connection.end;
+    }
+
+    /** MysSqlUtilities.js CREATE AN ATTRACTION
+     * @param {*} pDescription description of the attraction
+     * @param {*} pImg_url image url of the attraction
+     * @param {*} pName name of the attraction
+     * @param {*} callback  */
+    createAttraction(pDescription, pImg_url, pName,callback) {
+        console.log(pDescription, pImg_url, pName);
+        let connection = mysql.createConnection(config);
+        connection.connect();
+        connection.query('INSERT INTO `attraction` (`name`, `description`, `img_url`, `rating`, `ratingNbr`, `light`) VALUES (?,?,?,?,?,?)', [pName ,pDescription, pImg_url , 0, 0, 0], (error, results) => {
             callback(results, error);
         });
         connection.end;
@@ -172,6 +228,9 @@ class MySqlUtilities {
         connection.end;
     }
 
+    /** MysSqlUtilities.js DELETE RATING OF AN ATTRACTION
+     * @param {*} pAtrId id of the attraction
+     * @param {*} callback */
     delRating(pAtrId, callback) {
         let connection = mysql.createConnection(config);
         connection.connect();

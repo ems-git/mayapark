@@ -23,16 +23,34 @@ function isComputer()
     cssPhone.disabled = true;
 }
 
+function testWidth(screenWidth)
+{
+    if (screenWidth > 1024)
+    {
+        console.log("pc resize",widthDevice);
+        isComputer();
+    }
+    else if (screenWidth > 480) 
+    {
+        console.log("tablette resize",widthDevice);
+        isTablet();
+    }
+    else
+    {
+        console.log("phone resize",widthDevice);
+        isPhone();
+    }
+}
+
 if (widthDevice > 1024) {
     
     console.log("Computer", widthDevice);
     isComputer();
+    testWidth(Math.round(window.innerWidth));
 
     window.addEventListener('resize', function () {
         screenWidth = Math.round(window.innerWidth);
-        if (screenWidth > 1024) isComputer();
-        else if (screenWidth > 480) isTablet()
-        else isPhone()
+        testWidth(screenWidth);
     });
 }
 else if (widthDevice>480)

@@ -43,11 +43,11 @@ CREATE TABLE `attraction` (
 
 INSERT INTO `attraction` (`id_atr`, `name`, `description`, `img_url`, `rating`, `ratingNbr`, `light`) VALUES
 (1, 'Les montagnes de la mort', 'Les dieux sont en colères; la terre gronde, les sols tremblent et les montagnent hurlent. Fuyez, pour votre vie, fuyez!', '/assets/img/attractionPage/atr12.jpg', 0.7, 2, 0),
-(2, 'Les chutes infernales', 'Déluge fréquent durant cette saison, agripez vous à ce que vous pouvez et essayer de pas vous envoler!', '/assets/img/attractionPage/atr09.jpg', 0.8, 3, 1),
+(2, 'Les chutes infernales', 'Déluge fréquent durant cette saison, agripez vous à ce que vous pouvez et essayer de pas vous envoler!', '/assets/img/attractionPage/atr9.jpg', 0.8, 3, 1),
 (3, 'Sacrifice', 'Votre courage vous pousse à vous sacrifier aux dieux pour sauver les vêtres, mais irez vous jusqu\'au boud?', '/assets/img/attractionPage/atr14.jpg', 0.8, 3, 0),
-(4, 'titre4', 'decription4', '/assets/img/attractionPage/atr01.jpg', 0.8, 1, 0),
-(5, 'titre5', 'decription5', '/assets/img/attractionPage/atr01.jpg', 0, 0, 0),
-(6, 'titre6', 'decription6', '/assets/img/attractionPage/atr01.jpg',0, 0, 0);
+(4, 'Attraction 03', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '/assets/img/attractionPage/atr1.jpg', 0.8, 1, 0),
+(5, 'Attraction 05', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '/assets/img/attractionPage/atr8.jpg', 0, 0, 0),
+(6, 'Attraction 06', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '/assets/img/attractionPage/atr5.jpg',0, 0, 0);
 
 -- --------------------------------------------------------
 
